@@ -14,17 +14,17 @@ const features = [
 
 const FeaturesGrid = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto relative z-10">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto relative z-10 bg-[#F7F7F7]">
       <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-white mb-4 section-header-underline pb-4">
-          Why <span className="text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">Aakash Academic?</span>
+        <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-textPrimary mb-4 section-header-underline pb-4">
+          Why <span className="text-textPrimary">Aakash Academic?</span>
         </h2>
-        <p className="text-textSec font-exo text-lg max-w-2xl mx-auto mt-4">
+        <p className="text-textSecondary font-exo text-lg max-w-2xl mx-auto mt-4">
           Built with cutting edge technology to provide the best learning experience.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {features.map((feat, index) => (
           <motion.div
             key={index}
@@ -32,13 +32,13 @@ const FeaturesGrid = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
-            className="group glass-card p-6 border-white/10 hover:border-white/50 transition-all flex flex-col items-start"
+            className="group bg-white p-8 border border-[#E5E5E5] rounded-2xl shadow-sm hover:border-black transition-colors flex flex-col items-start"
           >
-            <div className="mb-4 bg-white/5 p-3 rounded-lg text-white group-hover:scale-110 group-hover:bg-white group-hover:text-black transition-all duration-300">
+            <div className="mb-6 bg-[#F5F5F5] p-3 rounded-xl text-textPrimary group-hover:scale-110 group-hover:bg-textPrimary group-hover:text-white transition-all duration-300 shadow-sm">
               {feat.icon}
             </div>
-            <h3 className="text-lg font-orbitron font-bold text-white mb-2">{feat.title}</h3>
-            <p className="text-textSec font-nunito text-sm">{feat.description}</p>
+            <h3 className="text-lg font-orbitron font-bold text-textPrimary mb-2 uppercase tracking-tight">{feat.title}</h3>
+            <p className="text-textSecondary font-nunito text-sm leading-relaxed">{feat.description}</p>
           </motion.div>
         ))}
       </div>

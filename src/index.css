@@ -6,78 +6,73 @@
 
 @layer base {
   body {
-    @apply bg-darkBg1 text-whiteAccent font-nunito overflow-x-hidden m-0 p-0;
+    @apply bg-white text-textPrimary font-nunito overflow-x-hidden m-0 p-0;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-orbitron tracking-wide font-bold text-whiteAccent;
+    @apply font-orbitron tracking-wide font-bold text-textPrimary;
   }
   
   p, span {
-    @apply text-midGrey;
+    @apply text-textSecondary;
   }
 
   .sub-heading {
-    @apply font-exo font-semibold text-whiteAccent;
+    @apply font-exo font-semibold text-textPrimary underline underline-offset-4 decoration-textMuted;
   }
 }
 
 @layer utilities {
+  /* Premium Light Cards */
   .glass-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 20px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.04);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
     transition: all 0.3s ease;
   }
   
   .glass-card:hover {
-    border-color: rgba(255, 255, 255, 0.40);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.12);
+    border-color: rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
     transform: translateY(-6px);
   }
 
   .glass-card-highlight {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 20px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.04);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
   }
   
   .glass-card-highlight:hover {
-    border-color: rgba(255, 255, 255, 0.60);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.20);
+    border-color: rgba(0, 0, 0, 0.40);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.16);
     transform: translateY(-6px);
   }
 
+  /* Premium Buttons */
   .btn-primary {
-    background: #FFFFFF;
-    color: #000000;
-    @apply font-bold font-exo px-8 py-3 rounded-[50px] transition-all duration-300;
-  }
-  
-  .btn-primary:hover {
-    background: #E0E0E0;
-    box-shadow: 0 0 20px rgba(255,255,255,0.3);
-  }
-
-  .btn-secondary {
-    background: transparent;
-    border: 1.5px solid #FFFFFF;
+    background: #0A0A0A;
     color: #FFFFFF;
     @apply font-bold font-exo px-8 py-3 rounded-[50px] transition-all duration-300;
   }
   
-  .btn-secondary:hover {
-    background: rgba(255,255,255,0.08);
+  .btn-primary:hover {
+    background: #333333;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
   }
 
-  /* Force white text glow overrides */
-  .neon-text-cyan, .neon-text-orange {
-    @apply text-whiteAccent drop-shadow-[0_0_8px_rgba(255,255,255,0.6)];
+  .btn-secondary {
+    background: transparent;
+    border: 1.5px solid #0A0A0A;
+    color: #0A0A0A;
+    @apply font-bold font-exo px-8 py-3 rounded-[50px] transition-all duration-300;
+  }
+  
+  .btn-secondary:hover {
+    @apply bg-[#0A0A0A] text-white;
   }
 
   .section-header-underline {
@@ -91,23 +86,31 @@
     left: 0;
     width: 60px;
     height: 3px;
-    background: #FFFFFF;
+    background: #0A0A0A;
     border-radius: 2px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Graph Paper Background Pattern */
+  .bg-graph {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
   }
 }
 
-/* Custom Scrollbar Black/White */
+/* Custom Scrollbar White/Black */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #080808; 
+  background: #F7F7F7; 
 }
 ::-webkit-scrollbar-thumb {
-  background: #333333; 
+  background: #E5E5E5; 
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #666666; 
+  background: #CCCCCC; 
 }

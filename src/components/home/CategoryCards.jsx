@@ -12,17 +12,17 @@ const categories = [
 
 const CategoryCards = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto relative z-10">
-      <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-white mb-4 section-header-underline pb-4">
-          Choose Your <span className="text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">Battleground</span>
+    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto relative z-10 bg-white">
+      <div className="text-center mb-20">
+        <h2 className="text-4xl md:text-5xl font-orbitron font-bold text-textPrimary mb-4 section-header-underline pb-4">
+          Choose Your <span className="text-textPrimary">Battleground</span>
         </h2>
-        <p className="text-textSec font-exo text-lg max-w-2xl mx-auto mt-4">
+        <p className="text-textSecondary font-exo text-lg max-w-2xl mx-auto mt-4">
           Tailored learning tracks for the toughest exams. Your success story starts here.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {categories.map((cat, index) => (
           <motion.div
             key={index}
@@ -30,15 +30,15 @@ const CategoryCards = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
-            className={`${cat.hover} p-8 group cursor-pointer flex flex-col items-center text-center`}
+            className={`${cat.hover} p-10 group cursor-pointer flex flex-col items-center text-center`}
           >
-            <div className="mb-6 p-4 rounded-xl transition-all duration-300 transform group-hover:-translate-y-2 group-hover:scale-110 bg-white/5 text-white shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+            <div className="mb-8 p-5 rounded-full transition-all duration-300 transform group-hover:-translate-y-2 group-hover:bg-textPrimary group-hover:text-white bg-[#F5F5F5] text-textPrimary shadow-sm border border-[#E5E5E5]">
               {cat.icon}
             </div>
-            <h3 className="text-xl font-orbitron font-bold text-white group-hover:text-whiteAccent group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all">
+            <h3 className="text-xl font-orbitron font-bold text-textPrimary group-hover:text-black tracking-wide transition-all uppercase">
               {cat.name}
             </h3>
-            <div className="mt-4 w-12 h-1 bg-[#333333] rounded-full group-hover:w-full group-hover:bg-whiteAccent transition-all duration-300"></div>
+            <div className="mt-6 w-12 h-1 bg-[#E5E5E5] rounded-full group-hover:w-full group-hover:bg-textPrimary transition-all duration-300"></div>
           </motion.div>
         ))}
       </div>

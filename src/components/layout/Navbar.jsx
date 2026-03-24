@@ -26,7 +26,7 @@ const Navbar = () => {
     <motion.nav 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#080808]/85 backdrop-blur-lg border-b border-white/10 shadow-[0_4px_30px_rgba(255,255,255,0.05)] py-3' : 'bg-transparent py-5'}`}
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-lg border-b border-[#E5E5E5] shadow-sm py-3' : 'bg-white/50 py-5'}`}
     >
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
@@ -35,7 +35,7 @@ const Navbar = () => {
             <img 
               src="/logo.jpeg" 
               alt="Aakash Academic" 
-              className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+              className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
@@ -44,24 +44,24 @@ const Navbar = () => {
               <Link 
                 key={link.name} 
                 to={link.path}
-                className="relative font-exo font-semibold text-[#CCCCCC] group transition-colors hover:text-whiteAccent"
+                className="relative font-exo font-semibold text-textSecondary group transition-colors hover:text-black"
               >
-                <span className="group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all">{link.name}</span>
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-whiteAccent rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all group-hover:w-full"></span>
+                <span>{link.name}</span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black rounded-full transition-all group-hover:w-full"></span>
               </Link>
             ))}
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <Link to="/login" className="btn-secondary px-6 py-2 text-sm">
+            <Link to="/login" className="btn-secondary px-6 py-2 text-sm border-textPrimary text-textPrimary hover:bg-textPrimary hover:text-white transition-all">
               Log In
             </Link>
-            <Link to="/signup" className="btn-primary px-6 py-2 text-sm drop-shadow-md">
+            <Link to="/signup" className="btn-primary px-6 py-2 text-sm bg-textPrimary text-white hover:bg-[#333333] transition-all">
               ENROLL NOW
             </Link>
           </div>
 
-          <button className="md:hidden text-white hover:text-lightGrey" onClick={() => setIsOpen(!isOpen)}>
+          <button className="md:hidden text-textPrimary hover:text-black" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X /> : <Menu />}
           </button>
         </div>
@@ -72,13 +72,13 @@ const Navbar = () => {
           initial={{ x: '100%' }}
           animate={{ x: 0 }}
           exit={{ x: '100%' }}
-          className="md:hidden absolute top-full right-0 w-64 h-screen bg-[#080808]/95 backdrop-blur-xl border-l border-white/10 p-6 flex flex-col gap-6 shadow-[-10px_0_30px_rgba(255,255,255,0.05)]"
+          className="md:hidden absolute top-full right-0 w-64 h-screen bg-white/95 backdrop-blur-xl border-l border-[#E5E5E5] p-6 flex flex-col gap-6 shadow-xl"
         >
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
               to={link.path}
-              className="text-lg font-exo font-semibold text-[#CCCCCC] hover:text-whiteAccent transition-all border-b border-white/5 pb-2"
+              className="text-lg font-exo font-semibold text-textSecondary hover:text-black transition-all border-b border-[#E5E5E5] pb-2"
               onClick={() => setIsOpen(false)}
             >
               {link.name}
