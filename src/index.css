@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Orbitron:wght@400;500;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-darkBg text-white font-nunito overflow-x-hidden m-0 p-0;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-orbitron tracking-wide;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-xl transition-all duration-300;
+  }
+  .glass-card:hover {
+    @apply border-cyanAccent/50 shadow-[0_0_15px_rgba(0,245,255,0.3)];
+  }
+  
+  .glass-card-orange:hover {
+    @apply border-orangeAccent/50 shadow-[0_0_15px_rgba(255,107,0,0.3)];
+  }
+  
+  .glass-card-purple:hover {
+    @apply border-purpleAccent/50 shadow-[0_0_15px_rgba(124,58,237,0.3)];
+  }
+
+  .neon-text-cyan {
+    @apply text-cyanAccent drop-shadow-[0_0_8px_rgba(0,245,255,0.8)];
+  }
+  
+  .neon-text-orange {
+    @apply text-orangeAccent drop-shadow-[0_0_8px_rgba(255,107,0,0.8)];
+  }
+}
+
+/* Custom Scrollbar for a sleek look */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0F2C; 
+}
+::-webkit-scrollbar-thumb {
+  background: #7C3AED; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00F5FF; 
+}
