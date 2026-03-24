@@ -3,6 +3,12 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
+import CoursesPage from './pages/CoursesPage';
+import LivePage from './pages/LivePage';
+import TestSeriesPage from './pages/TestSeriesPage';
+import PricingPage from './pages/PricingPage';
+import CheckoutPage from './pages/CheckoutPage';
+import DashboardPage from './pages/DashboardPage';
 
 function App() {
   return (
@@ -20,10 +26,16 @@ function App() {
           <main className="flex-grow pt-20">
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/courses" element={<CoursesPage />} />
+              <Route path="/live" element={<LivePage />} />
+              <Route path="/test-series" element={<TestSeriesPage />} />
+              <Route path="/pricing" element={<PricingPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/login" element={<AuthPage type="login" />} />
               <Route path="/signup" element={<AuthPage type="signup" />} />
               {/* Stub for other routes */}
-              <Route path="*" element={<div className="text-center py-32 text-2xl font-orbitron text-textPrimary">Coming Soon...</div>} />
+              <Route path="*" element={<div className="flex flex-col items-center justify-center py-48 text-center bg-white"><h2 className="text-4xl font-orbitron font-bold text-brandNavy uppercase mb-4">Coming Soon...</h2><p className="text-textMuted font-exo font-semibold mb-8">We are building something magical for you.</p><a href="/" className="btn-primary px-10 py-3">Back to Homepage</a></div>} />
             </Routes>
           </main>
           <Footer />

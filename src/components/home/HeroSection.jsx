@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Atom, Divide, Dna, FlaskConical, Play } from 'lucide-react';
+import { Atom, Divide, Dna, FlaskConical, Play, Rocket, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   const { scrollY } = useScroll();
@@ -43,18 +44,17 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.8, duration: 0.5, type: 'spring' }}
-            className="flex flex-col sm:flex-row gap-6 mb-16 w-full sm:w-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            className="flex flex-col sm:flex-row gap-6 mt-10 justify-center md:justify-start w-full"
           >
-            <button className="btn-primary flex items-center justify-center gap-2 shadow-lg">
-              <Play className="w-5 h-5 fill-white" /> Start Learning Free
-            </button>
-            
-            <button className="btn-secondary">
-              Explore Batches
-            </button>
+            <Link to="/signup" className="btn-primary flex items-center justify-center gap-3 px-12 py-5 text-base shadow-xl md:text-sm tracking-widest uppercase font-orbitron hover:scale-105 active:scale-95 transition-all w-full sm:w-auto">
+              <Rocket className="w-5 h-5 fill-white" /> Start Learning Free
+            </Link>
+            <Link to="/pricing" className="btn-secondary flex items-center justify-center gap-3 px-10 py-4 text-base md:text-sm tracking-widest uppercase font-orbitron border-brandNavy text-brandNavy hover:bg-brandNavy hover:text-white hover:scale-105 active:scale-95 transition-all w-full sm:w-auto">
+              Explore Batches <ArrowRight className="w-5 h-5" />
+            </Link>
           </motion.div>
         </div>
 
@@ -69,7 +69,7 @@ const HeroSection = () => {
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                 className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-[#F0F0F0] border border-[#DDDDDD] shadow-sm flex items-center justify-center overflow-hidden"
               >
-                 <span className="font-orbitron text-[#888888] text-sm tracking-widest text-center">COSMIC<br/>ACADEMY</span>
+                 <span className="font-orbitron text-[#888888] text-sm tracking-widest text-center uppercase">Aakash<br/>Academics</span>
               </motion.div>
 
               {/* Floating Icons - Black with Light Circles */}
