@@ -10,9 +10,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           
           <div className="space-y-4">
-            <h2 className="font-orbitron font-bold text-2xl text-white">
-              <span className="text-white">AAKASH</span><br/><span className="text-midGrey text-sm tracking-[0.2em] -mt-1 block">ACADEMIC</span>
-            </h2>
+            <Link to="/" className="inline-block">
+              <img 
+                src="/logo.jpeg" 
+                alt="Aakash Academics" 
+                className="h-16 md:h-20 w-auto object-contain brightness-110"
+              />
+            </Link>
             <p className="text-textSec font-nunito leading-relaxed">
               Your Rank. Your Rules. Your Academy. Next-generation learning platform for the stars of tomorrow.
             </p>

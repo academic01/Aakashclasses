@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Menu, X, Rocket } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -31,13 +31,12 @@ const Navbar = () => {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="bg-[#1A1A1A] border-2 border-white p-2 rounded-lg group-hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all">
-              <Rocket className="w-6 h-6 text-white group-hover:animate-float-icon" />
-            </div>
-            <span className="font-orbitron font-bold text-xl md:text-2xl text-whiteAccent tracking-wider">
-              AAKASH<br/><span className="text-[#999999] text-xs tracking-[0.2em] -mt-1 block">ACADEMIC</span>
-            </span>
+          <Link to="/" className="flex items-center group">
+            <img 
+              src="/logo.jpeg" 
+              alt="Aakash Academic" 
+              className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+            />
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
