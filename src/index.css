@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Orbitron:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&family=Nunito:wght@300;400;600;700;800&family=Orbitron:wght@400;500;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,28 +6,90 @@
 
 @layer base {
   body {
-    @apply bg-darkBg text-white font-nunito overflow-x-hidden m-0 p-0;
+    @apply bg-darkBg1 text-white font-nunito overflow-x-hidden m-0 p-0;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-orbitron tracking-wide;
+    @apply font-orbitron tracking-wide font-bold;
+  }
+  
+  .sub-heading {
+    @apply font-exo font-semibold;
   }
 }
 
 @layer utilities {
-  .glass-card {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-xl transition-all duration-300;
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
   }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(0, 245, 255, 0.15);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 30px rgba(0, 245, 255, 0.08);
+    transition: all 0.3s ease;
+  }
+  
   .glass-card:hover {
-    @apply border-cyanAccent/50 shadow-[0_0_15px_rgba(0,245,255,0.3)];
+    border-color: rgba(0, 245, 255, 0.5);
+    box-shadow: 0 0 40px rgba(0, 245, 255, 0.25);
+    transform: translateY(-6px);
+  }
+
+  /* Gamification Specific Cards (For variety in category/showcase) */
+  .glass-card-orange {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 107, 0, 0.15);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 30px rgba(255, 107, 0, 0.08);
+    transition: all 0.3s ease;
   }
   
   .glass-card-orange:hover {
-    @apply border-orangeAccent/50 shadow-[0_0_15px_rgba(255,107,0,0.3)];
+    border-color: rgba(255, 107, 0, 0.5);
+    box-shadow: 0 0 40px rgba(255, 107, 0, 0.25);
+    transform: translateY(-6px);
   }
-  
+
+  .glass-card-purple {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(124, 58, 237, 0.15);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 30px rgba(124, 58, 237, 0.08);
+    transition: all 0.3s ease;
+  }
+
   .glass-card-purple:hover {
-    @apply border-purpleAccent/50 shadow-[0_0_15px_rgba(124,58,237,0.3)];
+    border-color: rgba(124, 58, 237, 0.5);
+    box-shadow: 0 0 40px rgba(124, 58, 237, 0.25);
+    transform: translateY(-6px);
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #00F5FF, #7C3AED);
+    @apply text-white font-bold font-exo px-8 py-3 rounded-full transition-all duration-300;
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.53);
+    transform: scale(1.05);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    border: 1.5px solid #00F5FF;
+    @apply text-cyanAccent font-bold font-exo px-8 py-3 rounded-full transition-all duration-300;
+  }
+  .btn-secondary:hover {
+    box-shadow: inset 0 0 15px rgba(0, 245, 255, 0.5), 0 0 15px rgba(0, 245, 255, 0.5);
   }
 
   .neon-text-cyan {
@@ -37,9 +99,25 @@
   .neon-text-orange {
     @apply text-orangeAccent drop-shadow-[0_0_8px_rgba(255,107,0,0.8)];
   }
+
+  .section-header-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .section-header-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #00F5FF;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.8);
+  }
 }
 
-/* Custom Scrollbar for a sleek look */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }

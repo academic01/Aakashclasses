@@ -15,13 +15,13 @@ const HomePage = () => {
       <FeaturesGrid />
       
       {/* App Download Prompt */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative cursor-default">
-        <div className="glass-card bg-gradient-to-br from-cyanAccent/10 to-purpleAccent/10 border-cyanAccent/20 p-8 md:p-12 rounded-3xl flex flex-col md:flex-row items-center justify-between shadow-[0_0_30px_rgba(124,58,237,0.15)] overflow-hidden">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto relative cursor-default z-10">
+        <div className="glass-card bg-gradient-to-br from-cyanAccent/10 to-purpleAccent/10 border-cyanAccent/20 p-8 md:p-12 rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between shadow-[0_0_30px_rgba(124,58,237,0.15)] overflow-hidden">
           <div className="relative z-10 max-w-xl text-center md:text-left mb-8 md:mb-0">
-            <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-white mb-4 section-header-underline pb-4">
               Learn <span className="neon-text-cyan">Anywhere</span>
             </h2>
-            <p className="text-gray-300 font-nunito text-lg mb-8">
+            <p className="text-textSec font-exo text-lg mb-8 mt-4">
               Download the Aakash Academic App. Access live classes, recorded videos, and tests right from your pocket. Offline modes available.
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-4">

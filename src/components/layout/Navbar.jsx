@@ -26,17 +26,17 @@ const Navbar = () => {
     <motion.nav 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-darkBg/80 backdrop-blur-lg border-b border-cyanAccent/20 shadow-[0_4px_30px_rgba(0,245,255,0.1)] py-3' : 'bg-transparent py-5'}`}
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#0A0F2C]/85 backdrop-blur-lg border-b border-cyanAccent/20 shadow-[0_4px_30px_rgba(0,245,255,0.1)] py-3' : 'bg-transparent py-5'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           
           <Link to="/" className="flex items-center gap-2 group">
             <div className="bg-gradient-to-tr from-purpleAccent to-cyanAccent p-2 rounded-lg group-hover:shadow-[0_0_15px_rgba(0,245,255,0.6)] transition-all">
-              <Rocket className="w-6 h-6 text-white" />
+              <Rocket className="w-6 h-6 text-white group-hover:animate-float-icon" />
             </div>
-            <span className="font-orbitron font-bold text-xl md:text-2xl neon-text-cyan tracking-wider">
-              AAKASH<br/><span className="text-xs text-orangeAccent tracking-[0.2em] -mt-1 block">ACADEMIC</span>
+            <span className="font-orbitron font-bold text-xl md:text-2xl text-white tracking-wider">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyanAccent to-purpleAccent">AAKASH</span><br/><span className="text-xs text-orangeAccent tracking-[0.2em] -mt-1 block">ACADEMIC</span>
             </span>
           </Link>
 
@@ -45,18 +45,19 @@ const Navbar = () => {
               <Link 
                 key={link.name} 
                 to={link.path}
-                className="font-nunito font-semibold text-gray-300 hover:text-cyanAccent hover:drop-shadow-[0_0_5px_rgba(0,245,255,0.8)] transition-all"
+                className="relative font-exo font-semibold text-white group"
               >
-                {link.name}
+                <span className="group-hover:text-cyanAccent group-hover:drop-shadow-[0_0_8px_rgba(0,245,255,0.8)] transition-all">{link.name}</span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyanAccent rounded-full shadow-[0_0_8px_rgba(0,245,255,0.8)] transition-all group-hover:w-full"></span>
               </Link>
             ))}
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <Link to="/login" className="font-nunito font-bold text-white hover:text-cyanAccent transition">
+            <Link to="/login" className="btn-secondary px-6 py-2 text-sm">
               Log In
             </Link>
-            <Link to="/signup" className="glass-card px-6 py-2 font-orbitron font-bold text-sm bg-cyanAccent/10 border-cyanAccent/50 text-cyanAccent hover:bg-cyanAccent hover:text-darkBg transition-all">
+            <Link to="/signup" className="btn-primary px-6 py-2 text-sm drop-shadow-md">
               ENROLL NOW
             </Link>
           </div>
@@ -69,23 +70,25 @@ const Navbar = () => {
 
       {isOpen && (
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="md:hidden absolute top-full left-0 w-full bg-darkBg/95 backdrop-blur-xl border-b border-cyanAccent/20 p-4 flex flex-col gap-4 shadow-[0_10px_30px_rgba(0,245,255,0.1)]"
+          initial={{ x: '100%' }}
+          animate={{ x: 0 }}
+          exit={{ x: '100%' }}
+          className="md:hidden absolute top-full right-0 w-64 h-screen bg-[#0A0F2C]/95 backdrop-blur-xl border-l border-cyanAccent/20 p-6 flex flex-col gap-6 shadow-[-10px_0_30px_rgba(0,245,255,0.1)]"
         >
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
               to={link.path}
-              className="text-lg font-nunito font-semibold text-gray-300 hover:text-cyanAccent"
+              className="text-lg font-exo font-semibold text-white hover:text-cyanAccent transition-all border-b border-white/5 pb-2"
               onClick={() => setIsOpen(false)}
             >
               {link.name}
             </Link>
           ))}
-          <hr className="border-gray-800" />
-          <Link to="/login" className="text-lg font-nunito font-bold" onClick={() => setIsOpen(false)}>Log In</Link>
-          <Link to="/signup" className="text-center glass-card py-3 mt-2 font-orbitron bg-cyanAccent text-darkBg text-lg" onClick={() => setIsOpen(false)}>ENROLL NOW</Link>
+          <div className="mt-8 flex flex-col gap-4">
+            <Link to="/login" className="btn-secondary text-center" onClick={() => setIsOpen(false)}>Log In</Link>
+            <Link to="/signup" className="btn-primary text-center" onClick={() => setIsOpen(false)}>ENROLL NOW</Link>
+          </div>
         </motion.div>
       )}
     </motion.nav>
