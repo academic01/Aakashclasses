@@ -57,7 +57,7 @@ const ParticleCanvas = () => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-40" />;
+  return <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-30" />;
 };
 
 const HeroSection = () => {
@@ -81,12 +81,12 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
             className="mb-4"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-orbitron font-bold text-white mb-2 leading-tight">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyanAccent via-white to-purpleAccent">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-orbitron font-bold leading-tight">
+              <span className="text-white">
                 Your Rank.
               </span><br/>
-              Your Rules.<br />
-              <span className="neon-text-cyan">Your Academy.</span>
+              <span className="text-lightGrey">Your Rules.</span><br />
+              <span className="text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">Your Academy.</span>
             </h1>
           </motion.div>
 
@@ -94,7 +94,7 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-lg md:text-xl text-gray-300 font-exo font-semibold mb-10 max-w-lg"
+            className="text-lg md:text-xl text-midGrey font-exo font-semibold mb-10 max-w-lg"
           >
             JEE | NEET | CUET | Boards | Government Exams
           </motion.p>
@@ -107,7 +107,7 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-6 mb-16 w-full sm:w-auto"
           >
             <button className="btn-primary flex items-center justify-center gap-2">
-              <Play className="w-5 h-5 fill-white" /> Start Learning Free
+              <Play className="w-5 h-5 fill-black" /> Start Learning Free
             </button>
             
             <button className="btn-secondary">
@@ -126,26 +126,25 @@ const HeroSection = () => {
               <motion.div 
                 animate={{ y: [-10, 10, -10] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-tr from-purpleAccent/40 to-cyanAccent/40 backdrop-blur-3xl border border-white/10 shadow-[0_0_80px_rgba(0,245,255,0.2)] flex items-center justify-center overflow-hidden"
+                className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-[rgba(255,255,255,0.06)] backdrop-blur-3xl border border-[rgba(255,255,255,0.15)] shadow-[0_0_80px_rgba(255,255,255,0.1)] flex items-center justify-center overflow-hidden"
               >
-                 <div className="absolute inset-0 bg-noise opacity-20"></div>
-                 <span className="font-orbitron text-white text-opacity-50 text-sm tracking-widest text-center">COSMIC<br/>ACADEMY</span>
+                 <span className="font-orbitron text-white text-opacity-80 text-sm tracking-widest text-center">COSMIC<br/>ACADEMY</span>
               </motion.div>
 
               {/* Floating Icons */}
-              <motion.div style={{ y: y1 }} className="absolute text-cyanAccent opacity-90 drop-shadow-[0_0_15px_rgba(0,245,255,1)] top-[10%] left-[15%]">
+              <motion.div style={{ y: y1 }} className="absolute text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] top-[10%] left-[15%]">
                 <Atom className="w-16 h-16 animate-spin-slow" />
               </motion.div>
               
-              <motion.div style={{ y: y2 }} className="absolute text-orangeAccent opacity-90 drop-shadow-[0_0_15px_rgba(255,107,0,1)] bottom-[20%] left-[5%]">
+              <motion.div style={{ y: y2 }} className="absolute text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] bottom-[20%] left-[5%]">
                 <FlaskConical className="w-14 h-14 animate-float-icon" />
               </motion.div>
               
-              <motion.div style={{ y: y2 }} className="absolute text-purpleAccent opacity-90 drop-shadow-[0_0_15px_rgba(124,58,237,1)] top-[25%] right-[10%]">
+              <motion.div style={{ y: y2 }} className="absolute text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] top-[25%] right-[10%]">
                 <Dna className="w-12 h-12 rotate-45 animate-float-icon" />
               </motion.div>
 
-              <motion.div style={{ y: y1 }} className="absolute text-white opacity-60 drop-shadow-[0_0_15px_rgba(255,255,255,1)] bottom-[15%] right-[20%]">
+              <motion.div style={{ y: y1 }} className="absolute text-white opacity-80 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] bottom-[15%] right-[20%]">
                 <Divide className="w-12 h-12 -rotate-12 animate-float-icon" />
               </motion.div>
 
@@ -160,20 +159,20 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.8 }}
-        className="glass-card w-full max-w-[1280px] mx-auto py-8 px-4 md:px-12 flex flex-col md:flex-row items-center justify-around mt-auto mb-10 border-cyanAccent/20 z-10"
+        className="glass-card w-full max-w-[1280px] mx-auto py-8 px-4 md:px-12 flex flex-col md:flex-row items-center justify-around mt-auto mb-10 border-white/10 z-10"
       >
         <div className="text-center mb-6 md:mb-0">
-          <h3 className="font-orbitron font-bold text-3xl md:text-4xl neon-text-cyan mb-2">2,50,000+</h3>
+          <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-white mb-2 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">2,50,000+</h3>
           <p className="font-exo text-sm md:text-base text-textSec">Students Enrolled</p>
         </div>
         <div className="hidden md:block w-px h-16 bg-white/10"></div>
         <div className="text-center mb-6 md:mb-0">
-          <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-orangeAccent drop-shadow-[0_0_8px_rgba(255,107,0,0.8)] mb-2">500+</h3>
+          <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] mb-2">500+</h3>
           <p className="font-exo text-sm md:text-base text-textSec">Active Courses</p>
         </div>
         <div className="hidden md:block w-px h-16 bg-white/10"></div>
         <div className="text-center">
-          <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-purpleAccent drop-shadow-[0_0_8px_rgba(124,58,237,0.8)] mb-2">98%</h3>
+          <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)] mb-2">98%</h3>
           <p className="font-exo text-sm md:text-base text-textSec">Success Rate</p>
         </div>
       </motion.div>

@@ -26,17 +26,17 @@ const Navbar = () => {
     <motion.nav 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#0A0F2C]/85 backdrop-blur-lg border-b border-cyanAccent/20 shadow-[0_4px_30px_rgba(0,245,255,0.1)] py-3' : 'bg-transparent py-5'}`}
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#080808]/85 backdrop-blur-lg border-b border-white/10 shadow-[0_4px_30px_rgba(255,255,255,0.05)] py-3' : 'bg-transparent py-5'}`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="bg-gradient-to-tr from-purpleAccent to-cyanAccent p-2 rounded-lg group-hover:shadow-[0_0_15px_rgba(0,245,255,0.6)] transition-all">
+            <div className="bg-[#1A1A1A] border-2 border-white p-2 rounded-lg group-hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all">
               <Rocket className="w-6 h-6 text-white group-hover:animate-float-icon" />
             </div>
-            <span className="font-orbitron font-bold text-xl md:text-2xl text-white tracking-wider">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyanAccent to-purpleAccent">AAKASH</span><br/><span className="text-xs text-orangeAccent tracking-[0.2em] -mt-1 block">ACADEMIC</span>
+            <span className="font-orbitron font-bold text-xl md:text-2xl text-whiteAccent tracking-wider">
+              AAKASH<br/><span className="text-[#999999] text-xs tracking-[0.2em] -mt-1 block">ACADEMIC</span>
             </span>
           </Link>
 
@@ -45,10 +45,10 @@ const Navbar = () => {
               <Link 
                 key={link.name} 
                 to={link.path}
-                className="relative font-exo font-semibold text-white group"
+                className="relative font-exo font-semibold text-[#CCCCCC] group transition-colors hover:text-whiteAccent"
               >
-                <span className="group-hover:text-cyanAccent group-hover:drop-shadow-[0_0_8px_rgba(0,245,255,0.8)] transition-all">{link.name}</span>
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyanAccent rounded-full shadow-[0_0_8px_rgba(0,245,255,0.8)] transition-all group-hover:w-full"></span>
+                <span className="group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all">{link.name}</span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-whiteAccent rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all group-hover:w-full"></span>
               </Link>
             ))}
           </div>
@@ -62,7 +62,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <button className="md:hidden text-white hover:text-cyanAccent" onClick={() => setIsOpen(!isOpen)}>
+          <button className="md:hidden text-white hover:text-lightGrey" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X /> : <Menu />}
           </button>
         </div>
@@ -73,13 +73,13 @@ const Navbar = () => {
           initial={{ x: '100%' }}
           animate={{ x: 0 }}
           exit={{ x: '100%' }}
-          className="md:hidden absolute top-full right-0 w-64 h-screen bg-[#0A0F2C]/95 backdrop-blur-xl border-l border-cyanAccent/20 p-6 flex flex-col gap-6 shadow-[-10px_0_30px_rgba(0,245,255,0.1)]"
+          className="md:hidden absolute top-full right-0 w-64 h-screen bg-[#080808]/95 backdrop-blur-xl border-l border-white/10 p-6 flex flex-col gap-6 shadow-[-10px_0_30px_rgba(255,255,255,0.05)]"
         >
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
               to={link.path}
-              className="text-lg font-exo font-semibold text-white hover:text-cyanAccent transition-all border-b border-white/5 pb-2"
+              className="text-lg font-exo font-semibold text-[#CCCCCC] hover:text-whiteAccent transition-all border-b border-white/5 pb-2"
               onClick={() => setIsOpen(false)}
             >
               {link.name}

@@ -7,12 +7,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        darkBg1: '#0A0F2C',
-        darkBg2: '#05080F',
-        cyanAccent: '#00F5FF',
-        orangeAccent: '#FF6B00',
-        purpleAccent: '#7C3AED',
-        textSec: '#A0AEC0',
+        darkBg1: '#080808',
+        darkBg2: '#111111',
+        whiteAccent: '#FFFFFF',
+        lightGrey: '#CCCCCC',
+        midGrey: '#999999',
+        darkGrey: '#555555',
+        cardBorder: 'rgba(255, 255, 255, 0.12)',
+        cardHover: 'rgba(255, 255, 255, 0.5)',
       },
       fontFamily: {
         orbitron: ['Orbitron', 'sans-serif'],
@@ -21,7 +23,8 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'btn-primary': 'linear-gradient(135deg, #00F5FF, #7C3AED)',
+        'btn-primary': '#FFFFFF',
+        'text-gradient': 'linear-gradient(135deg, #FFFFFF, #888888)',
       },
       animation: {
         'spin-slow': 'spin 15s linear infinite',
@@ -38,9 +41,9 @@ export default {
           '50%': { opacity: '1' },
         },
         flicker: {
-          '0%': { transform: 'scale(1)', opacity: '0.8', filter: 'drop-shadow(0 0 5px #FF6B00)' },
-          '50%': { transform: 'scale(1.1)', opacity: '1', filter: 'drop-shadow(0 0 15px #FF6B00)' },
-          '100%': { transform: 'scale(0.95)', opacity: '0.9', filter: 'drop-shadow(0 0 8px #FF6B00)' },
+          '0%': { transform: 'scale(1)', opacity: '0.8', filter: 'drop-shadow(0 0 5px rgba(255,255,255,0.8))' },
+          '50%': { transform: 'scale(1.1)', opacity: '1', filter: 'drop-shadow(0 0 15px rgba(255,255,255,1))' },
+          '100%': { transform: 'scale(0.95)', opacity: '0.9', filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.8))' },
         },
         shimmer: {
           '0%': { transform: 'translateX(-100%)' },
@@ -51,9 +54,9 @@ export default {
           '50%': { transform: 'translateY(-15px)' },
         },
         'pulse-dot': {
-          '0%': { transform: 'scale(0.95)', boxShadow: '0 0 0 0 rgba(255, 0, 0, 0.7)' },
-          '70%': { transform: 'scale(1)', boxShadow: '0 0 0 10px rgba(255, 0, 0, 0)' },
-          '100%': { transform: 'scale(0.95)', boxShadow: '0 0 0 0 rgba(255, 0, 0, 0)' },
+          '0%': { transform: 'scale(0.95)', boxShadow: '0 0 0 0 rgba(255, 255, 255, 0.7)' },
+          '70%': { transform: 'scale(1)', boxShadow: '0 0 0 10px rgba(255, 255, 255, 0)' },
+          '100%': { transform: 'scale(0.95)', boxShadow: '0 0 0 0 rgba(255, 255, 255, 0)' },
         }
       }
     },

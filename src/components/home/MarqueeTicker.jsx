@@ -13,9 +13,9 @@ const MarqueeTicker = () => {
   const fullText = [...tickerItems, ...tickerItems, ...tickerItems].join('   |   ');
 
   return (
-    <div className="w-full bg-[#05080F]/90 border-y border-cyanAccent/20 py-3 overflow-hidden flex items-center shadow-[0_0_20px_rgba(0,245,255,0.05)] relative z-10">
+    <div className="w-full bg-[#080808]/90 border-y border-white/10 py-3 overflow-hidden flex items-center shadow-[0_0_20px_rgba(255,255,255,0.05)] relative z-10">
       <motion.div
-        className="whitespace-nowrap font-exo font-bold text-cyanAccent tracking-wide text-sm md:text-base flex"
+        className="whitespace-nowrap font-exo font-bold text-white tracking-wide text-sm md:text-base flex"
         animate={{ x: [0, -2000] }}
         transition={{
           repeat: Infinity,
@@ -24,7 +24,7 @@ const MarqueeTicker = () => {
           ease: 'linear'
         }}
       >
-        <span className="mr-8 drop-shadow-[0_0_5px_rgba(0,245,255,0.5)]">{fullText}</span>
+        <span className="mr-8 drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">{fullText}</span>
       </motion.div>
     </div>
   );
