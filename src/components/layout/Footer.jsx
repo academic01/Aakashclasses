@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Youtube, Twitter, MessageCircle, Mail } from 'lucide-react';
+import { Tv, Globe, MessageCircle, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -17,8 +17,8 @@ const Footer = () => {
               Your Rank. Your Rules. Your Academy. Next-generation learning platform for the stars of tomorrow.
             </p>
             <div className="flex gap-4 pt-2">
-              <a href="#" className="p-2 glass-card hover:bg-cyanAccent/20 hover:text-cyanAccent transition-colors"><Youtube className="w-5 h-5" /></a>
-              <a href="#" className="p-2 glass-card hover:bg-cyanAccent/20 hover:text-cyanAccent transition-colors"><Twitter className="w-5 h-5" /></a>
+              <a href="#" className="p-2 glass-card hover:bg-cyanAccent/20 hover:text-cyanAccent transition-colors"><Tv className="w-5 h-5" /></a>
+              <a href="#" className="p-2 glass-card hover:bg-cyanAccent/20 hover:text-cyanAccent transition-colors"><Globe className="w-5 h-5" /></a>
               <a href="#" className="p-2 glass-card hover:bg-cyanAccent/20 hover:text-cyanAccent transition-colors"><MessageCircle className="w-5 h-5" /></a>
             </div>
           </div>
