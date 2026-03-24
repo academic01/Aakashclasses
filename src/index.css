@@ -10,7 +10,7 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-orbitron tracking-wide font-bold text-textPrimary;
+    @apply font-orbitron tracking-wide font-bold text-brandNavy;
   }
   
   p, span {
@@ -18,61 +18,52 @@
   }
 
   .sub-heading {
-    @apply font-exo font-semibold text-textPrimary underline underline-offset-4 decoration-textMuted;
+    @apply font-exo font-semibold text-brandNavy underline underline-offset-4 decoration-brandYellow;
   }
 }
 
 @layer utilities {
   /* Premium Light Cards */
   .glass-card {
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 20px;
+    @apply bg-white border border-black/5 rounded-[20px] transition-all duration-300;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-    transition: all 0.3s ease;
   }
   
   .glass-card:hover {
-    border-color: rgba(0, 0, 0, 0.25);
+    border-color: #2E86C1; /* brandBlue opacity approx */
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
     transform: translateY(-6px);
   }
 
   .glass-card-highlight {
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 20px;
+    @apply bg-white border border-black/10 rounded-[20px] transition-all duration-300;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
   }
   
   .glass-card-highlight:hover {
-    border-color: rgba(0, 0, 0, 0.40);
+    border-color: #2E86C1;
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.16);
     transform: translateY(-6px);
   }
 
-  /* Premium Buttons */
+  /* Premium Buttons - Navy/Blue Branding */
   .btn-primary {
-    background: #0A0A0A;
+    background: #0D2240;
     color: #FFFFFF;
     @apply font-bold font-exo px-8 py-3 rounded-[50px] transition-all duration-300;
   }
   
   .btn-primary:hover {
-    background: #333333;
+    background: #2E86C1;
     box-shadow: 0 4px 20px rgba(0,0,0,0.25);
   }
 
   .btn-secondary {
-    background: transparent;
-    border: 1.5px solid #0A0A0A;
-    color: #0A0A0A;
-    @apply font-bold font-exo px-8 py-3 rounded-[50px] transition-all duration-300;
+    @apply bg-transparent border-[1.5px] border-brandNavy text-brandNavy font-bold font-exo px-8 py-3 rounded-[50px] transition-all duration-300;
   }
   
   .btn-secondary:hover {
-    @apply bg-[#0A0A0A] text-white;
+    @apply bg-brandNavy text-white border-brandNavy;
   }
 
   .section-header-underline {
@@ -85,10 +76,10 @@
     bottom: -8px;
     left: 0;
     width: 60px;
-    height: 3px;
-    background: #0A0A0A;
+    height: 4px;
+    background: #F5A623;
     border-radius: 2px;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 8px rgba(245, 166, 35, 0.3);
   }
 
   /* Graph Paper Background Pattern */
@@ -100,17 +91,17 @@
   }
 }
 
-/* Custom Scrollbar White/Black */
+/* Custom Scrollbar Navy/Yellow */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F7F7F7; 
+  @apply bg-lightBg2; 
 }
 ::-webkit-scrollbar-thumb {
-  background: #E5E5E5; 
+  background: #0D2240; 
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #CCCCCC; 
+  background: #2E86C1; 
 }

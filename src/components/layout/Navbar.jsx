@@ -33,9 +33,9 @@ const Navbar = () => {
           
           <Link to="/" className="flex items-center group">
             <img 
-              src="/logo.jpeg" 
-              alt="Aakash Academic" 
-              className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              src="/logo.png" 
+              alt="Aakash Academics" 
+              className="h-[50px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
@@ -47,7 +47,7 @@ const Navbar = () => {
                 className="relative font-exo font-semibold text-textSecondary group transition-colors hover:text-black"
               >
                 <span>{link.name}</span>
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black rounded-full transition-all group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brandYellow rounded-full transition-all group-hover:w-full shadow-sm"></span>
               </Link>
             ))}
           </div>

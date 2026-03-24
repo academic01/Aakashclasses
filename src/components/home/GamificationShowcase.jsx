@@ -54,7 +54,7 @@ const GamificationShowcase = () => {
                   whileInView={{ width: '84%' }}
                   viewport={{ once: true }}
                   transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
-                  className="h-full bg-textPrimary relative overflow-hidden"
+                  className="h-full bg-brandNavy relative overflow-hidden"
                 >
                   <div className="w-full h-full animate-shimmer bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
                 </motion.div>
@@ -65,9 +65,9 @@ const GamificationShowcase = () => {
           {/* Streak & Badges row */}
           <div className="grid grid-cols-2 gap-4">
             {/* Streak Counter */}
-            <div className="bg-white shadow-sm rounded-2xl border border-[#E5E5E5] p-6 flex flex-col items-center justify-center text-center group hover:border-black transition-colors">
-              <span className="text-4xl animate-flicker grayscale block mb-2">🔥</span>
-              <div className="font-orbitron font-bold text-textPrimary text-xl tracking-tight">Day 14</div>
+            <div className="bg-white shadow-sm rounded-2xl border border-[#E5E5E5] p-6 flex flex-col items-center justify-center text-center group hover:border-brandBlue transition-colors">
+              <span className="text-4xl animate-flicker block mb-2">🔥</span>
+              <div className="font-orbitron font-bold text-brandNavy text-xl tracking-tight">Day 14</div>
               <p className="text-xs font-exo text-textMuted mt-1 uppercase tracking-wider font-bold">Active Streak</p>
             </div>
 
@@ -75,11 +75,11 @@ const GamificationShowcase = () => {
             <div className="bg-white shadow-sm rounded-2xl border border-[#E5E5E5] p-4 flex flex-col justify-around">
                <div className="text-xs font-orbitron text-textMuted mb-2 text-center uppercase font-bold">LATEST BADGE</div>
                <div className="flex justify-center group relative cursor-pointer">
-                 <div className="w-16 h-16 rounded-full border border-black bg-white flex items-center justify-center relative hover:scale-105 transition-transform shadow-sm">
-                   <Target className="w-8 h-8 text-black" />
+                 <div className="w-16 h-16 rounded-full border border-brandNavy bg-white flex items-center justify-center relative hover:scale-105 transition-transform shadow-sm">
+                   <Target className="w-8 h-8 text-brandNavy" />
                  </div>
                  {/* Tooltip */}
-                 <div className="opacity-0 group-hover:opacity-100 absolute -top-12 bg-black text-white px-3 py-1 rounded text-xs transition-opacity whitespace-nowrap z-20">
+                 <div className="opacity-0 group-hover:opacity-100 absolute -top-12 bg-brandNavy text-white px-3 py-1 rounded text-xs transition-opacity whitespace-nowrap z-20">
                    Sharpshooter: 100% Accuracy in Test
                  </div>
                </div>
@@ -100,32 +100,32 @@ const GamificationShowcase = () => {
             
             <div className="flex justify-between items-center mb-8 pb-4 border-b border-[#F0F0F0]">
               <div className="flex items-center gap-3">
-                <Users className="w-6 h-6 text-textPrimary" />
-                <h3 className="font-orbitron font-bold text-xl text-textPrimary">All-India Leaderboard</h3>
+                <Users className="w-6 h-6 text-brandNavy" />
+                <h3 className="font-orbitron font-bold text-xl text-brandNavy">All-India Leaderboard</h3>
               </div>
               <div className="flex gap-2 text-sm font-exo">
-                <button className="px-3 py-1 bg-textPrimary text-white rounded-[50px] shadow-sm font-bold">Weekly</button>
-                <button className="px-3 py-1 text-textMuted hover:text-black transition-colors font-bold uppercase tracking-wider text-xs">All-time</button>
+                <button className="px-3 py-1 bg-brandNavy text-white rounded-[50px] shadow-sm font-bold">Weekly</button>
+                <button className="px-3 py-1 text-textMuted hover:text-brandNavy transition-colors font-bold uppercase tracking-wider text-xs">All-time</button>
               </div>
             </div>
 
             <div className="space-y-3 flex-grow">
               
-              {/* Rank 1 Row - Black/White Contrast */}
-              <div className="flex items-center justify-between p-4 rounded-xl bg-textPrimary text-white shadow-md transition-all">
+              {/* Rank 1 Row - Brand Navy background */}
+              <div className="flex items-center justify-between p-4 rounded-xl bg-brandNavy text-white shadow-md transition-all">
                  <div className="flex items-center gap-4">
                    <div className="font-orbitron font-bold text-white w-6 text-lg">#1</div>
-                   <div className="w-11 h-11 rounded-full border border-white/20 overflow-hidden shadow-sm"><img src="https://i.pravatar.cc/150?img=33" alt="" className="grayscale" /></div>
+                   <div className="w-11 h-11 rounded-full border border-white/20 overflow-hidden shadow-sm shadow-brandYellow/30"><img src="https://i.pravatar.cc/150?img=33" alt="" className="" /></div>
                    <div className="font-exo font-bold text-white tracking-wide">Priya M.</div>
                  </div>
                  <div className="font-orbitron text-white font-bold tracking-wider">12,450 XP</div>
               </div>
 
               {/* Rank 2 Row */}
-              <div className="flex items-center justify-between p-4 rounded-xl bg-[#333333] text-white shadow-sm transition-all hover:scale-[1.01]">
+              <div className="flex items-center justify-between p-4 rounded-xl bg-brandBlue text-white shadow-sm transition-all hover:scale-[1.01]">
                  <div className="flex items-center gap-4">
                    <div className="font-orbitron font-bold text-white w-6">#2</div>
-                   <div className="w-10 h-10 rounded-full border border-white/10 overflow-hidden"><img src="https://i.pravatar.cc/150?img=68" alt="" className="grayscale" /></div>
+                   <div className="w-10 h-10 rounded-full border border-white/10 overflow-hidden"><img src="https://i.pravatar.cc/150?img=68" alt="" className="" /></div>
                    <div className="font-exo font-bold text-white">Arjun S.</div>
                  </div>
                  <div className="font-orbitron font-bold">11,900 XP</div>
@@ -135,7 +135,7 @@ const GamificationShowcase = () => {
               <div className="flex items-center justify-between p-4 rounded-xl bg-[#666666] text-white transition-all hover:scale-[1.01]">
                  <div className="flex items-center gap-4">
                    <div className="font-orbitron font-bold text-white w-6">#3</div>
-                   <div className="w-10 h-10 rounded-full border border-white/5 overflow-hidden"><img src="https://i.pravatar.cc/150?img=12" alt="" className="grayscale" /></div>
+                   <div className="w-10 h-10 rounded-full border border-white/5 overflow-hidden"><img src="https://i.pravatar.cc/150?img=12" alt="" className="" /></div>
                    <div className="font-exo font-bold text-white">Nisha T.</div>
                  </div>
                  <div className="font-orbitron font-bold">11,200 XP</div>
@@ -148,18 +148,18 @@ const GamificationShowcase = () => {
                 <div className="w-1.5 h-1.5 rounded-full bg-current mx-1"></div>
               </div>
 
-              {/* User Row Highlighted - Light Mode with Dark Accent */}
-              <div className="flex items-center justify-between p-4 rounded-xl bg-white border-l-4 border-l-textPrimary border border-[#E5E5E5] shadow-sm transition-all group hover:bg-[#F5F5F5]">
+              {/* User Row Highlighted - Light Mode with Brand Navy Accent */}
+              <div className="flex items-center justify-between p-4 rounded-xl bg-white border-l-4 border-l-brandNavy border border-[#E5E5E5] shadow-sm transition-all group hover:bg-[#F5F5F5]">
                  <div className="flex items-center gap-4">
-                   <div className="font-orbitron font-bold text-textPrimary w-8 text-center text-sm">#342</div>
-                   <div className="w-10 h-10 rounded-full border border-textPrimary overflow-hidden"><img src="https://i.pravatar.cc/150?img=11" alt="" className="grayscale" /></div>
-                   <div className="font-exo font-bold text-textPrimary flex items-center gap-3">
-                     Rahul K. <span className="bg-black text-white text-[9px] font-orbitron px-2 py-0.5 rounded-full uppercase">YOU</span>
+                   <div className="font-orbitron font-bold text-brandNavy w-8 text-center text-sm">#342</div>
+                   <div className="w-10 h-10 rounded-full border border-brandNavy overflow-hidden"><img src="https://i.pravatar.cc/150?img=11" alt="" className="" /></div>
+                   <div className="font-exo font-bold text-brandNavy flex items-center gap-3">
+                     Rahul K. <span className="bg-brandYellow text-brandNavy text-[9px] font-orbitron px-2 py-0.5 rounded-full uppercase font-bold">YOU</span>
                    </div>
                  </div>
                  <div className="flex items-center gap-3">
-                   <div className="font-orbitron text-textPrimary font-bold">4,200 XP</div>
-                   <ArrowUp className="w-4 h-4 text-textPrimary" />
+                   <div className="font-orbitron text-brandNavy font-bold">4,200 XP</div>
+                   <ArrowUp className="w-4 h-4 text-brandNavy" />
                  </div>
               </div>
 

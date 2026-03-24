@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
+import AuthPage from './pages/AuthPage';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
           <main className="flex-grow pt-20">
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<AuthPage type="login" />} />
+              <Route path="/signup" element={<AuthPage type="signup" />} />
               {/* Stub for other routes */}
               <Route path="*" element={<div className="text-center py-32 text-2xl font-orbitron text-textPrimary">Coming Soon...</div>} />
             </Routes>

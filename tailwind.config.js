@@ -10,12 +10,15 @@ export default {
         lightBg1: '#FFFFFF',
         lightBg2: '#F5F5F5',
         lightBg3: '#F7F7F7',
-        textPrimary: '#0A0A0A',
+        brandNavy: '#0D2240',
+        brandBlue: '#2E86C1',
+        brandYellow: '#F5A623',
+        textPrimary: '#0D2240',
         textSecondary: '#444444',
         textMuted: '#888888',
         cardBg: '#FFFFFF',
         cardBorder: 'rgba(0, 0, 0, 0.08)',
-        cardBorderHover: 'rgba(0, 0, 0, 0.25)',
+        cardBorderHover: 'rgba(46, 134, 193, 0.4)', /* brandBlue */
       },
       fontFamily: {
         orbitron: ['Orbitron', 'sans-serif'],
@@ -23,8 +26,7 @@ export default {
         nunito: ['Nunito', 'sans-serif'],
       },
       backgroundImage: {
-        'btn-primary': '#0A0A0A',
-        'text-gradient': 'linear-gradient(135deg, #000000, #555555)',
+        'btn-primary': '#0D2240',
       },
       animation: {
         'spin-slow': 'spin 15s linear infinite',

@@ -12,9 +12,9 @@ const Footer = () => {
           <div className="space-y-6">
             <Link to="/" className="inline-block">
               <img 
-                src="/logo.jpeg" 
+                src="/logo.png" 
                 alt="Aakash Academics" 
-                className="h-16 w-auto object-contain grayscale"
+                className="h-[70px] w-auto object-contain"
               />
             </Link>
             <p className="text-textSecondary leading-relaxed text-sm">

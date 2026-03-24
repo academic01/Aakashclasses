@@ -111,17 +111,17 @@ const HeroSection = () => {
         className="w-full max-w-[1280px] mx-auto py-10 px-4 md:px-12 flex flex-col md:flex-row items-center justify-around mt-auto mb-10 border-y border-[#E5E5E5] z-10 bg-white/50 backdrop-blur-sm shadow-sm rounded-2xl"
       >
         <div className="text-center mb-6 md:mb-0">
-          <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-textPrimary mb-2">2,50,000+</h3>
+          <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-brandNavy mb-2">2,50,000+</h3>
           <p className="font-exo text-sm md:text-base text-textMuted uppercase tracking-wider">Students Enrolled</p>
         </div>
         <div className="hidden md:block w-px h-16 bg-[#E5E5E5]"></div>
         <div className="text-center mb-6 md:mb-0">
-          <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-textPrimary mb-2">500+</h3>
+          <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-brandNavy mb-2">500+</h3>
           <p className="font-exo text-sm md:text-base text-textMuted uppercase tracking-wider">Active Courses</p>
         </div>
         <div className="hidden md:block w-px h-16 bg-[#E5E5E5]"></div>
         <div className="text-center">
-          <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-textPrimary mb-2">98%</h3>
+          <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-brandNavy mb-2">98%</h3>
           <p className="font-exo text-sm md:text-base text-textMuted uppercase tracking-wider">Success Rate</p>
         </div>
       </motion.div>
