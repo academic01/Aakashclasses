@@ -63,27 +63,33 @@ export const AuthProvider = ({ children }) => {
     const FAST2SMS_KEY = "edH0Or9RZ7cxqBYbMNkPSaC251LUyQoE3VjuntlDi4XJKsGfvhImRVKqBJ1LGrcSEUiaXznjlNT79OwD";
 
     try {
-        // Fast2SMS URL
         const smsUrl = `https://www.fast2sms.com/dev/bulkV2?authorization=${FAST2SMS_KEY}&route=q&message=Your Aakash Academics OTP is ${otp}. Valid for 5 minutes.&language=english&numbers=${phoneNumber}`;
         
-        // Using AllOrigins Proxy to bypass CORS locally & in prod
+        // Proxy URL
         const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(smsUrl)}`;
         
         const response = await fetch(proxyUrl);
+        if (!response.ok) throw new Error('CORS Proxy Server Error');
+        
         const data = await response.json();
         
-        // AllOrigins returns the stringified response in data.contents
+        if (!data || !data.contents) {
+            throw new Error('Proxy returned empty response. Reload and try again.');
+        }
+
         const parsedData = JSON.parse(data.contents);
         
         if (parsedData.return) {
             toast.success('OTP Sent Successfully!');
             return { success: true, otp }; 
         } else {
-            throw new Error(parsedData.message || 'Failed to send SMS');
+            // Show the exact reason from Fast2SMS (e.g. "Low Balance" or "Invalid Number")
+            const reason = (parsedData.message && parsedData.message[0]) || parsedData.request_id || 'Fast2SMS Busy';
+            throw new Error(`Fast2SMS Error: ${reason}`);
         }
     } catch (error) {
-        console.error('CORS Proxy Error:', error);
-        toast.error('Galti: OTP nahi bhej paye. Network check karein.');
+        console.error('OTP Sending Failed:', error);
+        toast.error(error.message || 'OTP nahi bhej paye. Network/Balance check karein.');
         throw error;
     }
   };
