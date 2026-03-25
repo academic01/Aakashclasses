@@ -3,6 +3,7 @@ import HeroSection from '../components/home/HeroSection';
 import MarqueeTicker from '../components/home/MarqueeTicker';
 import CategoryCards from '../components/home/CategoryCards';
 import ExamCategories from '../components/home/ExamCategories';
+import StudyResources from '../components/home/StudyResources';
 import GamificationShowcase from '../components/home/GamificationShowcase';
 import FeaturesGrid from '../components/home/FeaturesGrid';
 
@@ -12,6 +13,7 @@ const HomePage = () => {
       <HeroSection />
       <MarqueeTicker />
       <ExamCategories />
+      <StudyResources />
       <GamificationShowcase />
       <FeaturesGrid />
       
