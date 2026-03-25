@@ -92,6 +92,21 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const loginWithOTPless = async (otplessUser) => {
+    // This receives the user data from OTpless directly
+    if (otplessUser && otplessUser.token) {
+       setUser({
+         email: otplessUser.email || (otplessUser.waNumber + '@otpless.com'),
+         phoneNumber: otplessUser.waNumber,
+         displayName: otplessUser.waName || 'User',
+         uid: otplessUser.userId || otplessUser.token
+       });
+       toast.success('Successfully logged in via WhatsApp!');
+       return true;
+    }
+    return false;
+  };
+
   const setupRecaptcha = (phoneNumber) => {
     if (MOCK_AUTH) {
       return Promise.resolve({ confirm: () => Promise.resolve(true) });
@@ -103,7 +118,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, signup, logout, loginWithGoogle, setupRecaptcha }}>
+    <AuthContext.Provider value={{ user, loading, login, signup, logout, loginWithGoogle, loginWithOTPless, setupRecaptcha }}>
       {children}
     </AuthContext.Provider>
   );

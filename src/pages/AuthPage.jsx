@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import { X, Edit2, ShieldCheck, MessageSquare } from 'lucide-react';
 
 const AuthPage = ({ type = 'login' }) => {
-  const { login, signup, loginWithGoogle, setupRecaptcha } = useAuth();
+  const { login, signup, loginWithGoogle, loginWithOTPless, setupRecaptcha } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1); // 1: phone entry, 2: OTP
@@ -21,6 +21,18 @@ const AuthPage = ({ type = 'login' }) => {
   const inputRefs = useRef([]);
 
   const [timeLeft, setTimeLeft] = useState(30);
+
+  useEffect(() => {
+    // Define the global callback for OTpless
+    window.otpless = async (otplessUser) => {
+        setLoading(true);
+        const success = await loginWithOTPless(otplessUser);
+        if (success) {
+           navigate('/goal-selection');
+        }
+        setLoading(false);
+    };
+  }, []);
 
   useEffect(() => {
     let timer;
@@ -165,6 +177,9 @@ const AuthPage = ({ type = 'login' }) => {
                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">OR</span>
                <div className="flex-grow h-px bg-gray-200"></div>
             </div>
+
+            {/* OTPless Auth Div */}
+            <div id="otpless-login-page" className="w-full mb-4"></div>
 
             <button 
               type="button"
