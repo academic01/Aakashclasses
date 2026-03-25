@@ -9,12 +9,12 @@ const HeroSection = () => {
   const y2 = useTransform(scrollY, [0, 500], [0, -80]);
   
   return (
-    <section className="relative min-h-[90vh] flex flex-col justify-center items-center overflow-hidden pt-20 bg-white bg-graph">
+    <section className="relative min-h-[90vh] flex flex-col justify-center items-center overflow-hidden pt-[140px] md:pt-[160px] bg-white bg-graph">
       
       {/* Background Depth - Radial Dots Pattern instead of Stars */}
       <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col lg:flex-row items-center mt-10">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col lg:flex-row items-center">
         
         {/* Left 55% Text */}
         <div className="w-full lg:w-[55%] text-left flex flex-col items-start pt-10 lg:pt-0">

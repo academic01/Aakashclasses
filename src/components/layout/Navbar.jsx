@@ -282,8 +282,6 @@ const Navbar = () => {
           )}
         </AnimatePresence>
       </motion.nav>
-      {/* Spacer to prevent content from going under the fixed navbar */}
-      <div className="h-[100px] w-full bg-transparent"></div>
     </>
   );
 };
