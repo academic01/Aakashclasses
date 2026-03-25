@@ -46,9 +46,17 @@ const Navbar = () => {
                 />
               </Link>
 
-              <button className={`hidden lg:flex items-center gap-2 border border-[#5A4BDA] text-[#5A4BDA] bg-[#F8F7FF] hover:bg-[#F3F0FF] rounded-md px-4 text-sm font-semibold transition-all duration-300 ${scrolled ? 'py-2' : 'py-2.5'}`}>
-                All Courses <ChevronDown className="w-4 h-4" />
-              </button>
+              <div className="relative group">
+                <button className={`hidden lg:flex items-center gap-2 border border-[#5A4BDA] text-[#5A4BDA] bg-[#F8F7FF] hover:bg-[#F3F0FF] rounded-md px-4 text-sm font-bold transition-all duration-300 ${scrolled ? 'py-2' : 'py-2.5'}`}>
+                  All Courses <ChevronDown className="w-4 h-4" />
+                </button>
+                <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-xl rounded-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 p-2 flex flex-col">
+                   <Link to="/courses?category=neet" className="px-4 py-3 hover:bg-gray-50 hover:text-[#5A4BDA] rounded-md font-bold text-gray-800 text-sm transition-colors">NEET</Link>
+                   <Link to="/courses?category=jee" className="px-4 py-3 hover:bg-gray-50 hover:text-[#5A4BDA] rounded-md font-bold text-gray-800 text-sm transition-colors">IIT JEE</Link>
+                   <Link to="/courses?category=foundation" className="px-4 py-3 hover:bg-gray-50 hover:text-[#5A4BDA] rounded-md font-bold text-gray-800 text-sm transition-colors">Pre Foundation</Link>
+                   <Link to="/courses?category=boards" className="px-4 py-3 hover:bg-gray-50 hover:text-[#5A4BDA] rounded-md font-bold text-gray-800 text-sm transition-colors">School Boards</Link>
+                </div>
+              </div>
             </div>
 
             {/* Middle Section: Navigation Links */}
@@ -57,7 +65,7 @@ const Navbar = () => {
                 <Link 
                   key={name} 
                   to="#"
-                  className={`font-semibold text-gray-800 hover:text-[#5A4BDA] transition-all duration-300 font-nunito ${scrolled ? 'text-sm' : 'text-base'}`}
+                  className={`font-bold text-gray-800 hover:text-[#5A4BDA] transition-all duration-300 font-nunito ${scrolled ? 'text-sm' : 'text-base'}`}
                 >
                   {name}
                 </Link>
@@ -101,7 +109,7 @@ const Navbar = () => {
                   <Link 
                     key={name}
                     to="#"
-                    className="text-base font-semibold text-gray-800 hover:text-[#5A4BDA]"
+                    className="text-base font-bold text-gray-800 hover:text-[#5A4BDA]"
                     onClick={() => setIsOpen(false)}
                   >
                     {name}
@@ -121,7 +129,7 @@ const Navbar = () => {
         </AnimatePresence>
       </motion.nav>
       {/* Spacer to prevent content from going under the fixed navbar */}
-      <div className="h-[76px] w-full"></div>
+      <div className="h-[140px] w-full bg-transparent"></div>
     </>
   );
 };
