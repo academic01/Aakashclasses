@@ -2,6 +2,7 @@ import React from 'react';
 import HeroSection from '../components/home/HeroSection';
 import MarqueeTicker from '../components/home/MarqueeTicker';
 import CategoryCards from '../components/home/CategoryCards';
+import ExamCategories from '../components/home/ExamCategories';
 import GamificationShowcase from '../components/home/GamificationShowcase';
 import FeaturesGrid from '../components/home/FeaturesGrid';
 
@@ -10,7 +11,7 @@ const HomePage = () => {
     <div className="w-full relative">
       <HeroSection />
       <MarqueeTicker />
-      <CategoryCards />
+      <ExamCategories />
       <GamificationShowcase />
       <FeaturesGrid />
       
