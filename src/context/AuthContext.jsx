@@ -56,15 +56,17 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // NEW: Real SMS OTP via Fast2SMS
+  // NEW: Real SMS OTP via Fast2SMS (proxied through Vercel API to avoid CORS)
   const sendSmsOtp = async (phoneNumber) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    setActiveOtp(otp); // Store to verify later
+    setActiveOtp(otp); 
 
     try {
-        // Fast2SMS Quick SMS Route (uses numeric sender IDs, bypasses DLT for testing)
-        // Note: Using a proxy or simple fetch. For production, do this on server-side.
-        const response = await fetch(`https://www.fast2sms.com/dev/bulkV2?authorization=${FAST2SMS_KEY}&route=q&message=Your Aakash Academics OTP is ${otp}. Valid for 5 minutes.&language=english&numbers=${phoneNumber}`);
+        const response = await fetch('/api/send-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone: phoneNumber, otp })
+        });
         
         const data = await response.json();
         
@@ -75,8 +77,8 @@ export const AuthProvider = ({ children }) => {
             throw new Error(data.message || 'Failed to send SMS');
         }
     } catch (error) {
-        console.error('Fast2SMS Error:', error);
-        toast.error('Galti: OTP nahi bhej paye. Network check karein.');
+        console.error('API Error:', error);
+        toast.error('CORS Error Bypass: Serverless function failed.');
         throw error;
     }
   };
