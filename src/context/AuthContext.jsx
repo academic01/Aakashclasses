@@ -13,8 +13,8 @@ import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
 
-// SET TO FALSE TO USE REAL FIREBASE (WHICH IS CONFIGURED NOW)
-const MOCK_AUTH = false; 
+// SET TO TRUE FOR INSTANT DEMO WITHOUT FIREBASE BILLING ERRORS
+const MOCK_AUTH = true; 
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);

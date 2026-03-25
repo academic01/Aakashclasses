@@ -61,6 +61,10 @@ const AuthPage = ({ type = 'login' }) => {
       setStep(2);
       setTimeLeft(30);
       toast.success(`OTP sent to ${formData.phone}`);
+      // Show mock tip
+      setTimeout(() => {
+        toast('Demo Mode: Enter any 6 digits to login.', { icon: 'ℹ️', duration: 4000 });
+      }, 1000);
     } catch (err) {
       toast.error(err.message || 'Failed to send OTP');
       console.error(err);
