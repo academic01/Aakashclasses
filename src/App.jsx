@@ -14,7 +14,7 @@ import GoalSelectionPage from './pages/GoalSelectionPage';
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen bg-white text-textPrimary relative overflow-hidden">
+      <div className="flex flex-col min-h-screen bg-lightBg1 text-textPrimary relative overflow-hidden">
         {/* Subtle Depth Blobs */}
         <div className="fixed top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
           <div className="absolute top-[-15%] left-[-10%] w-[50%] h-[50%] rounded-full bg-black/[0.04] blur-[150px]"></div>
