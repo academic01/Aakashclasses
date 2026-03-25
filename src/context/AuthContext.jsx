@@ -1,77 +1,40 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { 
-  onAuthStateChanged, 
-  signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword, 
-  signOut,
-  signInWithPopup,
-  RecaptchaVerifier,
-  signInWithPhoneNumber
-} from "firebase/auth";
-import { auth, googleProvider } from '../lib/firebase';
+import { useUser, useAuth as useClerkAuth, useClerk } from '@clerk/clerk-react';
 import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
 
-// SET TO TRUE FOR INSTANT DEMO WITHOUT FIREBASE BILLING ERRORS
-const MOCK_AUTH = true; 
-
 export const AuthProvider = ({ children }) => {
+  const { isLoaded: userLoaded, user: clerkUser } = useUser();
+  const { isLoaded: authLoaded, signOut } = useClerkAuth();
+  const { openSignIn } = useClerk();
+  
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (MOCK_AUTH) {
+    if (userLoaded && authLoaded) {
+      if (clerkUser) {
+        setUser({
+          email: clerkUser.primaryEmailAddress?.emailAddress,
+          displayName: clerkUser.fullName || clerkUser.firstName || 'User',
+          uid: clerkUser.id,
+          photoURL: clerkUser.imageUrl
+        });
+      } else {
+        setUser(null);
+      }
       setLoading(false);
-      return;
     }
+  }, [userLoaded, authLoaded, clerkUser]);
 
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const login = async (email, password) => {
-    if (MOCK_AUTH) {
-      setUser({ email, uid: 'mock-123', displayName: 'Rahul K.' });
-      toast.success('Login Successful (Mock)');
-      return;
-    }
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      toast.success('Welcome back!');
-    } catch (error) {
-      toast.error(error.message);
-      throw error;
-    }
-  };
-
-  const signup = async (email, password, name) => {
-    if (MOCK_AUTH) {
-      setUser({ email, uid: 'mock-123', displayName: name });
-      toast.success('Account Created (Mock)');
-      return;
-    }
-    try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      // You can update profile name here with updateProfile(res.user, { displayName: name })
-      toast.success('Sign up successful!');
-    } catch (error) {
-      toast.error(error.message);
-      throw error;
-    }
+  const login = async () => {
+    openSignIn();
   };
 
   const logout = async () => {
-    if (MOCK_AUTH) {
-      setUser(null);
-      toast.success('Logged out');
-      return;
-    }
     try {
-      await signOut(auth);
+      await signOut();
       toast.success('Logged out successfully');
     } catch (error) {
       toast.error(error.message);
@@ -79,46 +42,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const loginWithGoogle = async () => {
-    if (MOCK_AUTH) {
-      setUser({ email: 'google@user.com', uid: 'google-123', displayName: 'Google User' });
-      toast.success('Google Login Successful (Mock)');
-      return;
-    }
-    try {
-      await signInWithPopup(auth, googleProvider);
-      toast.success('Google login successful!');
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
-  const loginWithOTPless = async (otplessUser) => {
-    // This receives the user data from OTpless directly
-    if (otplessUser && otplessUser.token) {
-       setUser({
-         email: otplessUser.email || (otplessUser.waNumber + '@otpless.com'),
-         phoneNumber: otplessUser.waNumber,
-         displayName: otplessUser.waName || 'User',
-         uid: otplessUser.userId || otplessUser.token
-       });
-       toast.success('Successfully logged in via WhatsApp!');
-       return true;
-    }
-    return false;
-  };
-
-  const setupRecaptcha = (phoneNumber) => {
-    if (MOCK_AUTH) {
-      return Promise.resolve({ confirm: () => Promise.resolve(true) });
-    }
-    const recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-       size: 'invisible'
-    });
-    return signInWithPhoneNumber(auth, phoneNumber, recaptchaVerifier);
+    openSignIn({ initialValues: { strategy: 'oauth_google' } });
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, signup, logout, loginWithGoogle, loginWithOTPless, setupRecaptcha }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, loginWithGoogle }}>
       {children}
     </AuthContext.Provider>
   );
