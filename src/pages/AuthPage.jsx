@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import { X, Edit2, ShieldCheck, MessageSquare } from 'lucide-react';
 
 const AuthPage = ({ type = 'login' }) => {
-  const { login, signup, loginWithGoogle, loginWithOTPless, setupRecaptcha } = useAuth();
+  const { login, signup, loginWithGoogle, sendSmsOtp, verifySmsOtp } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1); // 1: phone entry, 2: OTP
@@ -16,23 +16,10 @@ const AuthPage = ({ type = 'login' }) => {
     name: ''
   });
 
-  const [confirmationResult, setConfirmationResult] = useState(null);
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const inputRefs = useRef([]);
 
   const [timeLeft, setTimeLeft] = useState(30);
-
-  useEffect(() => {
-    // Define the global callback for OTpless
-    window.otpless = async (otplessUser) => {
-        setLoading(true);
-        const success = await loginWithOTPless(otplessUser);
-        if (success) {
-           navigate('/goal-selection');
-        }
-        setLoading(false);
-    };
-  }, []);
 
   useEffect(() => {
     let timer;
@@ -67,18 +54,10 @@ const AuthPage = ({ type = 'login' }) => {
     }
     setLoading(true);
     try {
-      const formattedPhone = '+91' + formData.phone;
-      const res = await setupRecaptcha(formattedPhone);
-      setConfirmationResult(res);
+      await sendSmsOtp(formData.phone);
       setStep(2);
       setTimeLeft(30);
-      toast.success(`OTP sent to ${formData.phone}`);
-      // Show mock tip
-      setTimeout(() => {
-        toast('Demo Mode: Enter any 6 digits to login.', { icon: 'ℹ️', duration: 4000 });
-      }, 1000);
     } catch (err) {
-      toast.error(err.message || 'Failed to send OTP');
       console.error(err);
     } finally {
       setLoading(false);
@@ -92,18 +71,11 @@ const AuthPage = ({ type = 'login' }) => {
     
     setLoading(true);
     try {
-      if (confirmationResult && typeof confirmationResult.confirm === 'function') {
-         await confirmationResult.confirm(otpValue);
-         toast.success('Login Successful!');
-         navigate('/goal-selection');
-      } else {
-         // Mock fallback just in case
-         await login(formData.phone + '@mock.com', 'password123'); 
-         toast.success('Login Successful!');
-         navigate('/goal-selection');
-      }
+      await verifySmsOtp(otpValue, formData.phone);
+      toast.success('Login Successful!');
+      navigate('/goal-selection');
     } catch (err) {
-      toast.error('Invalid OTP');
+      toast.error(err.message || 'Invalid OTP');
       console.error(err);
     } finally {
       setLoading(false);

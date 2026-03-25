@@ -5,27 +5,22 @@ import {
   createUserWithEmailAndPassword, 
   signOut,
   signInWithPopup,
-  RecaptchaVerifier,
-  signInWithPhoneNumber
 } from "firebase/auth";
 import { auth, googleProvider } from '../lib/firebase';
 import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
 
-// SET TO TRUE FOR INSTANT DEMO WITHOUT FIREBASE BILLING ERRORS
-const MOCK_AUTH = true; 
+// Using Fast2SMS now for Real SMS OTP
+const MOCK_AUTH = false; 
+const FAST2SMS_KEY = "edH0Or9RZ7cxqBYbMNkPSaC251LUyQoE3VjuntlDi4XJKsGfvhImRVKqBJ1LGrcSEUiaXznjlNT79OwD";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [activeOtp, setActiveOtp] = useState(null);
 
   useEffect(() => {
-    if (MOCK_AUTH) {
-      setLoading(false);
-      return;
-    }
-
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
@@ -34,11 +29,6 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    if (MOCK_AUTH) {
-      setUser({ email, uid: 'mock-123', displayName: 'Rahul K.' });
-      toast.success('Login Successful (Mock)');
-      return;
-    }
     try {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success('Welcome back!');
@@ -48,28 +38,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signup = async (email, password, name) => {
-    if (MOCK_AUTH) {
-      setUser({ email, uid: 'mock-123', displayName: name });
-      toast.success('Account Created (Mock)');
-      return;
-    }
-    try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      // You can update profile name here with updateProfile(res.user, { displayName: name })
-      toast.success('Sign up successful!');
-    } catch (error) {
-      toast.error(error.message);
-      throw error;
-    }
-  };
-
   const logout = async () => {
-    if (MOCK_AUTH) {
-      setUser(null);
-      toast.success('Logged out');
-      return;
-    }
     try {
       await signOut(auth);
       toast.success('Logged out successfully');
@@ -79,11 +48,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const loginWithGoogle = async () => {
-    if (MOCK_AUTH) {
-      setUser({ email: 'google@user.com', uid: 'google-123', displayName: 'Google User' });
-      toast.success('Google Login Successful (Mock)');
-      return;
-    }
     try {
       await signInWithPopup(auth, googleProvider);
       toast.success('Google login successful!');
@@ -92,33 +56,48 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const loginWithOTPless = async (otplessUser) => {
-    // This receives the user data from OTpless directly
-    if (otplessUser && otplessUser.token) {
-       setUser({
-         email: otplessUser.email || (otplessUser.waNumber + '@otpless.com'),
-         phoneNumber: otplessUser.waNumber,
-         displayName: otplessUser.waName || 'User',
-         uid: otplessUser.userId || otplessUser.token
-       });
-       toast.success('Successfully logged in via WhatsApp!');
-       return true;
+  // NEW: Real SMS OTP via Fast2SMS
+  const sendSmsOtp = async (phoneNumber) => {
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    setActiveOtp(otp); // Store to verify later
+
+    try {
+        // Fast2SMS Quick SMS Route (uses numeric sender IDs, bypasses DLT for testing)
+        // Note: Using a proxy or simple fetch. For production, do this on server-side.
+        const response = await fetch(`https://www.fast2sms.com/dev/bulkV2?authorization=${FAST2SMS_KEY}&route=q&message=Your Aakash Academics OTP is ${otp}. Valid for 5 minutes.&language=english&numbers=${phoneNumber}`);
+        
+        const data = await response.json();
+        
+        if (data.return) {
+            toast.success('OTP Sent Successfully!');
+            return { success: true, otp }; 
+        } else {
+            throw new Error(data.message || 'Failed to send SMS');
+        }
+    } catch (error) {
+        console.error('Fast2SMS Error:', error);
+        toast.error('Galti: OTP nahi bhej paye. Network check karein.');
+        throw error;
     }
-    return false;
   };
 
-  const setupRecaptcha = (phoneNumber) => {
-    if (MOCK_AUTH) {
-      return Promise.resolve({ confirm: () => Promise.resolve(true) });
+  const verifySmsOtp = async (enteredOtp, phone) => {
+    if (enteredOtp === activeOtp) {
+       // On success, we manually log them in or set user state
+       // In a real app, you'd create/fetch the user in Firestore here
+       setUser({
+         phoneNumber: phone,
+         uid: 'sms-' + phone,
+         displayName: 'User ' + phone.slice(-4)
+       });
+       setActiveOtp(null);
+       return true;
     }
-    const recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-       size: 'invisible'
-    });
-    return signInWithPhoneNumber(auth, phoneNumber, recaptchaVerifier);
+    throw new Error('Ghalat OTP hai bhai!');
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, signup, logout, loginWithGoogle, loginWithOTPless, setupRecaptcha }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, loginWithGoogle, sendSmsOtp, verifySmsOtp }}>
       {children}
     </AuthContext.Provider>
   );
