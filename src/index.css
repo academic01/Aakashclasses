@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&family=Nunito:wght@300;400;600;700;800&family=Orbitron:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,19 +6,19 @@
 
 @layer base {
   body {
-    @apply bg-white text-textPrimary font-nunito overflow-x-hidden m-0 p-0;
+    @apply bg-white text-textPrimary font-inter overflow-x-hidden m-0 p-0;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-orbitron tracking-wide font-bold text-brandNavy;
+    @apply font-outfit tracking-tight font-bold text-brandNavy;
   }
   
   p, span {
-    @apply text-textSecondary;
+    @apply text-textSecondary font-inter;
   }
 
   .sub-heading {
-    @apply font-exo font-semibold text-brandNavy underline underline-offset-4 decoration-brandYellow;
+    @apply font-outfit font-semibold text-brandNavy underline underline-offset-4 decoration-brandYellow;
   }
 }
 
@@ -50,7 +50,7 @@
   .btn-primary {
     background: #0D2240;
     color: #FFFFFF;
-    @apply font-bold font-exo px-8 py-3 rounded-[50px] transition-all duration-300;
+    @apply font-bold font-outfit px-8 py-3 rounded-[50px] transition-all duration-300;
   }
   
   .btn-primary:hover {
@@ -59,7 +59,7 @@
   }
 
   .btn-secondary {
-    @apply bg-transparent border-[1.5px] border-brandNavy text-brandNavy font-bold font-exo px-8 py-3 rounded-[50px] transition-all duration-300;
+    @apply bg-transparent border-[1.5px] border-brandNavy text-brandNavy font-bold font-outfit px-8 py-3 rounded-[50px] transition-all duration-300;
   }
   
   .btn-secondary:hover {

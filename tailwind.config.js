@@ -21,6 +21,8 @@ export default {
         cardBorderHover: 'rgba(46, 134, 193, 0.4)', /* brandBlue */
       },
       fontFamily: {
+        outfit: ['Outfit', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
         orbitron: ['Orbitron', 'sans-serif'],
         exo: ['"Exo 2"', 'sans-serif'],
         nunito: ['Nunito', 'sans-serif'],
