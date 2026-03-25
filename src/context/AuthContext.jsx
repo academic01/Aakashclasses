@@ -53,17 +53,17 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       
-      // Update Auth Profile
+      // Update Auth Profile (Immediate)
       await updateProfile(res.user, { displayName: name });
 
-      // Save to Firestore for Admin Panel later
-      await setDoc(doc(db, "users", res.user.uid), {
+      // Save to Firestore (In background, don't block the user)
+      setDoc(doc(db, "users", res.user.uid), {
         name,
         mobile,
         email,
         uid: res.user.uid,
         createdAt: new Date().toISOString()
-      });
+      }).catch(err => console.error("Firestore Save Error:", err));
 
       toast.success('Registration successful! Welcome to Aakash.');
       return res.user;
