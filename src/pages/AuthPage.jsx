@@ -122,7 +122,7 @@ const AuthPage = ({ type = 'login' }) => {
           // STEP 1: LOGIN / PHONE ENTRY
           <div className="p-8 pt-12">
             <div className="mb-8 text-center">
-              <img src="/aakashlogo.png" className="w-24 mx-auto mb-6" alt="Logo" />
+              <img src="/aakashlogo.png" className="w-32 mx-auto mb-6" alt="Logo" />
               <h2 className="text-[22px] font-bold text-gray-800 mb-2">Login / Register</h2>
               <p className="text-gray-500 text-sm">Please enter your mobile number to proceed</p>
             </div>
