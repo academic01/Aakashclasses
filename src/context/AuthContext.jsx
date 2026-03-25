@@ -56,29 +56,34 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // NEW: Real SMS OTP via Fast2SMS (proxied through Vercel API to avoid CORS)
+  // NEW: Real SMS OTP via Fast2SMS (Wrapped in CORS Proxy for localhost + production support)
   const sendSmsOtp = async (phoneNumber) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     setActiveOtp(otp); 
+    const FAST2SMS_KEY = "edH0Or9RZ7cxqBYbMNkPSaC251LUyQoE3VjuntlDi4XJKsGfvhImRVKqBJ1LGrcSEUiaXznjlNT79OwD";
 
     try {
-        const response = await fetch('/api/send-otp', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ phone: phoneNumber, otp })
-        });
+        // Fast2SMS URL
+        const smsUrl = `https://www.fast2sms.com/dev/bulkV2?authorization=${FAST2SMS_KEY}&route=q&message=Your Aakash Academics OTP is ${otp}. Valid for 5 minutes.&language=english&numbers=${phoneNumber}`;
         
+        // Using AllOrigins Proxy to bypass CORS locally & in prod
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(smsUrl)}`;
+        
+        const response = await fetch(proxyUrl);
         const data = await response.json();
         
-        if (data.return) {
+        // AllOrigins returns the stringified response in data.contents
+        const parsedData = JSON.parse(data.contents);
+        
+        if (parsedData.return) {
             toast.success('OTP Sent Successfully!');
             return { success: true, otp }; 
         } else {
-            throw new Error(data.message || 'Failed to send SMS');
+            throw new Error(parsedData.message || 'Failed to send SMS');
         }
     } catch (error) {
-        console.error('API Error:', error);
-        toast.error('CORS Error Bypass: Serverless function failed.');
+        console.error('CORS Proxy Error:', error);
+        toast.error('Galti: OTP nahi bhej paye. Network check karein.');
         throw error;
     }
   };
