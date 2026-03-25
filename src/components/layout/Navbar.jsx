@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../../context/AuthContext';
 import {
   Menu, X, ChevronDown, ChevronRight,
   Atom, Stethoscope, User, Lightbulb, Code2, Trophy, Landmark, Users,
   GraduationCap, Building2, Backpack, PencilRuler, Map, Award, BookOpen,
   Scale, Library, Train, ClipboardList, FileBarChart, ListTodo, Hospital, Shield,
-  Target, Cog, BookText, Gavel, CheckCircle, Pill, PenTool
+  Target, Cog, BookText, Gavel, CheckCircle, Pill, PenTool, LogOut
 } from 'lucide-react';
 
 const courseCategories = [
@@ -119,10 +120,12 @@ const courseCategories = [
 ];
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState('competitive');
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -142,6 +145,10 @@ const Navbar = () => {
   ];
 
   const activeCategoryData = courseCategories.find(c => c.id === activeCategory);
+
+  if (location.pathname === '/goal-selection') {
+    return null;
+  }
 
   return (
     <>
@@ -226,15 +233,32 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Right Section: Login Button */}
-            <div className="hidden lg:flex items-center">
-              <Link
-                to="/login"
-                className={`bg-[#5A4BDA] hover:bg-[#4d3fc4] text-white rounded-md font-bold font-nunito transition-all duration-300 ${scrolled ? 'px-6 py-2.5 text-sm' : 'px-8 py-2.5 text-[15px]'}`}
-                onClick={() => navigate('/login')}
-              >
-                Login/Register
-              </Link>
+            {/* Right Section: Logic for Login OR User Profile */}
+            <div className="hidden lg:flex items-center gap-4">
+              {user ? (
+                <div className="flex items-center gap-4">
+                  <div className="flex flex-col items-end">
+                    <span className="text-xs font-bold text-gray-500 uppercase tracking-tighter">My Account</span>
+                    <span className="text-[15px] font-bold text-gray-800 leading-none">{user.displayName || 'Student'}</span>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-[#5A4BDA] text-white flex items-center justify-center font-bold text-lg border-2 border-white shadow-sm overflow-hidden ring-2 ring-gray-100">
+                    {user.displayName?.[0]?.toUpperCase() || 'S'}
+                  </div>
+                  <button 
+                    onClick={() => logout()}
+                    className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                  >
+                    <LogOut className="w-5 h-5" />
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  to="/login"
+                  className={`bg-[#5A4BDA] hover:bg-[#4d3fc4] text-white rounded-md font-bold font-nunito transition-all duration-300 ${scrolled ? 'px-6 py-2.5 text-sm' : 'px-8 py-2.5 text-[15px]'}`}
+                >
+                  Login/Register
+                </Link>
+              )}
             </div>
 
             {/* Mobile Menu Toggle */}
