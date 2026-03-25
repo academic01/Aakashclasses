@@ -82,7 +82,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const verifySmsOtp = async (enteredOtp, phone) => {
-    if (enteredOtp === activeOtp) {
+    if (activeOtp && enteredOtp === activeOtp) {
        // On success, we manually log them in or set user state
        // In a real app, you'd create/fetch the user in Firestore here
        setUser({
