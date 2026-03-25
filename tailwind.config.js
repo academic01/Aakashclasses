@@ -7,18 +7,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        lightBg1: '#FFFFFF',
-        lightBg2: '#F5F5F5',
-        lightBg3: '#F7F7F7',
-        brandNavy: '#0D2240',
-        brandBlue: '#2E86C1',
-        brandYellow: '#F5A623',
-        textPrimary: '#0D2240',
-        textSecondary: '#444444',
-        textMuted: '#888888',
+        lightBg1: '#FAF7F2', // Warm Beige
+        lightBg2: '#F3EFE9', 
+        lightBg3: '#EFEAE3',
+        brandNavy: '#0F172A', // Deep Midnight
+        brandBlue: '#2C5282',
+        brandYellow: '#C5A47E', // Warm Gold
+        textPrimary: '#0F172A',
+        textSecondary: '#5C524F',
+        textMuted: '#9E9491',
         cardBg: '#FFFFFF',
-        cardBorder: 'rgba(0, 0, 0, 0.08)',
-        cardBorderHover: 'rgba(46, 134, 193, 0.4)', /* brandBlue */
+        cardBorder: 'rgba(15, 23, 42, 0.05)',
+        cardBorderHover: 'rgba(197, 164, 126, 0.4)', /* brandGold */
       },
       fontFamily: {
         outfit: ['Outfit', 'sans-serif'],

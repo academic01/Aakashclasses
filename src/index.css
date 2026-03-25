@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply bg-white text-textPrimary font-inter overflow-x-hidden m-0 p-0;
+    @apply bg-lightBg1 text-textPrimary font-inter overflow-x-hidden m-0 p-0;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -26,12 +26,12 @@
   /* Premium Light Cards */
   .glass-card {
     @apply bg-white border border-black/5 rounded-[20px] transition-all duration-300;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.04);
   }
   
   .glass-card:hover {
-    border-color: #2E86C1; /* brandBlue opacity approx */
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+    border-color: #C5A47E; 
+    box-shadow: 0 8px 40px rgba(197, 164, 126, 0.1);
     transform: translateY(-6px);
   }
 
