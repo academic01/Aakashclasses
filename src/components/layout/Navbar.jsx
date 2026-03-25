@@ -40,7 +40,7 @@ const Navbar = () => {
             <div className="flex items-center gap-6">
               <Link to="/" className="flex items-center">
                 <img 
-                  src="/logo.png" 
+                  src="/aakashlogo.png" 
                   alt="Aakash Academics" 
                   className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-12' : 'h-[72px]'}`}
                 />
