@@ -4,15 +4,17 @@ import {
   signInWithEmailAndPassword, 
   createUserWithEmailAndPassword, 
   signOut,
-  signInWithPopup
+  signInWithPopup,
+  RecaptchaVerifier,
+  signInWithPhoneNumber
 } from "firebase/auth";
 import { auth, googleProvider } from '../lib/firebase';
 import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
 
-// TOGGLE THIS TO TRUE FOR INSTANT DEMO WITHOUT FIREBASE KEYS
-const MOCK_AUTH = true; 
+// SET TO FALSE TO USE REAL FIREBASE (WHICH IS CONFIGURED NOW)
+const MOCK_AUTH = false; 
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -90,8 +92,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const setupRecaptcha = (phoneNumber) => {
+    if (MOCK_AUTH) {
+      return Promise.resolve({ confirm: () => Promise.resolve(true) });
+    }
+    const recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+       size: 'invisible'
+    });
+    return signInWithPhoneNumber(auth, phoneNumber, recaptchaVerifier);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, signup, logout, loginWithGoogle }}>
+    <AuthContext.Provider value={{ user, loading, login, signup, logout, loginWithGoogle, setupRecaptcha }}>
       {children}
     </AuthContext.Provider>
   );
