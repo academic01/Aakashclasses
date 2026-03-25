@@ -42,7 +42,7 @@ const Navbar = () => {
                 <img 
                   src="/logo.png" 
                   alt="Aakash Academics" 
-                  className="h-10 w-auto object-contain"
+                  className="h-14 w-auto object-contain"
                 />
               </Link>
 
