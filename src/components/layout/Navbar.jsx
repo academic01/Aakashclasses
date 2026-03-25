@@ -28,12 +28,12 @@ const Navbar = () => {
   return (
     <>
       <motion.nav 
-        className={`fixed w-full z-50 transition-all duration-300 bg-white ${scrolled ? 'shadow-md py-3' : 'border-b border-gray-200 py-4'}`}
+        className={`fixed w-full z-50 transition-all duration-300 bg-white ${scrolled ? 'shadow-md py-2' : 'border-b border-gray-200 py-6'}`}
       >
-        {/* Very top thin dark bar is usually above the navbar, but we'll add it here for simplicity if needed, or just let the body background handle it. The screenshot shows a thick dark bar above the navbar. Let's add a fixed top bar. */}
-        <div className="absolute top-0 left-0 w-full h-2 bg-[#433A4D]"></div>
+        {/* Top thin dark bar */}
+        <div className="absolute top-0 left-0 w-full h-[6px] bg-[#433A4D]"></div>
         
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-2">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-1">
           <div className="flex justify-between items-center">
             
             {/* Left Section: Logo & All Courses Button */}
@@ -42,11 +42,11 @@ const Navbar = () => {
                 <img 
                   src="/logo.png" 
                   alt="Aakash Academics" 
-                  className="h-14 w-auto object-contain"
+                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-12' : 'h-[72px]'}`}
                 />
               </Link>
 
-              <button className="hidden lg:flex items-center gap-2 border border-[#5A4BDA] text-[#5A4BDA] bg-[#F8F7FF] hover:bg-[#F3F0FF] rounded-md px-4 py-2 text-sm font-semibold transition-colors">
+              <button className={`hidden lg:flex items-center gap-2 border border-[#5A4BDA] text-[#5A4BDA] bg-[#F8F7FF] hover:bg-[#F3F0FF] rounded-md px-4 text-sm font-semibold transition-all duration-300 ${scrolled ? 'py-2' : 'py-2.5'}`}>
                 All Courses <ChevronDown className="w-4 h-4" />
               </button>
             </div>
@@ -57,7 +57,7 @@ const Navbar = () => {
                 <Link 
                   key={name} 
                   to="#"
-                  className="text-sm font-semibold text-gray-800 hover:text-[#5A4BDA] transition-colors font-nunito"
+                  className={`font-semibold text-gray-800 hover:text-[#5A4BDA] transition-all duration-300 font-nunito ${scrolled ? 'text-sm' : 'text-base'}`}
                 >
                   {name}
                 </Link>
@@ -68,7 +68,7 @@ const Navbar = () => {
             <div className="hidden lg:flex items-center">
               <Link 
                 to="/login" 
-                className="bg-[#5A4BDA] hover:bg-[#4d3fc4] text-white px-6 py-2.5 rounded-md text-sm font-bold font-nunito transition-colors"
+                className={`bg-[#5A4BDA] hover:bg-[#4d3fc4] text-white rounded-md font-bold font-nunito transition-all duration-300 ${scrolled ? 'px-6 py-2.5 text-sm' : 'px-8 py-3 text-base'}`}
                 onClick={() => navigate('/login')}
               >
                 Login/Register
