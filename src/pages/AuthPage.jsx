@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
-import { X, Mail, Lock, User, Phone, ArrowRight, Github } from 'lucide-react';
+import { X, Mail, Lock, User, Phone, ArrowRight } from 'lucide-react';
 
 const AuthPage = () => {
   const { login, signup, loginWithGoogle } = useAuth();
