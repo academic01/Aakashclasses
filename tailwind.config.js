@@ -10,15 +10,15 @@ export default {
         lightBg1: '#F5E8D3', // Warm Beige
         lightBg2: '#EFE1C9', 
         lightBg3: '#EADABF',
-        brandNavy: '#0D2240', // Deep Midnight Updated
+        brandNavy: '#0F172A', // Deep Midnight
         brandBlue: '#2C5282',
-        brandYellow: '#F5A623', // Updated to match user request
-        textPrimary: '#0D2240',
-        textSecondary: '#666666',
-        textMuted: '#888888',
+        brandYellow: '#C5A47E', // Warm Gold
+        textPrimary: '#0F172A',
+        textSecondary: '#5C524F',
+        textMuted: '#9E9491',
         cardBg: '#FFFFFF',
         cardBorder: 'rgba(15, 23, 42, 0.05)',
-        cardBorderHover: 'rgba(245, 166, 35, 0.4)',
+        cardBorderHover: 'rgba(197, 164, 126, 0.4)', /* brandGold */
       },
       fontFamily: {
         outfit: ['Outfit', 'sans-serif'],
@@ -27,14 +27,15 @@ export default {
         exo: ['"Exo 2"', 'sans-serif'],
         nunito: ['Nunito', 'sans-serif'],
       },
+      backgroundImage: {
+        'btn-primary': '#0D2240',
+      },
       animation: {
         'spin-slow': 'spin 15s linear infinite',
         'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'flicker': 'flicker 1.5s infinite alternate',
         'shimmer': 'shimmer 2s infinite linear',
         'float-icon': 'float-icon 4s ease-in-out infinite',
-        'float-badge': 'float-badge 3s ease-in-out infinite',
-        'count-up': 'count-up 2s ease-out forwards',
       },
       keyframes: {
         flicker: {
@@ -49,14 +50,6 @@ export default {
         'float-icon': {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-15px)' },
-        },
-        'float-badge': {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
-        },
-        'count-up': {
-          'from': { opacity: 0, transform: 'translateY(10px)' },
-          'to': { opacity: 1, transform: 'translateY(0)' },
         }
       }
     },
