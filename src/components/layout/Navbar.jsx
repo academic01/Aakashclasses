@@ -72,8 +72,8 @@ const Navbar = () => {
         className={`fixed w-full z-50 transition-all duration-300 bg-brandBeige/95 backdrop-blur-md ${scrolled ? 'shadow-md py-2' : 'py-5'}`}
       >
 
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-1">
-          <div className="flex justify-between items-center pb-2">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center">
 
             {/* Left Section: Logo & All Courses Button */}
             <div className="flex items-center gap-6">

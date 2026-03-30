@@ -12,7 +12,7 @@ const slides = [
     bg: "bg-brandBeige",
     accent: "#F5A623",
     type: "School Prep",
-    image: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=2000&q=100",
     link: "/courses?category=school"
   },
   {
@@ -23,7 +23,7 @@ const slides = [
     bg: "bg-brandBeige",
     accent: "#0D2240",
     type: "Senior Secondary",
-    image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=2000&q=100",
     link: "/courses?category=senior"
   },
   {
@@ -34,7 +34,7 @@ const slides = [
     bg: "bg-brandBeige",
     accent: "#22C55E",
     type: "Govt Jobs",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=2000&q=100",
     link: "/courses?category=govt"
   }
 ];
@@ -53,7 +53,7 @@ const HeroSection = () => {
   const prevSlide = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <section className="relative w-full h-[520px] md:h-[620px] overflow-hidden bg-brandBeige pt-[140px]">
+    <section className="relative w-full h-[450px] md:h-[550px] overflow-hidden bg-brandBeige pt-[115px]">
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
