@@ -18,7 +18,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative w-full overflow-hidden bg-white bg-dot-grid pt-20 md:pt-24 lg:pt-32 pb-20 px-6 md:px-20 min-h-auto">
+    <section className="relative w-full overflow-hidden bg-white bg-dot-grid pt-12 md:pt-14 lg:pt-16 pb-16 px-6 md:px-20 min-h-auto">
       
       <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-0 relative z-10">
         

@@ -153,7 +153,7 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed w-full z-50 transition-all duration-300 bg-white ${scrolled ? 'shadow-md py-2' : 'border-b border-[#E5E5E5] py-6'}`}
+        className={`fixed w-full z-50 transition-all duration-300 bg-white ${scrolled ? 'shadow-md py-1' : 'border-b border-[#E5E5E5] py-2'}`}
       >
         <div className="nav-accent-line absolute top-0 left-0 w-full h-[6px] bg-gradient-to-r from-[#0D2240] via-[#0D2240] to-[#FFD700]"></div>
 
@@ -166,7 +166,7 @@ const Navbar = () => {
                 <img
                   src="/aakashlogo.png"
                   alt="Aakash Academics"
-                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-12' : 'h-[72px]'}`}
+                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-8' : 'h-12'}`}
                 />
               </Link>
 
