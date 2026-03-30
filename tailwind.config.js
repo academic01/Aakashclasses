@@ -7,9 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        lightBg1: '#FFFFFF', // Pure White
-        lightBg2: '#F8F8F8', // Cool Grey
-        lightBg3: '#F0F0F0',
+        brandBeige: '#F9F6F2', // Light Beige Base
+        lightBg1: '#F9F6F2', // Updated to Beige
+        lightBg2: '#F3EFEA', // Slightly darker beige for contrast
+        lightBg3: '#EAE5DF',
         brandNavy: '#0D2240', // Deep Midnight
         brandBlue: '#1a3a6b',
         brandYellow: '#F5A623', // Bright Yellow

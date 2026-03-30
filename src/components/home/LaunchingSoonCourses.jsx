@@ -177,7 +177,7 @@ const LaunchingSoonCourses = () => {
   };
 
   return (
-    <section className="py-24 px-6 md:px-20 bg-white relative overflow-hidden">
+    <section className="py-24 px-6 md:px-20 bg-brandBeige relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto text-left mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <h2 className="text-4xl md:text-5xl font-outfit font-black text-[#0A0A0A] mb-4">Featured Courses</h2>
@@ -195,13 +195,12 @@ const LaunchingSoonCourses = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className={`group flex flex-col relative overflow-hidden bg-white border border-[#E5E5E5] rounded-[24px] transition-all duration-300 ${cat.active ? 'hover:shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:-translate-y-2' : 'opacity-80'}`}
+            className={`group flex flex-col relative overflow-hidden bg-brandBeige border border-brandNavy/5 rounded-[24px] transition-all duration-300 ${cat.active ? 'hover:shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:-translate-y-2' : 'opacity-80'}`}
           >
-            {/* Launching Soon Overlay */}
             {!cat.active && (
-              <div className="launching-soon-overlay flex flex-col items-center justify-center absolute inset-0 bg-white/60 backdrop-blur-sm z-20">
+              <div className="launching-soon-overlay flex flex-col items-center justify-center absolute inset-0 bg-brandBeige/70 backdrop-blur-sm z-20">
                  <div className="bg-[#0D2240] text-white px-4 py-1 text-xs font-black uppercase tracking-widest rounded-sm mb-4">LAUNCHING SOON</div>
-                 <div className="bg-white p-4 rounded-xl text-[#0D2240] font-black text-sm flex items-center gap-2 shadow-xl group-hover:scale-110 transition-transform">
+                 <div className="bg-brandBeige p-4 rounded-xl text-[#0D2240] font-black text-sm flex items-center gap-2 shadow-xl group-hover:scale-110 transition-transform">
                    Stay Tuned 🚀
                  </div>
               </div>
@@ -217,7 +216,7 @@ const LaunchingSoonCourses = () => {
 
               <div className="flex flex-wrap gap-2 mb-8 mt-auto">
                 {cat.tags.map(tag => (
-                  <span key={tag} className="px-4 py-1.5 bg-[#F8F8F8] text-[#888888] text-[11px] font-bold rounded-full uppercase tracking-widest">{tag}</span>
+                  <span key={tag} className="px-4 py-1.5 bg-lightBg2 text-[#888888] text-[11px] font-bold rounded-full uppercase tracking-widest">{tag}</span>
                 ))}
               </div>
 
@@ -225,7 +224,7 @@ const LaunchingSoonCourses = () => {
                 <button 
                   onClick={(e) => handleEnrollClick(e, cat)}
                   disabled={loadingMap[cat.id]}
-                  className="btn-primary flex items-center justify-between w-full p-4 bg-[#F8F8F8] text-[#0A0A0A] hover:bg-[#0D2240] hover:text-white rounded-2xl transition-all font-outfit font-black min-h-[44px] cursor-pointer disabled:opacity-50"
+                  className="btn-primary flex items-center justify-between w-full p-4 bg-lightBg2 text-[#0A0A0A] hover:bg-[#0D2240] hover:text-white rounded-2xl transition-all font-outfit font-black min-h-[44px] cursor-pointer disabled:opacity-50"
                 >
                   <span>{loadingMap[cat.id] ? 'Processing...' : 'Enroll Now'}</span>
                   <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-2" />
@@ -250,7 +249,7 @@ const LaunchingSoonCourses = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }} 
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-[32px] p-8 max-w-md w-full shadow-2xl relative"
+            className="bg-brandBeige rounded-[32px] p-8 max-w-md w-full shadow-2xl relative border border-brandNavy/5"
           >
             <button onClick={() => setShowNotifyModal(false)} className="absolute top-6 right-6 text-gray-400 hover:text-gray-900 font-bold cursor-pointer min-h-[44px] min-w-[44px]">✕</button>
             <h3 className="text-2xl font-outfit font-black text-[#0A0A0A] mb-2 mt-4 text-center">Get Notified! 🔔</h3>
@@ -262,7 +261,7 @@ const LaunchingSoonCourses = () => {
                 required 
                 value={notifyEmail}
                 onChange={e => setNotifyEmail(e.target.value)}
-                className="w-full bg-[#F8F8F8] border border-[#E5E5E5] px-6 py-4 rounded-xl outline-none focus:border-[#F5A623] transition-colors"
+                className="w-full bg-lightBg2 border border-brandNavy/5 px-6 py-4 rounded-xl outline-none focus:border-[#F5A623] transition-colors"
               />
               <button 
                 type="submit" 

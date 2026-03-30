@@ -69,7 +69,7 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed w-full z-50 transition-all duration-300 bg-white ${scrolled ? 'shadow-md py-1' : 'border-b border-[#E5E5E5] py-2'}`}
+        className={`fixed w-full z-50 transition-all duration-300 bg-brandBeige/90 backdrop-blur-md ${scrolled ? 'shadow-md py-1' : 'border-b border-brandNavy/5 py-2'}`}
       >
         <div className="absolute bottom-0 left-0 w-full h-[3px]" style={{ background: 'linear-gradient(90deg, #0D2240, #F5A623, #0D2240)' }}></div>
 
@@ -87,7 +87,7 @@ const Navbar = () => {
               </Link>
 
               <div className="relative group/nav h-full">
-                <button className={`hidden lg:flex items-center gap-2 border-2 border-[#0D2240] text-[#0D2240] bg-white group-hover/nav:bg-[#0D2240] group-hover/nav:text-white rounded-full px-5 text-[15px] font-bold transition-all duration-300 h-11 cursor-pointer`}>
+                <button className={`hidden lg:flex items-center gap-2 border-2 border-[#0D2240] text-[#0D2240] bg-brandBeige group-hover/nav:bg-[#0D2240] group-hover/nav:text-white rounded-full px-5 text-[15px] font-bold transition-all duration-300 h-11 cursor-pointer`}>
                   All Courses <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover/nav:rotate-180" />
                 </button>
 
@@ -95,14 +95,14 @@ const Navbar = () => {
                 <div className="absolute top-full left-0 w-full h-4 bg-transparent cursor-default"></div>
 
                 {/* Mega Menu Dropdown */}
-                <div className="absolute top-[calc(100%+10px)] left-0 w-[850px] bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.2)] rounded-lg border border-gray-100 opacity-0 invisible group-hover/nav:opacity-100 group-hover/nav:visible transition-all duration-300 flex overflow-hidden lg:h-[480px]">
+                <div className="absolute top-[calc(100%+10px)] left-0 w-[850px] bg-brandBeige shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] rounded-lg border border-brandNavy/5 opacity-0 invisible group-hover/nav:opacity-100 group-hover/nav:visible transition-all duration-300 flex overflow-hidden lg:h-[480px]">
                   {/* Left Sidebar */}
-                  <div className="w-[340px] bg-white border-r border-gray-100 overflow-y-auto py-2 custom-scrollbar">
+                  <div className="w-[340px] bg-brandBeige border-r border-brandNavy/5 overflow-y-auto py-2 custom-scrollbar">
                     {courseCategories.map((cat) => (
                       <div
                         key={cat.id}
                         onMouseEnter={() => setActiveCategory(cat.id)}
-                        className={`px-6 py-4 cursor-pointer flex justify-between items-center group/item transition-colors ${activeCategory === cat.id ? 'bg-[#F4F6F8]' : 'hover:bg-gray-50'}`}
+                        className={`px-6 py-4 cursor-pointer flex justify-between items-center group/item transition-colors ${activeCategory === cat.id ? 'bg-lightBg2' : 'hover:bg-lightBg2/50'}`}
                       >
                         <div className="pr-2">
                           <div className={`font-bold text-[14px] leading-tight ${cat.id === 'coming_soon' ? 'text-[#888888]' : 'text-gray-900'}`}>{cat.title}</div>
@@ -114,14 +114,14 @@ const Navbar = () => {
                   </div>
 
                   {/* Right Content Area */}
-                  <div className="flex-1 bg-[#F8F9FA] p-8 overflow-y-auto custom-scrollbar">
+                  <div className="flex-1 bg-lightBg3/30 p-8 overflow-y-auto custom-scrollbar">
                     <div className="grid grid-cols-2 gap-4 auto-rows-max">
                       {activeCategoryData?.courses.map(course => (
                         <Link 
                           to={course.link}
                           key={course.name} 
                           onClick={() => { if(!course.soon) setIsOpen(false); }}
-                          className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer flex items-center gap-4 relative overflow-hidden group/item"
+                          className="bg-brandBeige p-4 rounded-lg border border-brandNavy/10 shadow-sm hover:shadow-md transition-shadow cursor-pointer flex items-center gap-4 relative overflow-hidden group/item"
                         >
                           {course.soon && (
                             <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] flex items-center justify-center -rotate-12 z-10">

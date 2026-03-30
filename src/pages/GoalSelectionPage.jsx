@@ -121,10 +121,10 @@ const GoalSelectionPage = () => {
   const currentModal = activeModal ? modalData[activeModal] : null;
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] text-gray-800 font-nunito flex flex-col items-center pb-20 relative">
+    <div className="min-h-screen bg-brandBeige text-gray-800 font-nunito flex flex-col items-center pb-20 relative">
       
       {/* Top Header */}
-      <div className="w-full bg-white border-b border-gray-200 sticky top-0 z-40">
+      <div className="w-full bg-brandBeige border-b border-brandNavy/5 sticky top-0 z-40">
         <div className="max-w-4xl mx-auto flex items-center justify-center relative py-4 px-4 h-16">
           <button 
             onClick={() => navigate(-1)} 
@@ -165,7 +165,7 @@ const GoalSelectionPage = () => {
                whileTap={{ scale: 0.99 }}
                key={idx} 
                onClick={() => activeModal !== exam.id && setActiveModal(exam.id)}
-               className="bg-white border border-gray-200 rounded-[14px] p-4 flex items-center gap-5 cursor-pointer hover:border-[#5A4BDA] transition-all"
+               className="bg-brandBeige border border-brandNavy/5 rounded-[14px] p-4 flex items-center gap-5 cursor-pointer hover:border-[#5A4BDA] transition-all"
             >
               <div className={`w-[52px] h-[52px] rounded-[14px] ${exam.iconBg} flex items-center justify-center shrink-0`}>
                 {exam.icon}
@@ -184,7 +184,7 @@ const GoalSelectionPage = () => {
                whileTap={{ scale: 0.99 }}
                key={idx} 
                onClick={() => navigate('/dashboard')}
-               className="bg-white border border-gray-200 rounded-[14px] p-4 flex items-center gap-5 cursor-pointer hover:border-[#5A4BDA] transition-all"
+               className="bg-brandBeige border border-brandNavy/5 rounded-[14px] p-4 flex items-center gap-5 cursor-pointer hover:border-[#5A4BDA] transition-all"
             >
               <div className={`w-[52px] h-[52px] rounded-[14px] ${offer.iconBg} flex items-center justify-center shrink-0`}>
                 {offer.icon}
@@ -213,7 +213,7 @@ const GoalSelectionPage = () => {
                initial={{ opacity: 0, scale: 0.95, y: 10 }}
                animate={{ opacity: 1, scale: 1, y: 0 }}
                exit={{ opacity: 0, scale: 0.95, y: 10 }}
-               className="relative w-full max-w-3xl bg-white rounded-2xl shadow-2xl flex flex-col max-h-[85vh] overflow-hidden"
+               className="relative w-full max-w-3xl bg-brandBeige rounded-2xl shadow-2xl flex flex-col max-h-[85vh] overflow-hidden border border-brandNavy/5"
             >
               {/* Modal Header */}
               <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">

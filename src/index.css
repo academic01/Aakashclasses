@@ -6,7 +6,7 @@
 
 @layer base {
   html, body {
-    @apply bg-white text-textPrimary overflow-x-hidden m-0 p-0;
+    @apply bg-brandBeige text-textPrimary overflow-x-hidden m-0 p-0;
     font-family: 'Inter', sans-serif;
   }
   
@@ -40,7 +40,7 @@
 
   /* Program Cards */
   .program-card {
-    @apply bg-white border border-[#E5E5E5] rounded-[20px] p-8 shadow-[0_4px_24px_rgba(0,0,0,0.08)] transition-all duration-300;
+    @apply bg-white/50 backdrop-blur-sm border border-brandNavy/5 rounded-[20px] p-8 shadow-[0_4px_24px_rgba(0,0,0,0.05)] transition-all duration-300;
   }
   .program-card:hover {
     @apply -translate-y-2 shadow-[0_12px_40px_rgba(0,0,0,0.12)];
@@ -94,19 +94,19 @@
 
   /* Premium Light Cards */
   .glass-card {
-    @apply bg-white border border-black/5 rounded-[20px] transition-all duration-300;
-    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.04);
+    @apply bg-white/40 backdrop-blur-md border border-black/5 rounded-[20px] transition-all duration-300;
+    box-shadow: 0 4px 24px rgba(13, 34, 64, 0.03);
   }
   
   .glass-card:hover {
-    border-color: #C5A47E; 
-    box-shadow: 0 8px 40px rgba(197, 164, 126, 0.1);
+    border-color: #F5A623; 
+    box-shadow: 0 8px 40px rgba(245, 166, 35, 0.08);
     transform: translateY(-6px);
   }
 
   .glass-card-highlight {
-    @apply bg-white border border-black/10 rounded-[20px] transition-all duration-300;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    @apply bg-white/60 backdrop-blur-md border border-brandNavy/10 rounded-[20px] transition-all duration-300;
+    box-shadow: 0 4px 24px rgba(13, 34, 64, 0.06);
   }
   
   .glass-card-highlight:hover {

@@ -104,7 +104,7 @@ const resources = [
 
 const StudyResources = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto w-full relative z-10 font-nunito bg-white">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto w-full relative z-10 font-nunito bg-brandBeige">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-5xl font-bold font-orbitron text-textPrimary mb-4">
           Study Resources

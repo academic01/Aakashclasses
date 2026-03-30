@@ -38,7 +38,7 @@ const programs = [
 
 const OurPrograms = () => {
   return (
-    <section className="py-24 px-6 md:px-20 bg-white">
+    <section className="py-24 px-6 md:px-20 bg-brandBeige">
       <div className="max-w-[1400px] mx-auto text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-outfit font-black text-[#0A0A0A] mb-4">Our Programs</h2>
         <p className="text-[#888888] text-lg md:text-xl font-inter">Choose your path to success</p>
@@ -57,7 +57,7 @@ const OurPrograms = () => {
             <div className="h-2 w-full absolute top-0 left-0 z-10" style={{ backgroundColor: program.color }}></div>
 
             <div className="flex flex-col h-full items-start p-8">
-              <div className="mb-6 p-4 rounded-2xl bg-[#F8F8F8] group-hover:bg-white border border-transparent group-hover:border-[#E5E5E5] transition-all duration-300" style={{ color: program.color }}>
+              <div className="mb-6 p-4 rounded-2xl bg-lightBg2 group-hover:bg-brandBeige border border-transparent group-hover:border-brandNavy/5 transition-all duration-300" style={{ color: program.color }}>
                 {program.icon}
               </div>
 

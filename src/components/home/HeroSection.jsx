@@ -9,7 +9,7 @@ const slides = [
     badge: "VIth To Xth CLASSES",
     subtitle: "MATHS, SCIENCE, ENGLISH & SST",
     checks: ["Expert Faculty", "Complete Syllabus", "Live + Recorded Classes", "Regular Tests & Doubt Sessions"],
-    bg: "bg-white",
+    bg: "bg-brandBeige",
     accent: "#F5A623",
     type: "School Prep",
     image: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=600&q=80",
@@ -20,7 +20,7 @@ const slides = [
     badge: "XIth – XIIth CLASSES",
     subtitle: "COMMERCE, SCIENCE & HUMANITIES",
     checks: ["Experienced Teachers", "Study Materials & Notes", "Regular Doubt Sessions", "Board Exam Focused Content"],
-    bg: "bg-white",
+    bg: "bg-brandBeige",
     accent: "#0D2240",
     type: "Senior Secondary",
     image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&q=80",
@@ -31,7 +31,7 @@ const slides = [
     title: { navy: "PREPARATION FOR", orange: "GOVT. JOBS" },
     subtitle: "SSC, RAILWAY, DSSSB & MORE",
     checks: ["Comprehensive Courses", "Practice Sets & Mock Tests", "Expert Guidance", "Current Affairs Updates"],
-    bg: "bg-white",
+    bg: "bg-brandBeige",
     accent: "#22C55E",
     type: "Govt Jobs",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
@@ -53,7 +53,7 @@ const HeroSection = () => {
   const prevSlide = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <section className="relative w-full h-[600px] md:h-[700px] overflow-hidden bg-white pt-[60px]">
+    <section className="relative w-full h-[600px] md:h-[700px] overflow-hidden bg-brandBeige pt-[60px]">
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
@@ -73,7 +73,7 @@ const HeroSection = () => {
             />
             <div 
               className="absolute inset-0" 
-              style={{ background: 'linear-gradient(to right, rgba(255,255,255,0.95) 40%, rgba(255,255,255,0) 100%)' }}
+              style={{ background: 'linear-gradient(to right, rgba(249, 246, 242, 0.98) 30%, rgba(249, 246, 242, 0.8) 50%, rgba(249, 246, 242, 0) 100%)' }}
             ></div>
           </div>
 
@@ -127,7 +127,7 @@ const HeroSection = () => {
       {/* Navigation Arrows */}
       <button 
         onClick={prevSlide}
-        className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg border border-gray-100 text-[#0D2240] hover:bg-white transition-all z-20 cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center"
+        className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/60 backdrop-blur-sm p-3 rounded-full shadow-lg border border-brandNavy/5 text-[#0D2240] hover:bg-white transition-all z-20 cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center"
       >
         <ChevronLeft className="w-6 h-6" />
       </button>

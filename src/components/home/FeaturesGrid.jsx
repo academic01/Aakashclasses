@@ -14,7 +14,7 @@ const features = [
 
 const FeaturesGrid = () => {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto relative z-10 bg-[#F7F7F7]">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto relative z-10 bg-brandBeige">
       <div className="text-center mb-16">
         <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-textPrimary mb-4 section-header-underline pb-4">
           Why <span className="text-textPrimary">Aakash Academic?</span>
@@ -32,7 +32,7 @@ const FeaturesGrid = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
-            className="group bg-white p-8 border border-[#E5E5E5] rounded-2xl shadow-sm hover:border-black transition-colors flex flex-col items-start"
+            className="group bg-brandBeige/50 backdrop-blur-sm p-8 border border-brandNavy/5 rounded-2xl shadow-sm hover:border-brandNavy/20 transition-all flex flex-col items-start"
           >
             <div className="mb-6 bg-[#F5F5F5] p-3 rounded-xl text-textPrimary group-hover:scale-110 group-hover:bg-textPrimary group-hover:text-white transition-all duration-300 shadow-sm">
               {feat.icon}

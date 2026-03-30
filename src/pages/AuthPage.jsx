@@ -55,7 +55,7 @@ const AuthPage = () => {
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        className="w-full max-w-[440px] bg-white rounded-[32px] shadow-2xl overflow-hidden relative"
+        className="w-full max-w-[440px] bg-brandBeige rounded-[32px] shadow-2xl overflow-hidden relative border border-brandNavy/5"
       >
         {/* Close Button */}
         <button
@@ -93,7 +93,7 @@ const AuthPage = () => {
                          required
                          value={formData.name}
                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                         className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:border-[#5A4BDA] focus:ring-4 focus:ring-[#5A4BDA] focus:ring-opacity-10 transition-all text-gray-800 font-medium"
+                         className="w-full pl-12 pr-4 py-3.5 bg-lightBg2 border border-transparent rounded-2xl focus:bg-brandBeige focus:border-[#5A4BDA] focus:ring-4 focus:ring-[#5A4BDA] focus:ring-opacity-10 transition-all text-gray-800 font-medium"
                          placeholder="Full Name"
                        />
                      </div>
@@ -104,7 +104,7 @@ const AuthPage = () => {
                          required
                          value={formData.mobile}
                          onChange={(e) => setFormData({ ...formData, mobile: e.target.value.replace(/\D/g, '') })}
-                         className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:border-[#5A4BDA] focus:ring-4 focus:ring-[#5A4BDA] focus:ring-opacity-10 transition-all text-gray-800 font-medium"
+                         className="w-full pl-12 pr-4 py-3.5 bg-lightBg2 border border-transparent rounded-2xl focus:bg-brandBeige focus:border-[#5A4BDA] focus:ring-4 focus:ring-[#5A4BDA] focus:ring-opacity-10 transition-all text-gray-800 font-medium"
                          placeholder="Mobile Number"
                        />
                      </div>
@@ -119,7 +119,7 @@ const AuthPage = () => {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:border-[#5A4BDA] focus:ring-4 focus:ring-[#5A4BDA] focus:ring-opacity-10 transition-all text-gray-800 font-medium"
+                className="w-full pl-12 pr-4 py-3.5 bg-lightBg2 border border-transparent rounded-2xl focus:bg-brandBeige focus:border-[#5A4BDA] focus:ring-4 focus:ring-[#5A4BDA] focus:ring-opacity-10 transition-all text-gray-800 font-medium"
                 placeholder="Email Address"
               />
             </div>
