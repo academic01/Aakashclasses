@@ -1,144 +1,144 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Atom, FlaskConical, Dna, Divide, Rocket, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const HeroSection = () => {
-  const stats = [
-    { value: '2,50,000+', label: 'Students' },
-    { value: '500+', label: 'Courses' },
-    { value: '98%', label: 'Success' }
-  ];
+const slides = [
+  {
+    id: 1,
+    badge: "VIth To Xth CLASSES",
+    subtitle: "MATHS, SCIENCE, ENGLISH & SST",
+    checks: ["Expert Faculty", "Complete Syllabus", "Live + Recorded Classes", "Regular Tests & Doubt Sessions"],
+    bg: "from-[#FFF8F0] to-[#FFFFFF]",
+    accent: "#F5A623",
+    type: "School Prep"
+  },
+  {
+    id: 2,
+    badge: "XIth – XIIth CLASSES",
+    subtitle: "COMMERCE, SCIENCE & HUMANITIES",
+    checks: ["Experienced Teachers", "Study Materials & Notes", "Regular Doubt Sessions", "Board Exam Focused Content"],
+    bg: "from-[#F3F8FF] to-[#FFFFFF]",
+    accent: "#0D2240",
+    type: "Senior Secondary"
+  },
+  {
+    id: 3,
+    title: { navy: "PREPARATION FOR", orange: "GOVT. JOBS" },
+    subtitle: "SSC, RAILWAY, DSSSB & MORE",
+    checks: ["Comprehensive Courses", "Practice Sets & Mock Tests", "Expert Guidance", "Current Affairs Updates"],
+    bg: "from-[#F0FFF4] to-[#FFFFFF]",
+    accent: "#22C55E",
+    type: "Govt Jobs"
+  }
+];
 
-  const floatingIcons = [
-    { Icon: Atom, color: '#0D2240', bg: '#EEF2FF', delay: 0, animation: 'animate-spin-slow' },
-    { Icon: FlaskConical, color: '#F5A623', bg: '#FFF8E7', delay: 0.5 },
-    { Icon: Dna, color: '#22C55E', bg: '#F0FDF4', delay: 1 },
-    { Icon: Divide, color: '#F59E0B', bg: '#FEF3C7', delay: 1.5 }
-  ];
+const HeroSection = () => {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextSlide = () => setCurrent((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <section className="relative w-full overflow-hidden bg-white bg-dot-grid pt-12 md:pt-14 lg:pt-16 pb-16 px-6 md:px-20 min-h-auto">
-      
-      <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-0 relative z-10">
-        
-        {/* Left Side (55%) */}
-        <div className="w-full lg:w-[55%] text-left flex flex-col items-start">
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-outfit font-black leading-tight mb-6">
-              <span className="text-[#0D2240] block">Your Rank.</span>
-              <span className="text-[#0D2240] block">Your Rules.</span>
-              <span className="text-gradient-navy-yellow block">Your Academy.</span>
-            </h1>
-          </motion.div>
+    <section className="relative w-full h-[600px] md:h-[700px] overflow-hidden bg-white">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -50 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className={`absolute inset-0 bg-gradient-to-r ${slides[current].bg} flex items-center`}
+        >
+          {/* Orange Accent Stripe */}
+          <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#F5A623]"></div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-lg md:text-xl font-bold mb-8 flex flex-wrap gap-x-3 items-center"
-          >
-            <span className="text-[#0D2240]">JEE</span>
-            <span className="text-[#F5A623]">|</span>
-            <span className="text-[#0D2240]">NEET</span>
-            <span className="text-[#F5A623]">|</span>
-            <span className="text-[#0D2240]">CUET</span>
-            <span className="text-[#F5A623]">|</span>
-            <span className="text-[#0D2240]">Boards</span>
-            <span className="text-[#F5A623]">|</span>
-            <span className="text-[#0D2240]">Government Exams</span>
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="flex flex-col sm:flex-row items-center gap-6 mb-10 w-full sm:w-auto"
-          >
-            <Link
-              to="/signup"
-              className="btn-primary-gradient w-full sm:w-auto px-10 py-5 rounded-full text-white font-black text-sm tracking-widest uppercase flex items-center justify-center gap-3"
-            >
-              <Rocket className="w-5 h-5 fill-white" /> Start Learning Free
-            </Link>
-            
-            <Link
-              to="/courses"
-              className="btn-hover-arrow w-full sm:w-auto px-10 py-5 rounded-full border-2 border-[#0D2240] text-[#0D2240] font-black text-sm tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-[#0D2240] hover:text-white transition-all duration-300"
-            >
-              Explore Batches <ArrowRight className="w-5 h-5 arrow-icon" />
-            </Link>
-          </motion.div>
-
-          {/* Stats Bar */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="flex items-center gap-0 border-t border-b border-[#E5E5E5] py-4 mt-8 w-full md:w-auto"
-          >
-            {stats.map((stat, i) => (
-              <React.Fragment key={stat.label}>
-                <div className="px-6 md:px-10 text-center md:text-left">
-                  <div className="text-[#0D2240] text-2xl font-black">{stat.value}</div>
-                  <div className="text-[#888888] text-[13px] uppercase tracking-wider">{stat.label}</div>
+          <div className="max-w-[1400px] mx-auto px-6 md:px-20 w-full flex flex-col lg:flex-row items-center justify-between">
+            {/* Left Content */}
+            <div className="w-full lg:w-1/2 flex flex-col items-start text-left z-10">
+              {slides[current].badge ? (
+                <div className="bg-[#F5A623] px-6 py-2 rounded-md mb-4">
+                  <h2 className="text-white font-outfit font-bold text-2xl md:text-3xl tracking-tight">
+                    {slides[current].badge}
+                  </h2>
                 </div>
-                {i < stats.length - 1 && (
-                  <div className="w-px h-10 bg-[#E5E5E5]"></div>
-                )}
-              </React.Fragment>
-            ))}
-          </motion.div>
-        </div>
+              ) : (
+                <div className="mb-4">
+                  <h2 className="text-[#0D2240] font-outfit font-black text-3xl md:text-4xl">
+                    {slides[current].title.navy} <span className="text-[#F5A623]">{slides[current].title.orange}</span>
+                  </h2>
+                </div>
+              )}
 
-        {/* Right Side (45%) */}
-        <div className="w-full lg:w-[45%] relative h-[450px] md:h-[600px] flex justify-center items-center">
-          
-          {/* Animated Central Circle */}
-          <motion.div
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-[#0D2240] border-[3px] border-[#F5A623] shadow-2xl flex items-center justify-center text-center p-6 z-20"
-          >
-            <span className="text-white font-outfit font-black text-xl tracking-tighter uppercase leading-tight">
-              Aakash<br />Academics
-            </span>
-          </motion.div>
+              <h3 className="text-[#0D2240] font-outfit font-bold text-xl md:text-2xl mb-8 flex items-center">
+                {slides[current].subtitle}
+              </h3>
 
-          {/* Floating Icons */}
-          {floatingIcons.map(({ Icon, color, bg, delay, animation }, i) => {
-            const positions = [
-              "top-[10%] left-[15%]",
-              "bottom-[20%] left-[5%]",
-              "top-[25%] right-[10%]",
-              "bottom-[15%] right-[20%]"
-            ];
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.6 + delay, duration: 0.5 }}
-                className={`absolute ${positions[i]} z-30`}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 w-full">
+                {slides[current].checks.map((check, idx) => (
+                  <div key={idx} className="flex items-center gap-3 text-[#0D2240] font-inter italic font-bold">
+                    <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
+                    <span>{check}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                to="/signup"
+                className="bg-[#0D2240] text-white px-10 py-4 rounded-full font-outfit font-bold text-lg hover:scale-105 transition-transform duration-300 shadow-xl hover:shadow-[#0D2240]/30"
               >
-                <div 
-                  className={`p-4 rounded-full shadow-lg border border-white flex items-center justify-center animate-float ${animation || ''}`}
-                  style={{ backgroundColor: bg, animationDelay: `${delay}s` }}
-                >
-                  <Icon className="w-8 h-8 md:w-10 md:h-10" style={{ color }} />
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
+                Enroll Now
+              </Link>
+            </div>
 
+            {/* Right side decoration/image placeholder */}
+            <div className="hidden lg:flex w-1/2 justify-center relative h-full items-center">
+              <div className="w-96 h-96 rounded-full bg-[#F5A623]/10 absolute animate-pulse"></div>
+              <div className="relative z-10 w-80 h-80 bg-gray-200 rounded-2xl flex items-center justify-center border-4 border-white shadow-2xl overflow-hidden">
+                <span className="text-gray-400 font-bold uppercase tracking-widest text-center px-4">
+                   Student {slides[current].id} Illustration / Image
+                </span>
+              </div>
+              {/* Swirl Decoration */}
+              <svg className="absolute -right-10 w-64 h-64 text-[#F5A623]/20 fill-current opacity-50" viewBox="0 0 200 200">
+                <path d="M 40,100 C 40,40 160,40 160,100 C 160,160 40,160 40,100" />
+              </svg>
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Navigation Arrows */}
+      <button 
+        onClick={prevSlide}
+        className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg border border-gray-100 text-[#0D2240] hover:bg-white transition-all z-20"
+      >
+        <ChevronLeft className="w-6 h-6" />
+      </button>
+      <button 
+        onClick={nextSlide}
+        className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg border border-gray-100 text-[#0D2240] hover:bg-white transition-all z-20"
+      >
+        <ChevronRight className="w-6 h-6" />
+      </button>
+
+      {/* Bottom Dots */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+        {slides.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrent(idx)}
+            className={`slider-dot ${current === idx ? 'active' : 'inactive'}`}
+          ></button>
+        ))}
       </div>
-
     </section>
   );
 };

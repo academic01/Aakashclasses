@@ -2,8 +2,9 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import HeroSection from '../components/home/HeroSection';
 import MarqueeTicker from '../components/home/MarqueeTicker';
-import CategoryCards from '../components/home/CategoryCards';
-import ExamCategories from '../components/home/ExamCategories';
+import OurPrograms from '../components/home/OurPrograms';
+import ComingSoonBanner from '../components/home/ComingSoonBanner';
+import LaunchingSoonCourses from '../components/home/LaunchingSoonCourses';
 import StudyResources from '../components/home/StudyResources';
 import GamificationShowcase from '../components/home/GamificationShowcase';
 import FeaturesGrid from '../components/home/FeaturesGrid';
@@ -13,7 +14,10 @@ const HomePage = () => {
     <div className="w-full relative">
       <HeroSection />
       <MarqueeTicker />
-      <ExamCategories />
+      <OurPrograms />
+      <ComingSoonBanner />
+      <LaunchingSoonCourses />
+      
       <StudyResources />
       <GamificationShowcase />
       <FeaturesGrid />
@@ -45,7 +49,7 @@ const HomePage = () => {
           </div>
 
           <div className="relative w-full md:w-1/3 flex justify-center z-10 group mt-10 md:mt-0">
-             {/* Abstract Phone Mockup - Clean White Style */}
+             {/* Abstract Phone Mockup */}
              <div className="w-72 h-[480px] bg-lightBg1 border-8 border-gray-100 rounded-[3rem] p-3 relative shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] group-hover:-translate-y-6 transition-all duration-700 overflow-hidden">
                 <div className="absolute top-0 inset-x-0 h-7 bg-gray-100 rounded-b-2xl w-36 mx-auto z-20"></div>
                 <div className="w-full h-full bg-lightBg1 rounded-[2.5rem] border border-gray-100 p-6 flex flex-col relative z-10">
@@ -58,13 +62,10 @@ const HomePage = () => {
                    <div className="h-40 w-full bg-white rounded-2xl mb-auto border border-gray-100 shadow-sm"></div>
                    <div className="h-10 w-full bg-[#0D2240] rounded-xl mt-6"></div>
                 </div>
-                {/* Glow Effect */}
-                <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-[#5A4BDA]/10 blur-[80px] rounded-full pointer-events-none"></div>
              </div>
           </div>
         </div>
       </section>
-
     </div>
   );
 };

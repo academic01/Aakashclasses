@@ -13,11 +13,12 @@ export default {
         brandNavy: '#0D2240', // Deep Midnight
         brandBlue: '#1a3a6b',
         brandYellow: '#F5A623', // Bright Yellow
-        textPrimary: '#0D2240',
+        brandOrange: '#F5A623',
+        textPrimary: '#0A0A0A',
         textSecondary: '#444444',
         textMuted: '#888888',
         cardBg: '#FFFFFF',
-        cardBorder: 'rgba(13, 34, 64, 0.08)',
+        cardBorder: '#E5E5E5',
         cardBorderHover: 'rgba(245, 166, 35, 0.4)',
       },
       fontFamily: {
@@ -32,6 +33,7 @@ export default {
         'pulse-slow': 'pulse-custom 2s ease-in-out infinite',
         'float': 'float 3s ease-in-out infinite alternate',
         'shimmer': 'shimmer 2s infinite linear',
+        'slide-in': 'slide-in 0.5s ease-out forwards',
       },
       keyframes: {
         'pulse-custom': {
@@ -45,6 +47,10 @@ export default {
         float: {
           '0%': { transform: 'translateY(0)' },
           '100%': { transform: 'translateY(-15px)' },
+        },
+        'slide-in': {
+          '0%': { transform: 'translateX(100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
         }
       }
     },
