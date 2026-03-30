@@ -153,9 +153,9 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed w-full z-50 transition-all duration-300 bg-white ${scrolled ? 'shadow-md py-2' : 'border-b border-gray-200 py-6'}`}
+        className={`fixed w-full z-50 transition-all duration-300 bg-white ${scrolled ? 'shadow-md py-2' : 'border-b border-[#E5E5E5] py-6'}`}
       >
-        <div className="absolute top-0 left-0 w-full h-[6px] bg-[#433A4D]"></div>
+        <div className="nav-accent-line absolute top-0 left-0 w-full h-[6px] bg-gradient-to-r from-[#0D2240] via-[#0D2240] to-[#FFD700]"></div>
 
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-1">
           <div className="flex justify-between items-center">
@@ -171,7 +171,7 @@ const Navbar = () => {
               </Link>
 
               <div className="relative group/nav z-50 h-full">
-                <button className={`hidden lg:flex items-center gap-2 border border-[#5A4BDA] text-[#5A4BDA] bg-white group-hover/nav:border-[#5A4BDA] group-hover/nav:bg-white rounded-md px-4 text-[15px] font-bold transition-all duration-300 h-10 lg:h-11`}>
+                <button className={`hidden lg:flex items-center gap-2 border-2 border-[#0D2240] text-[#0D2240] bg-white group-hover/nav:bg-[#0D2240] group-hover/nav:text-white rounded-full px-5 text-[15px] font-bold transition-all duration-300 h-11`}>
                   All Courses <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover/nav:rotate-180" />
                 </button>
 
@@ -226,7 +226,7 @@ const Navbar = () => {
                 <Link
                   key={name}
                   to="#"
-                  className={`font-bold text-gray-800 hover:text-[#5A4BDA] transition-all duration-300 font-nunito ${scrolled ? 'text-sm' : 'text-[15px]'}`}
+                  className={`font-bold text-[#444444] hover:text-[#0D2240] transition-all duration-300 font-nunito ${scrolled ? 'text-sm' : 'text-[15px]'}`}
                 >
                   {name}
                 </Link>
@@ -241,7 +241,7 @@ const Navbar = () => {
                     <span className="text-xs font-bold text-gray-500 uppercase tracking-tighter">My Account</span>
                     <span className="text-[15px] font-bold text-gray-800 leading-none">{user.displayName || 'Student'}</span>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-[#5A4BDA] text-white flex items-center justify-center font-bold text-lg border-2 border-white shadow-sm overflow-hidden ring-2 ring-gray-100">
+                  <div className="w-10 h-10 rounded-full bg-[#0D2240] text-white flex items-center justify-center font-bold text-lg border-2 border-white shadow-sm overflow-hidden ring-2 ring-gray-100">
                     {user.displayName?.[0]?.toUpperCase() || 'S'}
                   </div>
                   <button 
@@ -254,7 +254,7 @@ const Navbar = () => {
               ) : (
                 <Link
                   to="/login"
-                  className={`bg-[#5A4BDA] hover:bg-[#4d3fc4] text-white rounded-md font-bold font-nunito transition-all duration-300 ${scrolled ? 'px-6 py-2.5 text-sm' : 'px-8 py-2.5 text-[15px]'}`}
+                  className={`bg-[#0D2240] hover:bg-[#1a3a6b] text-white rounded-full font-bold font-nunito transition-all duration-300 shadow-lg ${scrolled ? 'px-6 py-2.5 text-sm' : 'px-8 py-2.5 text-[15px]'}`}
                 >
                   Login/Register
                 </Link>

@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-lightBg1 text-textPrimary overflow-x-hidden m-0 p-0;
+  html, body {
+    @apply bg-white text-textPrimary overflow-x-hidden m-0 p-0;
     font-family: 'Inter', sans-serif;
   }
   
@@ -27,6 +27,44 @@
 }
 
 @layer utilities {
+  /* Hero Dot Grid Pattern */
+  .bg-dot-grid {
+    background-image: radial-gradient(circle, #E5E5E5 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  /* Navbar Accent Line */
+  .nav-accent-line {
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #0D2240, #F5A623, #0D2240);
+  }
+
+  /* Heading Gradient Text */
+  .text-gradient-navy-yellow {
+    background: linear-gradient(135deg, #0D2240, #F5A623);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Button Animations */
+  .btn-hover-arrow:hover .arrow-icon {
+    transform: translateX(5px);
+  }
+  .arrow-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .btn-primary-gradient {
+    background: linear-gradient(135deg, #0D2240, #1a3a6b);
+    box-shadow: 0 8px 30px rgba(13, 34, 64, 0.35);
+    transition: all 0.3s ease;
+  }
+  .btn-primary-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(13, 34, 64, 0.45);
+  }
+
   /* Premium Light Cards */
   .glass-card {
     @apply bg-white border border-black/5 rounded-[20px] transition-all duration-300;

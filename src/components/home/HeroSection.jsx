@@ -1,131 +1,144 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Atom, Divide, Dna, FlaskConical, Play, Rocket, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Atom, FlaskConical, Dna, Divide, Rocket, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 100]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -80]);
-  
-  return (
-    <section className="relative flex flex-col justify-start items-center overflow-hidden pt-24 md:pt-32 pb-10 bg-white bg-graph">
-      
-      {/* Background Depth - Radial Dots Pattern instead of Stars */}
-      <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+  const stats = [
+    { value: '2,50,000+', label: 'Students' },
+    { value: '500+', label: 'Courses' },
+    { value: '98%', label: 'Success' }
+  ];
 
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col lg:flex-row items-center">
+  const floatingIcons = [
+    { Icon: Atom, color: '#0D2240', bg: '#EEF2FF', delay: 0, animation: 'animate-spin-slow' },
+    { Icon: FlaskConical, color: '#F5A623', bg: '#FFF8E7', delay: 0.5 },
+    { Icon: Dna, color: '#22C55E', bg: '#F0FDF4', delay: 1 },
+    { Icon: Divide, color: '#F59E0B', bg: '#FEF3C7', delay: 1.5 }
+  ];
+
+  return (
+    <section className="relative w-full overflow-hidden bg-white bg-dot-grid pt-20 md:pt-24 lg:pt-32 pb-20 px-6 md:px-20 min-h-auto">
+      
+      <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-0 relative z-10">
         
-        {/* Left 55% Text */}
-        <div className="w-full lg:w-[55%] text-left flex flex-col items-start pt-0 lg:pt-0">
-          <motion.div 
+        {/* Left Side (55%) */}
+        <div className="w-full lg:w-[55%] text-left flex flex-col items-start">
+          
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-4"
+            transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-orbitron font-bold leading-tight">
-              <span className="text-textPrimary">
-                Your Rank.
-              </span><br/>
-              <span className="text-[#333333]">Your Rules.</span><br />
-              <span className="text-textPrimary relative">Your Academy.</span>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-outfit font-black leading-tight mb-6">
+              <span className="text-[#0D2240] block">Your Rank.</span>
+              <span className="text-[#0D2240] block">Your Rules.</span>
+              <span className="text-gradient-navy-yellow block">Your Academy.</span>
             </h1>
           </motion.div>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-lg md:text-xl text-textSecondary font-exo font-semibold mb-10 max-w-lg"
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="text-lg md:text-xl font-bold mb-8 flex flex-wrap gap-x-3 items-center"
           >
-            JEE | NEET | CUET | Boards | Government Exams
+            <span className="text-[#0D2240]">JEE</span>
+            <span className="text-[#F5A623]">|</span>
+            <span className="text-[#0D2240]">NEET</span>
+            <span className="text-[#F5A623]">|</span>
+            <span className="text-[#0D2240]">CUET</span>
+            <span className="text-[#F5A623]">|</span>
+            <span className="text-[#0D2240]">Boards</span>
+            <span className="text-[#F5A623]">|</span>
+            <span className="text-[#0D2240]">Government Exams</span>
           </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="flex flex-col sm:flex-row gap-6 mt-10 justify-center md:justify-start w-full"
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="flex flex-col sm:flex-row items-center gap-6 mb-10 w-full sm:w-auto"
           >
-            <Link to="/signup" className="btn-primary flex items-center justify-center gap-3 px-12 py-5 text-base shadow-xl md:text-sm tracking-widest uppercase font-orbitron hover:scale-105 active:scale-95 transition-all w-full sm:w-auto">
+            <Link
+              to="/signup"
+              className="btn-primary-gradient w-full sm:w-auto px-10 py-5 rounded-full text-white font-black text-sm tracking-widest uppercase flex items-center justify-center gap-3"
+            >
               <Rocket className="w-5 h-5 fill-white" /> Start Learning Free
             </Link>
-            <Link to="/pricing" className="btn-secondary flex items-center justify-center gap-3 px-10 py-4 text-base md:text-sm tracking-widest uppercase font-orbitron border-brandNavy text-brandNavy hover:bg-brandNavy hover:text-white hover:scale-105 active:scale-95 transition-all w-full sm:w-auto">
-              Explore Batches <ArrowRight className="w-5 h-5" />
+            
+            <Link
+              to="/courses"
+              className="btn-hover-arrow w-full sm:w-auto px-10 py-5 rounded-full border-2 border-[#0D2240] text-[#0D2240] font-black text-sm tracking-widest uppercase flex items-center justify-center gap-3 hover:bg-[#0D2240] hover:text-white transition-all duration-300"
+            >
+              Explore Batches <ArrowRight className="w-5 h-5 arrow-icon" />
             </Link>
+          </motion.div>
+
+          {/* Stats Bar */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            className="flex items-center gap-0 border-t border-b border-[#E5E5E5] py-4 mt-8 w-full md:w-auto"
+          >
+            {stats.map((stat, i) => (
+              <React.Fragment key={stat.label}>
+                <div className="px-6 md:px-10 text-center md:text-left">
+                  <div className="text-[#0D2240] text-2xl font-black">{stat.value}</div>
+                  <div className="text-[#888888] text-[13px] uppercase tracking-wider">{stat.label}</div>
+                </div>
+                {i < stats.length - 1 && (
+                  <div className="w-px h-10 bg-[#E5E5E5]"></div>
+                )}
+              </React.Fragment>
+            ))}
           </motion.div>
         </div>
 
-        {/* Right 45% Visuals */}
-        <div className="w-full lg:w-[45%] relative h-[400px] lg:h-[600px] mt-10 lg:mt-0 flex justify-center items-center">
-            
-            <div className="relative w-full h-full flex justify-center items-center">
-              
-              {/* Central glowing orb - Light Version */}
-              <motion.div 
-                animate={{ y: [-10, 10, -10] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-[#F0F0F0] border border-[#DDDDDD] shadow-sm flex items-center justify-center overflow-hidden"
+        {/* Right Side (45%) */}
+        <div className="w-full lg:w-[45%] relative h-[450px] md:h-[600px] flex justify-center items-center">
+          
+          {/* Animated Central Circle */}
+          <motion.div
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-[#0D2240] border-[3px] border-[#F5A623] shadow-2xl flex items-center justify-center text-center p-6 z-20"
+          >
+            <span className="text-white font-outfit font-black text-xl tracking-tighter uppercase leading-tight">
+              Aakash<br />Academics
+            </span>
+          </motion.div>
+
+          {/* Floating Icons */}
+          {floatingIcons.map(({ Icon, color, bg, delay, animation }, i) => {
+            const positions = [
+              "top-[10%] left-[15%]",
+              "bottom-[20%] left-[5%]",
+              "top-[25%] right-[10%]",
+              "bottom-[15%] right-[20%]"
+            ];
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.6 + delay, duration: 0.5 }}
+                className={`absolute ${positions[i]} z-30`}
               >
-                 <span className="font-orbitron text-[#888888] text-sm tracking-widest text-center uppercase">Aakash<br/>Academics</span>
-              </motion.div>
-
-              {/* Floating Icons - Black with Light Circles */}
-              <motion.div style={{ y: y1 }} className="absolute top-[10%] left-[15%]">
-                <div className="p-4 bg-[#F5F5F5] border border-[#E5E5E5] rounded-full text-textPrimary hover:bg-textPrimary hover:text-white transition-all cursor-pointer shadow-md group">
-                   <Atom className="w-10 h-10 animate-spin-slow" />
+                <div 
+                  className={`p-4 rounded-full shadow-lg border border-white flex items-center justify-center animate-float ${animation || ''}`}
+                  style={{ backgroundColor: bg, animationDelay: `${delay}s` }}
+                >
+                  <Icon className="w-8 h-8 md:w-10 md:h-10" style={{ color }} />
                 </div>
               </motion.div>
-              
-              <motion.div style={{ y: y2 }} className="absolute bottom-[20%] left-[5%]">
-                <div className="p-3 bg-[#F5F5F5] border border-[#E5E5E5] rounded-full text-textPrimary hover:bg-textPrimary hover:text-white transition-all cursor-pointer shadow-md">
-                   <FlaskConical className="w-10 h-10 animate-float-icon" />
-                </div>
-              </motion.div>
-              
-              <motion.div style={{ y: y2 }} className="absolute top-[25%] right-[10%]">
-                <div className="p-3 bg-[#F5F5F5] border border-[#E5E5E5] rounded-full text-textPrimary hover:bg-textPrimary hover:text-white transition-all cursor-pointer shadow-md">
-                   <Dna className="w-9 h-9 rotate-45 animate-float-icon" />
-                </div>
-              </motion.div>
-
-              <motion.div style={{ y: y1 }} className="absolute bottom-[15%] right-[20%]">
-                <div className="p-3 bg-[#F5F5F5] border border-[#E5E5E5] rounded-full text-textPrimary hover:bg-textPrimary hover:text-white transition-all cursor-pointer shadow-md">
-                   <Divide className="w-8 h-8 -rotate-12 animate-float-icon" />
-                </div>
-              </motion.div>
-
-            </div>
-
+            );
+          })}
         </div>
 
       </div>
 
-      {/* Counter Stats - Spanning full width below */}
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.8 }}
-        className="w-full max-w-[1280px] mx-auto py-10 px-4 md:px-12 flex flex-col md:flex-row items-center justify-around mt-12 md:mt-20 mb-10 border-y border-[#E5E5E5] z-10 bg-white/50 backdrop-blur-sm shadow-sm rounded-2xl"
-      >
-        <div className="text-center mb-6 md:mb-0">
-          <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-brandNavy mb-2">2,50,000+</h3>
-          <p className="font-exo text-sm md:text-base text-textMuted uppercase tracking-wider">Students Enrolled</p>
-        </div>
-        <div className="hidden md:block w-px h-16 bg-[#E5E5E5]"></div>
-        <div className="text-center mb-6 md:mb-0">
-          <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-brandNavy mb-2">500+</h3>
-          <p className="font-exo text-sm md:text-base text-textMuted uppercase tracking-wider">Active Courses</p>
-        </div>
-        <div className="hidden md:block w-px h-16 bg-[#E5E5E5]"></div>
-        <div className="text-center">
-          <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-brandNavy mb-2">98%</h3>
-          <p className="font-exo text-sm md:text-base text-textMuted uppercase tracking-wider">Success Rate</p>
-        </div>
-      </motion.div>
-      
     </section>
   );
 };
