@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Mail, Bell } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 const ComingSoonBanner = () => {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState('idle'); // idle, loading, success
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success("We'll notify you when we launch!", {
-      style: { background: '#0D2240', color: '#fff', border: '1px solid #F5A623' },
-      icon: '🔔'
-    });
+    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      toast.error('Please enter a valid email address', { position: 'bottom-right' });
+      return;
+    }
+    
+    setStatus('loading');
+    setTimeout(() => {
+      setStatus('success');
+      toast.success("✅ You're on the list! We'll email you when JEE/NEET launches", {
+        position: 'bottom-right',
+        style: { background: '#0D2240', color: '#fff', border: '1px solid #F5A623' },
+      });
+    }, 1200);
   };
 
   return (
@@ -39,15 +51,26 @@ const ComingSoonBanner = () => {
                 type="email" 
                 placeholder="Enter your email" 
                 required
-                className="w-full pl-16 pr-6 py-5 bg-white border-2 border-transparent focus:border-[#F5A623] rounded-full text-[#0A0A0A] font-medium outline-none transition-all placeholder:text-[#888888]/60"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={status !== 'idle'}
+                className="w-full pl-16 pr-6 py-5 bg-white border-2 border-transparent focus:border-[#F5A623] rounded-full text-[#0A0A0A] font-medium outline-none transition-all placeholder:text-[#888888]/60 disabled:opacity-50"
               />
             </div>
             
             <button 
               type="submit"
-              className="bg-[#F5A623] hover:bg-[#ff9f00] text-white font-black py-5 rounded-full text-lg shadow-xl shadow-[#F5A623]/20 flex items-center justify-center gap-3 transition-all transform hover:scale-[1.02]"
+              disabled={status !== 'idle'}
+              className="btn-primary flex items-center justify-center gap-3 transition-all cursor-pointer bg-[#F5A623] text-white font-black py-5 rounded-full text-lg shadow-xl shadow-[#F5A623]/20 disabled:opacity-80"
+              style={status !== 'idle' ? { transform: 'scale(1)', boxShadow: 'none'} : {}}
             >
-              Notify Me <Bell className="w-5 h-5" />
+              {status === 'loading' ? (
+                'Processing...'
+              ) : status === 'success' ? (
+                'Subscribed ✅'
+              ) : (
+                <>Notify Me <Bell className="w-5 h-5" /></>
+              )}
             </button>
             
             <p className="text-white/50 text-[13px] font-medium italic text-center">

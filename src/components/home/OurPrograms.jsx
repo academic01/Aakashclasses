@@ -11,7 +11,8 @@ const programs = [
     icon: <BookOpen className="w-12 h-12" />,
     color: "#F5A623",
     features: ["Maths, Science, English, SST", "NCERT Based Content", "Chapter-wise Tests", "Live Doubt Sessions"],
-    students: "5,000+ Students"
+    students: "5,000+ Students",
+    link: "/courses?category=school"
   },
   {
     id: 2,
@@ -20,7 +21,8 @@ const programs = [
     icon: <GraduationCap className="w-12 h-12" />,
     color: "#0D2240",
     features: ["Science, Commerce, Humanities", "Board-focused Curriculum", "Previous Year Papers", "Expert Faculty"],
-    students: "3,000+ Students"
+    students: "3,000+ Students",
+    link: "/courses?category=senior"
   },
   {
     id: 3,
@@ -29,7 +31,8 @@ const programs = [
     icon: <Landmark className="w-12 h-12" />,
     color: "#22C55E",
     features: ["Complete Syllabus Coverage", "Daily Practice Sets", "Mock Test Series", "Current Affairs"],
-    students: "2,000+ Students"
+    students: "2,000+ Students",
+    link: "/courses?category=govt"
   }
 ];
 
@@ -48,12 +51,12 @@ const OurPrograms = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="program-card overflow-hidden group"
+            className="program-card overflow-hidden group hover:shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300 rounded-[24px] border border-[#E5E5E5] relative"
           >
             {/* Top Color Bar */}
-            <div className="h-2 w-full absolute top-0 left-0" style={{ backgroundColor: program.color }}></div>
+            <div className="h-2 w-full absolute top-0 left-0 z-10" style={{ backgroundColor: program.color }}></div>
 
-            <div className="flex flex-col h-full items-start">
+            <div className="flex flex-col h-full items-start p-8">
               <div className="mb-6 p-4 rounded-2xl bg-[#F8F8F8] group-hover:bg-white border border-transparent group-hover:border-[#E5E5E5] transition-all duration-300" style={{ color: program.color }}>
                 {program.icon}
               </div>
@@ -73,8 +76,8 @@ const OurPrograms = () => {
               <div className="w-full pt-6 border-t border-[#E5E5E5] flex flex-col items-start gap-6">
                 <span className="text-[#0D2240] font-black text-sm uppercase tracking-widest">{program.students}</span>
                 <Link
-                  to="/courses"
-                  className="w-full text-center py-4 bg-[#0D2240] hover:bg-[#1a3a6b] text-white font-bold rounded-xl shadow-lg transition-all transform group-hover:translate-y-[-2px]"
+                  to={program.link}
+                  className="btn-primary w-full text-center py-4 bg-[#0D2240] hover:bg-[#1a3a6b] text-white font-bold rounded-xl shadow-lg transition-all transform group-hover:-translate-y-1 min-h-[44px] cursor-pointer flex justify-center items-center"
                 >
                   Explore Courses
                 </Link>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import {
   Menu, X, ChevronDown, ChevronRight,
@@ -14,13 +14,13 @@ const courseCategories = [
     title: 'AVAILABLE NOW',
     subtitle: 'High-Impact Board & Govt Job Prep',
     courses: [
-      { name: 'Class VI - X (Boards)', icon: <Backpack className="w-6 h-6 text-orange-500" /> },
-      { name: 'Class XI - XII Science', icon: <Atom className="w-6 h-6 text-blue-500" /> },
-      { name: 'Class XI - XII Commerce', icon: <Landmark className="w-6 h-6 text-green-500" /> },
-      { name: 'Class XI - XII Humanities', icon: <BookOpen className="w-6 h-6 text-indigo-500" /> },
-      { name: 'SSC Preparation', icon: <Landmark className="w-6 h-6 text-teal-500" /> },
-      { name: 'Railway Exams', icon: <Users className="w-6 h-6 text-blue-600" /> },
-      { name: 'DSSSB', icon: <Award className="w-6 h-6 text-yellow-600" /> },
+      { name: 'Class VI - X (Boards)', link: '/courses?category=school', icon: <Backpack className="w-6 h-6 text-orange-500" /> },
+      { name: 'Class XI - XII Science', link: '/courses?category=senior', icon: <Atom className="w-6 h-6 text-blue-500" /> },
+      { name: 'Class XI - XII Commerce', link: '/courses?category=senior', icon: <Landmark className="w-6 h-6 text-green-500" /> },
+      { name: 'Class XI - XII Humanities', link: '/courses?category=senior', icon: <BookOpen className="w-6 h-6 text-indigo-500" /> },
+      { name: 'Govt. Jobs Prep', link: '/courses?category=govt', icon: <Landmark className="w-6 h-6 text-teal-500" /> },
+      { name: 'Railway Exams', link: '/courses?category=govt', icon: <Users className="w-6 h-6 text-blue-600" /> },
+      { name: 'DSSSB', link: '/courses?category=govt', icon: <Award className="w-6 h-6 text-yellow-600" /> },
     ]
   },
   {
@@ -28,9 +28,9 @@ const courseCategories = [
     title: 'COMING SOON',
     subtitle: 'Competitive Exam Excellence',
     courses: [
-      { name: 'JEE Mains & Advanced', icon: <Atom className="w-6 h-6 text-gray-400" />, soon: true },
-      { name: 'NEET UG', icon: <Stethoscope className="w-6 h-6 text-gray-400" />, soon: true },
-      { name: 'CUET', icon: <Award className="w-6 h-6 text-gray-400" />, soon: true },
+      { name: 'JEE Mains & Advanced', link: '#', icon: <Atom className="w-6 h-6 text-gray-400" />, soon: true },
+      { name: 'NEET UG', link: '#', icon: <Stethoscope className="w-6 h-6 text-gray-400" />, soon: true },
+      { name: 'CUET', link: '#', icon: <Award className="w-6 h-6 text-gray-400" />, soon: true },
     ]
   }
 ];
@@ -41,6 +41,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState('available');
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,12 +52,12 @@ const Navbar = () => {
   }, []);
 
   const topNavLinks = [
-    { name: 'Vidyapeeth', path: '#' },
-    { name: 'Class VI - X', path: '#' },
-    { name: 'Class XI - XII', path: '#' },
-    { name: 'Govt. Jobs Prep', path: '#' },
-    { name: 'Store (Books)', path: '#' },
-    { name: 'Real Test', path: '#' },
+    { name: 'Vidyapeeth', path: '/vidyapeeth' },
+    { name: 'Class VI - X', path: '/courses?category=school' },
+    { name: 'Class XI - XII', path: '/courses?category=senior' },
+    { name: 'Govt. Jobs Prep', path: '/courses?category=govt' },
+    { name: 'Store (Books)', path: '/store' },
+    { name: 'Real Test', path: '/test-series' },
   ];
 
   const activeCategoryData = courseCategories.find(c => c.id === activeCategory);
@@ -70,10 +71,10 @@ const Navbar = () => {
       <motion.nav
         className={`fixed w-full z-50 transition-all duration-300 bg-white ${scrolled ? 'shadow-md py-1' : 'border-b border-[#E5E5E5] py-2'}`}
       >
-        <div className="nav-accent-line absolute top-0 left-0 w-full h-[6px] bg-gradient-to-r from-[#0D2240] via-[#0D2240] to-[#F5A623]"></div>
+        <div className="absolute bottom-0 left-0 w-full h-[3px]" style={{ background: 'linear-gradient(90deg, #0D2240, #F5A623, #0D2240)' }}></div>
 
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-1">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center pb-2">
 
             {/* Left Section: Logo & All Courses Button */}
             <div className="flex items-center gap-6">
@@ -86,7 +87,7 @@ const Navbar = () => {
               </Link>
 
               <div className="relative group/nav h-full">
-                <button className={`hidden lg:flex items-center gap-2 border-2 border-[#0D2240] text-[#0D2240] bg-white group-hover/nav:bg-[#0D2240] group-hover/nav:text-white rounded-full px-5 text-[15px] font-bold transition-all duration-300 h-11`}>
+                <button className={`hidden lg:flex items-center gap-2 border-2 border-[#0D2240] text-[#0D2240] bg-white group-hover/nav:bg-[#0D2240] group-hover/nav:text-white rounded-full px-5 text-[15px] font-bold transition-all duration-300 h-11 cursor-pointer`}>
                   All Courses <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover/nav:rotate-180" />
                 </button>
 
@@ -116,7 +117,12 @@ const Navbar = () => {
                   <div className="flex-1 bg-[#F8F9FA] p-8 overflow-y-auto custom-scrollbar">
                     <div className="grid grid-cols-2 gap-4 auto-rows-max">
                       {activeCategoryData?.courses.map(course => (
-                        <div key={course.name} className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer flex items-center gap-4 relative overflow-hidden group/item">
+                        <Link 
+                          to={course.link}
+                          key={course.name} 
+                          onClick={() => { if(!course.soon) setIsOpen(false); }}
+                          className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer flex items-center gap-4 relative overflow-hidden group/item"
+                        >
                           {course.soon && (
                             <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] flex items-center justify-center -rotate-12 z-10">
                               <span className="text-[10px] font-black text-[#F5A623] px-2 py-0.5 border border-[#F5A623] rounded-sm bg-white shadow-sm">LAUNCHING SOON</span>
@@ -126,7 +132,7 @@ const Navbar = () => {
                             {course.icon}
                           </div>
                           <span className={`font-bold text-[14px] ${course.soon ? 'text-[#888888]' : 'text-gray-800'}`}>{course.name}</span>
-                        </div>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -168,7 +174,7 @@ const Navbar = () => {
               ) : (
                 <Link
                   to="/login"
-                  className={`bg-[#0D2240] hover:bg-[#1a3a6b] text-white rounded-full font-bold font-nunito transition-all duration-300 shadow-lg ${scrolled ? 'px-6 py-2.5 text-sm' : 'px-8 py-2.5 text-[15px]'}`}
+                  className={`btn-primary bg-[#0D2240] hover:bg-[#1a3a6b] text-white rounded-full font-bold font-nunito transition-all duration-300 shadow-lg ${scrolled ? 'px-6 py-2.5 text-sm' : 'px-8 py-2.5 text-[15px]'} flex items-center justify-center cursor-pointer`}
                 >
                   Login/Register
                 </Link>
