@@ -9,7 +9,7 @@ const HeroSection = () => {
   const y2 = useTransform(scrollY, [0, 500], [0, -80]);
   
   return (
-    <section className="relative min-h-[90vh] flex flex-col justify-center items-center overflow-hidden pt-[140px] md:pt-[160px] bg-white bg-graph">
+    <section className="relative flex flex-col justify-start items-center overflow-hidden pt-24 md:pt-32 pb-10 bg-white bg-graph">
       
       {/* Background Depth - Radial Dots Pattern instead of Stars */}
       <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
@@ -17,7 +17,7 @@ const HeroSection = () => {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col lg:flex-row items-center">
         
         {/* Left 55% Text */}
-        <div className="w-full lg:w-[55%] text-left flex flex-col items-start pt-10 lg:pt-0">
+        <div className="w-full lg:w-[55%] text-left flex flex-col items-start pt-0 lg:pt-0">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -108,7 +108,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.8 }}
-        className="w-full max-w-[1280px] mx-auto py-10 px-4 md:px-12 flex flex-col md:flex-row items-center justify-around mt-auto mb-10 border-y border-[#E5E5E5] z-10 bg-white/50 backdrop-blur-sm shadow-sm rounded-2xl"
+        className="w-full max-w-[1280px] mx-auto py-10 px-4 md:px-12 flex flex-col md:flex-row items-center justify-around mt-12 md:mt-20 mb-10 border-y border-[#E5E5E5] z-10 bg-white/50 backdrop-blur-sm shadow-sm rounded-2xl"
       >
         <div className="text-center mb-6 md:mb-0">
           <h3 className="font-orbitron font-bold text-3xl md:text-4xl text-brandNavy mb-2">2,50,000+</h3>
