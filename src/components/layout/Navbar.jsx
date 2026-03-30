@@ -69,7 +69,7 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed w-full z-50 transition-all duration-300 bg-brandBeige/95 backdrop-blur-md ${scrolled ? 'shadow-md py-2' : 'py-5'}`}
+        className={`fixed w-full z-50 transition-all duration-300 bg-brandBeige/95 backdrop-blur-md ${scrolled ? 'shadow-md py-1.5' : 'py-3'}`}
       >
 
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,7 +81,7 @@ const Navbar = () => {
                 <img
                   src="/aakashlogo.png"
                   alt="Aakash Academics"
-                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-11' : 'h-18'}`}
+                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-7' : 'h-11'}`}
                 />
               </Link>
 
@@ -140,12 +140,12 @@ const Navbar = () => {
             </div>
 
             {/* Middle Section: Navigation Links */}
-            <div className="hidden lg:flex items-center gap-7 xl:gap-9">
+            <div className="hidden lg:flex items-center gap-5 xl:gap-7">
               {topNavLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`font-black text-black hover:text-orange-500 transition-all duration-300 font-outfit tracking-tight ${scrolled ? 'text-[13px]' : 'text-[15px]'}`}
+                  className={`font-semibold text-[#333333] hover:text-orange-500 transition-all duration-300 font-outfit tracking-tight ${scrolled ? 'text-[13px]' : 'text-[14px]'}`}
                 >
                   {link.name}
                 </Link>
