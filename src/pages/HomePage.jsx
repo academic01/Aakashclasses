@@ -8,10 +8,12 @@ import LaunchingSoonCourses from '../components/home/LaunchingSoonCourses';
 import StudyResources from '../components/home/StudyResources';
 import GamificationShowcase from '../components/home/GamificationShowcase';
 import FeaturesGrid from '../components/home/FeaturesGrid';
+import PromotionModal from '../components/common/PromotionModal';
 
 const HomePage = () => {
   return (
     <div className="w-full relative">
+      <PromotionModal />
       <HeroSection />
       <MarqueeTicker />
       <OurPrograms />
