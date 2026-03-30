@@ -6,19 +6,23 @@
 
 @layer base {
   body {
-    @apply bg-lightBg1 text-textPrimary font-inter overflow-x-hidden m-0 p-0;
+    @apply bg-lightBg1 text-textPrimary overflow-x-hidden m-0 p-0;
+    font-family: 'Inter', sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-outfit tracking-tight font-bold text-brandNavy;
+    @apply tracking-tight font-bold text-brandNavy;
+    font-family: 'Outfit', sans-serif;
   }
   
   p, span {
-    @apply text-textSecondary font-inter;
+    @apply text-textSecondary;
+    font-family: 'Inter', sans-serif;
   }
 
   .sub-heading {
-    @apply font-outfit font-semibold text-brandNavy underline underline-offset-4 decoration-brandYellow;
+    @apply font-semibold text-brandNavy underline underline-offset-4 decoration-brandYellow;
+    font-family: 'Outfit', sans-serif;
   }
 }
 
@@ -50,7 +54,8 @@
   .btn-primary {
     background: #0D2240;
     color: #FFFFFF;
-    @apply font-bold font-outfit px-8 py-3 rounded-[50px] transition-all duration-300;
+    @apply font-bold px-8 py-3 rounded-[50px] transition-all duration-300;
+    font-family: 'Outfit', sans-serif;
   }
   
   .btn-primary:hover {
@@ -59,7 +64,8 @@
   }
 
   .btn-secondary {
-    @apply bg-transparent border-[1.5px] border-brandNavy text-brandNavy font-bold font-outfit px-8 py-3 rounded-[50px] transition-all duration-300;
+    @apply bg-transparent border-[1.5px] border-brandNavy text-brandNavy font-bold px-8 py-3 rounded-[50px] transition-all duration-300;
+    font-family: 'Outfit', sans-serif;
   }
   
   .btn-secondary:hover {
