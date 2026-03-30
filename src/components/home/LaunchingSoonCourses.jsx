@@ -177,11 +177,11 @@ const LaunchingSoonCourses = () => {
   };
 
   return (
-    <section className="py-24 px-6 md:px-20 bg-brandBeige relative overflow-hidden">
-      <div className="max-w-[1400px] mx-auto text-left mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <section className="py-16 px-6 md:px-20 bg-brandBeige relative overflow-hidden">
+      <div className="max-w-[1400px] mx-auto text-left mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <h2 className="text-4xl md:text-5xl font-outfit font-black text-[#0A0A0A] mb-4">Featured Courses</h2>
-          <p className="text-[#888888] text-lg lg:text-xl font-medium max-w-2xl text-left">Prepare with excellence. Explore our active courses or get notified about our upcoming competitive exam programs.</p>
+          <h2 className="text-3xl md:text-4xl font-outfit font-black text-[#0A0A0A] mb-3">Featured Courses</h2>
+          <p className="text-[#888888] text-md lg:text-lg font-medium max-w-2xl text-left">Prepare with excellence. Explore our active courses or get notified about our upcoming competitive exam programs.</p>
         </div>
         <Link to="/courses" className="btn-secondary whitespace-nowrap px-8 py-3 min-h-[44px] min-w-[120px] rounded-full border-2 border-[#0D2240] text-[#0D2240] font-bold hover:bg-[#0D2240] hover:text-white transition-all hover:scale-105 inline-flex items-center justify-center cursor-pointer">
           See All Courses

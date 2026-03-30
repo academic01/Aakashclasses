@@ -53,7 +53,7 @@ const HeroSection = () => {
   const prevSlide = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <section className="relative w-full h-[650px] md:h-[750px] overflow-hidden bg-brandBeige pt-[110px]">
+    <section className="relative w-full h-[600px] md:h-[680px] overflow-hidden bg-brandBeige pt-[100px]">
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
@@ -85,19 +85,19 @@ const HeroSection = () => {
             <div className="w-full lg:w-1/2 flex flex-col items-start text-left">
               {slides[current].badge ? (
                 <div className="bg-[#F5A623] px-6 py-2 rounded-md mb-4">
-                  <h2 className="text-white font-outfit font-bold text-2xl md:text-3xl tracking-tight">
+                  <h2 className="text-white font-outfit font-bold text-xl md:text-2xl tracking-tight">
                     {slides[current].badge}
                   </h2>
                 </div>
               ) : (
                 <div className="mb-4">
-                  <h2 className="text-[#0D2240] font-outfit font-black text-3xl md:text-4xl">
+                  <h2 className="text-[#0D2240] font-outfit font-black text-2xl md:text-3xl">
                     {slides[current].title.navy} <span className="text-[#F5A623]">{slides[current].title.orange}</span>
                   </h2>
                 </div>
               )}
 
-              <h3 className="text-[#0D2240] font-outfit font-bold text-xl md:text-2xl mb-8 flex items-center">
+              <h3 className="text-[#0D2240] font-outfit font-bold text-lg md:text-xl mb-6 flex items-center">
                 {slides[current].subtitle}
               </h3>
 

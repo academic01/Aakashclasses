@@ -104,12 +104,12 @@ const resources = [
 
 const StudyResources = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto w-full relative z-10 font-nunito bg-brandBeige">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-5xl font-bold font-orbitron text-textPrimary mb-4">
+    <section className="py-14 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto w-full relative z-10 font-nunito bg-brandBeige">
+      <div className="text-center mb-10">
+        <h2 className="text-2xl md:text-4xl font-bold font-orbitron text-textPrimary mb-3">
           Study Resources
         </h2>
-        <p className="text-textSecondary text-lg md:text-xl font-exo mb-4 max-w-2xl mx-auto">
+        <p className="text-textSecondary text-md md:text-lg font-exo mb-4 max-w-2xl mx-auto">
           A diverse array of learning materials to enhance your educational journey.
         </p>
       </div>

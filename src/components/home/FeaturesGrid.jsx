@@ -14,12 +14,12 @@ const features = [
 
 const FeaturesGrid = () => {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto relative z-10 bg-brandBeige">
-      <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-textPrimary mb-4 section-header-underline pb-4">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto relative z-10 bg-brandBeige">
+      <div className="text-center mb-12">
+        <h2 className="text-2xl md:text-4xl font-orbitron font-bold text-textPrimary mb-3 section-header-underline pb-4">
           Why <span className="text-textPrimary">Aakash Academic?</span>
         </h2>
-        <p className="text-textSecondary font-exo text-lg max-w-2xl mx-auto mt-4">
+        <p className="text-textSecondary font-exo text-md max-w-2xl mx-auto mt-3">
           Built with cutting edge technology to provide the best learning experience.
         </p>
       </div>

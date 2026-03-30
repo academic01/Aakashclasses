@@ -69,7 +69,7 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed w-full z-50 transition-all duration-300 bg-brandBeige/90 backdrop-blur-md ${scrolled ? 'shadow-md py-1' : 'border-b border-brandNavy/5 py-2'}`}
+        className={`fixed w-full z-50 transition-all duration-300 bg-brandBeige/90 backdrop-blur-md ${scrolled ? 'shadow-md py-0.5' : 'border-b border-brandNavy/5 py-1.5'}`}
       >
         <div className="absolute bottom-0 left-0 w-full h-[3px]" style={{ background: 'linear-gradient(90deg, #0D2240, #F5A623, #0D2240)' }}></div>
 
@@ -82,12 +82,12 @@ const Navbar = () => {
                 <img
                   src="/aakashlogo.png"
                   alt="Aakash Academics"
-                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-8' : 'h-12'}`}
+                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-7' : 'h-10'}`}
                 />
               </Link>
 
               <div className="relative group/nav h-full">
-                <button className={`hidden lg:flex items-center gap-2 border-2 border-[#0D2240] text-[#0D2240] bg-brandBeige group-hover/nav:bg-[#0D2240] group-hover/nav:text-white rounded-full px-5 text-[15px] font-bold transition-all duration-300 h-11 cursor-pointer`}>
+                <button className={`hidden lg:flex items-center gap-2 border-2 border-[#0D2240] text-[#0D2240] bg-brandBeige group-hover/nav:bg-[#0D2240] group-hover/nav:text-white rounded-full px-4 text-[14px] font-bold transition-all duration-300 h-9 cursor-pointer`}>
                   All Courses <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover/nav:rotate-180" />
                 </button>
 
@@ -146,7 +146,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`font-bold text-[#444444] hover:text-[#0D2240] transition-all duration-300 font-nunito ${scrolled ? 'text-sm' : 'text-[15px]'}`}
+                  className={`font-bold text-[#444444] hover:text-[#0D2240] transition-all duration-300 font-nunito ${scrolled ? 'text-xs' : 'text-[14px]'}`}
                 >
                   {link.name}
                 </Link>

@@ -38,10 +38,10 @@ const programs = [
 
 const OurPrograms = () => {
   return (
-    <section className="py-24 px-6 md:px-20 bg-brandBeige">
-      <div className="max-w-[1400px] mx-auto text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-outfit font-black text-[#0A0A0A] mb-4">Our Programs</h2>
-        <p className="text-[#888888] text-lg md:text-xl font-inter">Choose your path to success</p>
+    <section className="py-16 px-6 md:px-20 bg-brandBeige">
+      <div className="max-w-[1400px] mx-auto text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-outfit font-black text-[#0A0A0A] mb-4">Our Programs</h2>
+        <p className="text-[#888888] text-md md:text-lg font-inter">Choose your path to success</p>
       </div>
 
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
