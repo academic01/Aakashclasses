@@ -10,6 +10,11 @@ import PricingPage from './pages/PricingPage';
 import CheckoutPage from './pages/CheckoutPage';
 import DashboardPage from './pages/DashboardPage';
 import GoalSelectionPage from './pages/GoalSelectionPage';
+import AboutUs from './pages/AboutUs';
+import ContactSupport from './pages/ContactSupport';
+import Careers from './pages/Careers';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsConditions from './pages/TermsConditions';
 
 function App() {
   return (
@@ -36,6 +41,11 @@ function App() {
               <Route path="/login" element={<AuthPage type="login" />} />
               <Route path="/signup" element={<AuthPage type="signup" />} />
               <Route path="/goal-selection" element={<GoalSelectionPage />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/contact" element={<ContactSupport />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-conditions" element={<TermsConditions />} />
               {/* Stub for other routes */}
               <Route path="*" element={<div className="flex flex-col items-center justify-center py-48 text-center bg-white"><h2 className="text-4xl font-orbitron font-bold text-brandNavy uppercase mb-4">Coming Soon...</h2><p className="text-textMuted font-exo font-semibold mb-8">We are building something magical for you.</p><a href="/" className="btn-primary px-10 py-3">Back to Homepage</a></div>} />
             </Routes>

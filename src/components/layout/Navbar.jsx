@@ -52,12 +52,12 @@ const Navbar = () => {
   }, []);
 
   const topNavLinks = [
-    { name: 'Vidyapeeth', path: '/vidyapeeth' },
-    { name: 'Class VI - X', path: '/courses?category=school' },
     { name: 'Class XI - XII', path: '/courses?category=senior' },
+    { name: 'Class VI - X', path: '/courses?category=school' },
     { name: 'Govt. Jobs Prep', path: '/courses?category=govt' },
     { name: 'Store (Books)', path: '/store' },
     { name: 'Real Test', path: '/test-series' },
+    { name: 'Offline Institute', path: '/about' },
   ];
 
   const activeCategoryData = courseCategories.find(c => c.id === activeCategory);
@@ -81,7 +81,7 @@ const Navbar = () => {
                 <img
                   src="/aakashlogo.png"
                   alt="Aakash Academics"
-                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-9' : 'h-14'}`}
+                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-11' : 'h-18'}`}
                 />
               </Link>
 
@@ -140,12 +140,12 @@ const Navbar = () => {
             </div>
 
             {/* Middle Section: Navigation Links */}
-            <div className="hidden lg:flex items-center gap-6 xl:gap-8">
+            <div className="hidden lg:flex items-center gap-7 xl:gap-9">
               {topNavLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`font-bold text-[#444444] hover:text-[#0D2240] transition-all duration-300 font-nunito ${scrolled ? 'text-xs' : 'text-[14px]'}`}
+                  className={`font-black text-black hover:text-orange-500 transition-all duration-300 font-outfit tracking-tight ${scrolled ? 'text-[13px]' : 'text-[15px]'}`}
                 >
                   {link.name}
                 </Link>

@@ -44,8 +44,8 @@ const Footer = () => {
               <li><Link to="/about" className="hover:text-black hover:translate-x-1 transition-all inline-block">About Us</Link></li>
               <li><Link to="/contact" className="hover:text-black hover:translate-x-1 transition-all inline-block">Contact Support</Link></li>
               <li><Link to="/careers" className="hover:text-black hover:translate-x-1 transition-all inline-block">Careers</Link></li>
-              <li><Link to="/privacy" className="hover:text-black hover:translate-x-1 transition-all inline-block">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="hover:text-black hover:translate-x-1 transition-all inline-block">T&C</Link></li>
+              <li><Link to="/privacy-policy" className="hover:text-black hover:translate-x-1 transition-all inline-block">Privacy Policy</Link></li>
+              <li><Link to="/terms-conditions" className="hover:text-black hover:translate-x-1 transition-all inline-block">T&C</Link></li>
             </ul>
           </div>
 
