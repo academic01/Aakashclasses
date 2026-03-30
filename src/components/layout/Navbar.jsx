@@ -69,9 +69,8 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed w-full z-50 transition-all duration-300 bg-brandBeige/90 backdrop-blur-md ${scrolled ? 'shadow-md py-0.5' : 'border-b border-brandNavy/5 py-1.5'}`}
+        className={`fixed w-full z-50 transition-all duration-300 bg-brandBeige/95 backdrop-blur-md ${scrolled ? 'shadow-md py-2' : 'py-5'}`}
       >
-        <div className="absolute bottom-0 left-0 w-full h-[3px]" style={{ background: 'linear-gradient(90deg, #0D2240, #F5A623, #0D2240)' }}></div>
 
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-1">
           <div className="flex justify-between items-center pb-2">
@@ -82,7 +81,7 @@ const Navbar = () => {
                 <img
                   src="/aakashlogo.png"
                   alt="Aakash Academics"
-                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-7' : 'h-10'}`}
+                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-9' : 'h-14'}`}
                 />
               </Link>
 
