@@ -112,7 +112,7 @@ const HeroSection = () => {
 
               <Link
                 to={slides[current].link}
-                className="btn-primary bg-[#0D2240] text-white px-10 py-4 rounded-full font-outfit font-bold text-lg hover:scale-105 transition-transform duration-300 shadow-xl hover:shadow-[#0D2240]/30 min-w-[120px] min-h-[44px] flex items-center justify-center cursor-pointer"
+                className="btn-primary bg-[#0D2240] text-white px-7 py-3 rounded-full font-outfit font-bold text-[15px] hover:scale-105 transition-transform duration-300 shadow-xl hover:shadow-[#0D2240]/30 min-h-[40px] flex items-center justify-center cursor-pointer"
               >
                 Enroll Now
               </Link>

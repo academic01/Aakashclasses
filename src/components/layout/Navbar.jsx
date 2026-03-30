@@ -69,7 +69,7 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed w-full z-50 transition-all duration-300 bg-brandBeige/95 backdrop-blur-md ${scrolled ? 'shadow-md py-1.5' : 'py-3'}`}
+        className={`fixed w-full z-50 transition-all duration-300 bg-brandBeige/95 backdrop-blur-md ${scrolled ? 'shadow-md py-1' : 'py-2'}`}
       >
 
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,13 +81,13 @@ const Navbar = () => {
                 <img
                   src="/aakashlogo.png"
                   alt="Aakash Academics"
-                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-7' : 'h-11'}`}
+                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-8' : 'h-13'}`}
                 />
               </Link>
 
               <div className="relative group/nav h-full">
-                <button className={`hidden lg:flex items-center gap-2 border-2 border-[#0D2240] text-[#0D2240] bg-brandBeige group-hover/nav:bg-[#0D2240] group-hover/nav:text-white rounded-full px-4 text-[14px] font-bold transition-all duration-300 h-9 cursor-pointer`}>
-                  All Courses <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover/nav:rotate-180" />
+                <button className={`hidden lg:flex items-center gap-2 border-2 border-[#0D2240] text-[#0D2240] bg-brandBeige group-hover/nav:bg-[#0D2240] group-hover/nav:text-white rounded-full px-3.5 text-[13px] font-bold transition-all duration-300 h-8 cursor-pointer`}>
+                  All Courses <ChevronDown className="w-3.5 h-3.5 transition-transform duration-300 group-hover/nav:rotate-180" />
                 </button>
 
                 {/* Invisible hover bridge */}
@@ -116,10 +116,10 @@ const Navbar = () => {
                   <div className="flex-1 bg-lightBg3/30 p-8 overflow-y-auto custom-scrollbar">
                     <div className="grid grid-cols-2 gap-4 auto-rows-max">
                       {activeCategoryData?.courses.map(course => (
-                        <Link 
+                        <Link
                           to={course.link}
-                          key={course.name} 
-                          onClick={() => { if(!course.soon) setIsOpen(false); }}
+                          key={course.name}
+                          onClick={() => { if (!course.soon) setIsOpen(false); }}
                           className="bg-brandBeige p-4 rounded-lg border border-brandNavy/10 shadow-sm hover:shadow-md transition-shadow cursor-pointer flex items-center gap-4 relative overflow-hidden group/item"
                         >
                           {course.soon && (
@@ -163,7 +163,7 @@ const Navbar = () => {
                   <div className="w-10 h-10 rounded-full bg-[#0D2240] text-white flex items-center justify-center font-bold text-lg border-2 border-white shadow-sm overflow-hidden ring-2 ring-gray-100">
                     {user.displayName?.[0]?.toUpperCase() || 'S'}
                   </div>
-                  <button 
+                  <button
                     onClick={() => logout()}
                     className="p-2 text-gray-400 hover:text-red-500 transition-colors"
                   >
@@ -173,7 +173,7 @@ const Navbar = () => {
               ) : (
                 <Link
                   to="/login"
-                  className={`btn-primary bg-[#0D2240] hover:bg-[#1a3a6b] text-white rounded-full font-bold font-nunito transition-all duration-300 shadow-lg ${scrolled ? 'px-6 py-2.5 text-sm' : 'px-8 py-2.5 text-[15px]'} flex items-center justify-center cursor-pointer`}
+                  className={`btn-primary bg-[#0D2240] hover:bg-[#1a3a6b] text-white rounded-full font-bold font-nunito transition-all duration-300 shadow-lg ${scrolled ? 'px-5 py-2 text-[13px]' : 'px-6 py-2 text-[14px]'} flex items-center justify-center cursor-pointer`}
                 >
                   Login/Register
                 </Link>

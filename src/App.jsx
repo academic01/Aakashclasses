@@ -15,6 +15,7 @@ import ContactSupport from './pages/ContactSupport';
 import Careers from './pages/Careers';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
+import SyllabusPage from './pages/SyllabusPage';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
               <Route path="/contact" element={<ContactSupport />} />
               <Route path="/careers" element={<Careers />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/syllabus" element={<SyllabusPage />} />
               <Route path="/terms-conditions" element={<TermsConditions />} />
               {/* Stub for other routes */}
               <Route path="*" element={<div className="flex flex-col items-center justify-center py-48 text-center bg-white"><h2 className="text-4xl font-orbitron font-bold text-brandNavy uppercase mb-4">Coming Soon...</h2><p className="text-textMuted font-exo font-semibold mb-8">We are building something magical for you.</p><a href="/" className="btn-primary px-10 py-3">Back to Homepage</a></div>} />
