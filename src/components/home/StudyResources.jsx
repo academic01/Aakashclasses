@@ -1,5 +1,5 @@
 import React from 'react';
-import { Book, FileText, FileSearch, Library } from 'lucide-react';
+import { Book, FileText, FileSearch, Library, Download, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const resources = [
