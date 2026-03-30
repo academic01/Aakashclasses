@@ -1,14 +1,10 @@
 import React from 'react';
-import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
 import { motion } from 'framer-motion';
 import { Users, Target, Award, Rocket } from 'lucide-react';
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen bg-brandBeige pt-[120px]">
-      <Navbar />
-      
+    <div className="min-h-screen bg-brandBeige">
       {/* Hero Section */}
       <section className="px-6 md:px-20 py-20 text-center relative overflow-hidden">
         <motion.div 
@@ -95,8 +91,6 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

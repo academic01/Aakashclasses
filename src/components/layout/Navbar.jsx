@@ -69,11 +69,10 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed w-full z-50 transition-all duration-300 bg-brandBeige/95 backdrop-blur-md ${scrolled ? 'shadow-md py-1' : 'py-2'}`}
+        className={`fixed w-full z-50 transition-all duration-300 bg-brandBeige/95 backdrop-blur-md flex items-center ${scrolled ? 'h-[60px] shadow-md' : 'h-[72px]'}`}
       >
-
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
+        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center w-full">
 
             {/* Left Section: Logo & All Courses Button */}
             <div className="flex items-center gap-6">
@@ -81,7 +80,7 @@ const Navbar = () => {
                 <img
                   src="/aakashlogo.png"
                   alt="Aakash Academics"
-                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-8' : 'h-13'}`}
+                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-8' : 'h-10'}`}
                 />
               </Link>
 

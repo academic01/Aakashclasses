@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Download, FileText, ChevronRight } from 'lucide-react';
-import { Download, FileText, ChevronRight } from 'lucide-react';
+import { Download, FileText } from 'lucide-react';
 
 const syllabusData = [
   {
@@ -41,7 +40,7 @@ const syllabusData = [
 const SyllabusPage = () => {
   return (
     <div className="min-h-screen bg-brandBeige flex flex-col">
-      <main className="flex-grow pt-10 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+      <main className="flex-grow pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <header className="mb-12 text-center">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
