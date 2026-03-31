@@ -50,7 +50,7 @@ const ContactSupport = () => {
               </div>
               <h3 className="text-lg font-bold text-brandNavy mb-2">Call Us</h3>
               <p className="text-gray-500 font-medium mb-4">Mon-Fri from 9am to 6pm.</p>
-              <a href="tel:+911234567890" className="text-green-600 font-bold hover:underline">+91 (123) 456-7890</a>
+              <a href="tel:+918178858202" className="text-green-600 font-bold hover:underline">+91 81788 58202</a>
             </div>
 
             <div className="bg-brandBeige p-8 rounded-3xl border border-brandNavy/5 shadow-sm hover:shadow-md transition-all">
@@ -59,7 +59,7 @@ const ContactSupport = () => {
               </div>
               <h3 className="text-lg font-bold text-brandNavy mb-2">Visit Us</h3>
               <p className="text-gray-500 font-medium mb-4">Come say hello at our office.</p>
-              <p className="text-gray-800 font-bold leading-relaxed">123, Academic Square, <br />Netaji Subhash Place, Delhi - 110034</p>
+              <p className="text-gray-800 font-bold leading-relaxed">C 66 Avantika, <br />Rohini Sec 1, Delhi</p>
             </div>
           </div>
 
