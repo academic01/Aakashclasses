@@ -10,7 +10,7 @@ const INITIAL_COURSES = [
   { id: 'c2', title: 'NEET Biology: Genetic Basis', exam: 'NEET', class: '12', price: 0, free: true, image: 'https://images.unsplash.com/photo-1579154273821-39691b0f5551?auto=format&fit=crop&q=80&w=400', faculty: 'Shilpa Rao' },
   { id: 'c3', title: 'Foundation Mathematics: Algebra', exam: 'BOARDS', class: '10', price: 1499, free: false, image: 'https://images.unsplash.com/photo-1543286386-2167bb309eb2?auto=format&fit=crop&q=80&w=400', faculty: 'Samanth J.' },
   { id: 'c4', title: 'Advanced Chemistry: Organic', exam: 'JEE', class: '12', price: 0, free: true, image: 'https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?auto=format&fit=crop&q=80&w=400', faculty: 'Aman Deep' },
-  { id: 'c5', title: 'CUET General Awareness', exam: 'CUET', class: '12', price: 999, free: false, image: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&q=80&w=400', faculty: 'Megha V.' },
+  { id: 'c5', title: 'CUET 2026 Complete Prep', exam: 'CUET', class: '12', price: 2999, originalPrice: 8999, discount: '67%', newBatch: 'April 1, 2026', free: false, image: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&q=80&w=400', faculty: 'Aakash Faculty', features: ['Domain Subjects', 'General Test', 'Language Section', 'Mock Tests Included'] },
 ];
 
 const INITIAL_TESTS = [

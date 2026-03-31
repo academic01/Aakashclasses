@@ -21,6 +21,7 @@ const courseCategories = [
       { name: 'Govt. Jobs Prep', link: '/courses?category=govt', icon: <Landmark className="w-6 h-6 text-teal-500" /> },
       { name: 'Railway Exams', link: '/courses?category=govt', icon: <Users className="w-6 h-6 text-blue-600" /> },
       { name: 'DSSSB', link: '/courses?category=govt', icon: <Award className="w-6 h-6 text-yellow-600" /> },
+      { name: 'CUET', link: '/courses/cuet', badge: '✨ CUET 2026 [NEW]', icon: <Award className="w-6 h-6 text-[#7C3AED]" /> },
     ]
   },
   {
@@ -30,7 +31,6 @@ const courseCategories = [
     courses: [
       { name: 'JEE Mains & Advanced', link: '#', icon: <Atom className="w-6 h-6 text-gray-400" />, soon: true },
       { name: 'NEET UG', link: '#', icon: <Stethoscope className="w-6 h-6 text-gray-400" />, soon: true },
-      { name: 'CUET', link: '#', icon: <Award className="w-6 h-6 text-gray-400" />, soon: true },
     ]
   }
 ];
@@ -40,6 +40,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState('available');
+  const [showAnnouncement, setShowAnnouncement] = useState(!localStorage.getItem('hideCuetAnnouncement'));
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -66,12 +67,36 @@ const Navbar = () => {
     return null;
   }
 
+  const handleCloseAnnouncement = () => {
+    localStorage.setItem('hideCuetAnnouncement', 'true');
+    setShowAnnouncement(false);
+  };
+
   return (
     <>
       <motion.nav
-        className={`fixed w-full z-50 transition-all duration-300 bg-brandBeige/95 backdrop-blur-md flex items-center ${scrolled ? 'h-[60px] shadow-md' : 'h-[72px]'}`}
+        className={`fixed w-full z-50 transition-all duration-300 flex flex-col bg-brandBeige/95 backdrop-blur-md ${scrolled && !showAnnouncement ? 'shadow-md' : ''}`}
       >
-        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        {showAnnouncement && (
+          <div className="bg-[#22C55E] h-[40px] flex items-center justify-center text-white text-[13px] font-bold w-full relative z-[60]">
+            <span>
+              🎉 CUET 2026 New Batch Starting 1st April! Limited Seats —{' '}
+              <span 
+                onClick={() => navigate('/courses/cuet')} 
+                className="text-[#FFFF00] font-bold cursor-pointer hover:underline"
+              >
+                Enroll Now →
+              </span>
+            </span>
+            <button 
+              onClick={handleCloseAnnouncement}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-200"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+        <div className={`w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center transition-all duration-300 ${scrolled ? 'h-[60px]' : 'h-[72px]'}`}>
           <div className="flex justify-between items-center w-full">
 
             {/* Left Section: Logo & All Courses Button */}
@@ -130,6 +155,11 @@ const Navbar = () => {
                             {course.icon}
                           </div>
                           <span className={`font-bold text-[14px] ${course.soon ? 'text-[#888888]' : 'text-gray-800'}`}>{course.name}</span>
+                          {course.badge && (
+                            <span className="bg-[#22C55E] text-white text-[10px] px-2 py-0.5 rounded-full ml-auto whitespace-nowrap hidden lg:block">
+                              {course.badge}
+                            </span>
+                          )}
                         </Link>
                       ))}
                     </div>

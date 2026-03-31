@@ -35,10 +35,10 @@ const ComingSoonBanner = () => {
         <div className="w-full lg:w-1/2 text-left">
           <span className="bg-[#F5A623] text-white font-black text-xs px-4 py-1.5 rounded-sm uppercase tracking-widest mb-6 inline-block">Expanding Soon</span>
           <h2 className="text-white font-outfit font-black text-4xl md:text-5xl lg:text-6xl mb-4 leading-tight">
-            JEE • NEET • CUET
+            JEE • NEET
           </h2>
           <p className="text-white/70 font-inter text-lg lg:text-xl max-w-lg mb-0 font-medium">
-            World-class coaching for competitive exams coming soon! Stay tuned for more updates.
+            Elite competitive exam coaching coming mid-2026!
           </p>
         </div>
 

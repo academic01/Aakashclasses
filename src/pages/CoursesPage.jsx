@@ -133,15 +133,27 @@ const CoursesPage = () => {
                   <div className="p-6 flex flex-col flex-grow">
                     <div className="flex justify-between items-start mb-3">
                        <span className="text-xs font-exo font-bold text-brandBlue uppercase">Class {course.class}</span>
-                       <span className={`text-sm font-orbitron font-bold ${course.price === 0 ? 'text-green-600' : 'text-brandNavy'}`}>
-                         {course.price === 0 ? 'FREE' : `₹${course.price}`}
-                       </span>
+                       <div className="flex flex-col items-end">
+                         {course.originalPrice && <span className="text-[10px] text-textMuted line-through font-bold">₹{course.originalPrice}</span>}
+                         <div className="flex gap-2 items-center">
+                           {course.discount && <span className="text-[10px] bg-red-100 text-red-600 px-1 py-0.5 rounded font-bold">{course.discount} OFF</span>}
+                           <span className={`text-sm font-orbitron font-bold ${course.price === 0 ? 'text-green-600' : 'text-brandNavy'}`}>
+                             {course.price === 0 ? 'FREE' : `₹${course.price}`}
+                           </span>
+                         </div>
+                       </div>
                     </div>
                     
                     <h3 className="text-xl font-orbitron font-bold text-brandNavy mb-2 h-14 line-clamp-2">
                        {course.title}
                     </h3>
-                    <p className="text-sm text-textMuted font-exo font-semibold mb-6">Expert: {course.faculty}</p>
+                    <p className="text-sm text-textMuted font-exo font-semibold mb-2">Expert: {course.faculty}</p>
+                    
+                    {course.features && (
+                      <ul className="text-xs text-textSecondary font-exo space-y-1 mb-4">
+                        {course.features.map((f, i) => <li key={i}>• {f}</li>)}
+                      </ul>
+                    )}
                     
                     <div className="mt-auto flex gap-3">
                       {enrolled ? (

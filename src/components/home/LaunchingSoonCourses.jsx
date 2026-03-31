@@ -109,6 +109,7 @@ const categories = [
   {
     id: 11,
     title: 'JEE Mains & Advanced',
+    subtitle: '🔜 Launching Soon — 2026',
     active: false,
     tags: ['IIT JEE', 'Engineering'],
     image: "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?w=400&q=80",
@@ -117,6 +118,7 @@ const categories = [
   {
     id: 12,
     title: 'NEET UG',
+    subtitle: '🔜 Launching Soon — 2026',
     active: false,
     tags: ['Medical', 'MBBS Entrance'],
     image: "https://images.unsplash.com/photo-1532094349884-543559a8e9f6?w=400&q=80",
@@ -124,11 +126,13 @@ const categories = [
   },
   {
     id: 13,
-    title: 'CUET',
-    active: false,
-    tags: ['UG Entrance', 'Universities'],
+    title: 'CUET 2026 Complete Prep',
+    subtitle: 'Central Universities Entrance Test',
+    active: true,
+    tags: ['CUET', 'Universities'],
     image: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=400&q=80",
-    color: "#888888"
+    color: "#7C3AED",
+    link: "/checkout/cuet"
   }
 ];
 
@@ -207,12 +211,19 @@ const LaunchingSoonCourses = () => {
             )}
 
             <div className="w-full h-48 relative overflow-hidden rounded-t-[24px]">
+              {cat.id === 13 && (
+                <div className="absolute top-0 left-0 bg-[#22C55E] text-white text-[11px] font-bold px-[10px] py-[4px] rounded-br-[8px] z-30">
+                  🆕 NEW BATCH
+                </div>
+              )}
               <img src={cat.image} alt={cat.title} className="w-full h-full object-cover rounded-t-[24px] group-hover:scale-105 transition-transform duration-700" loading="lazy" style={{ borderRadius: '16px 16px 0 0' }} />
             </div>
 
             <div className="flex flex-col h-full p-8 pt-6">
               <h3 className="text-2xl font-outfit font-black text-[#0A0A0A] mb-2">{cat.title}</h3>
-              <p className="text-[#888888] font-bold text-sm mb-6">{cat.subtitle || 'Competitive Entrance Exam'}</p>
+              <p className="text-[#888888] font-bold text-sm mb-4">{cat.subtitle || 'Competitive Entrance Exam'}</p>
+              {cat.id === 13 && <p className="text-[#22C55E] text-xs font-bold mb-4">Batch starts: 1st April 2026</p>}
+
 
               <div className="flex flex-wrap gap-2 mb-8 mt-auto">
                 {cat.tags.map(tag => (
@@ -253,7 +264,10 @@ const LaunchingSoonCourses = () => {
           >
             <button onClick={() => setShowNotifyModal(false)} className="absolute top-6 right-6 text-gray-400 hover:text-gray-900 font-bold cursor-pointer min-h-[44px] min-w-[44px]">✕</button>
             <h3 className="text-2xl font-outfit font-black text-[#0A0A0A] mb-2 mt-4 text-center">Get Notified! 🔔</h3>
-            <p className="text-[#888888] text-center mb-6 font-medium">We'll notify you when <strong>{selectedCourse?.title}</strong> launches.</p>
+            <p className="text-[#888888] text-center mb-6 font-medium">
+              We'll notify you when <strong>{selectedCourse?.title}</strong> launches.<br/>
+              <span className="text-[#0D2240] font-bold text-sm mt-2 block">Expected Launch: Mid 2026</span>
+            </p>
             <form onSubmit={submitNotify} className="flex flex-col gap-4">
               <input 
                 type="email" 

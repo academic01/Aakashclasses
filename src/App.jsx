@@ -16,6 +16,7 @@ import Careers from './pages/Careers';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
 import SyllabusPage from './pages/SyllabusPage';
+import CuetPage from './pages/CuetPage';
 
 function App() {
   return (
@@ -30,10 +31,11 @@ function App() {
         
         <div className="relative z-10 flex flex-col min-h-screen">
           <Navbar />
-          <main className="flex-grow pt-32">
+          <main className="flex-grow pt-0 mt-0">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/courses" element={<CoursesPage />} />
+              <Route path="/courses/cuet" element={<CuetPage />} />
               <Route path="/live" element={<LivePage />} />
               <Route path="/test-series" element={<TestSeriesPage />} />
               <Route path="/pricing" element={<PricingPage />} />
