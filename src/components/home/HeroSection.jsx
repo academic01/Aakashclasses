@@ -44,8 +44,8 @@ const HeroSection = () => {
   const prevSlide = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <section className="relative w-full overflow-hidden bg-brandBeige !mt-[88px] !pt-0">
-      <div className="relative w-full h-[400px] md:h-[500px] lg:h-[650px]">
+    <section className="relative w-full overflow-hidden bg-brandBeige !mt-0 !pt-0">
+      <div className="relative w-full min-h-[600px] lg:min-h-[calc(100vh-88px)] flex flex-col">
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
@@ -75,7 +75,7 @@ const HeroSection = () => {
                 ></div>
 
                 {/* Left Content */}
-                <div className="w-full lg:w-[60%] h-full relative z-10 flex flex-col justify-center px-6 md:px-16 lg:px-24 pt-6">
+                <div className="w-full lg:w-[60%] h-full relative z-10 flex flex-col justify-center px-6 md:px-16 lg:px-24 pt-6 pb-10">
                   
                   {/* Notice Badges */}
                   <div className="flex flex-wrap items-center gap-3 mb-6">
@@ -136,13 +136,6 @@ const HeroSection = () => {
               ></div>
             )}
 
-            {/* Circular Logo Top Left */}
-            <div className="absolute top-6 left-6 md:top-8 md:left-8 z-20 pointer-events-none drop-shadow-2xl">
-               <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] rounded-full bg-white border-4 border-[#F5A623] flex items-center justify-center p-2 shadow-xl overflow-hidden bg-cover bg-center">
-                  <img src="/aakashlogo.png" alt="Aakash Logo" className="w-full h-full object-contain hover:scale-110 transition-transform duration-500" />
-               </div>
-            </div>
-
           </motion.div>
         </AnimatePresence>
 
@@ -161,7 +154,7 @@ const HeroSection = () => {
         </button>
 
         {/* Bottom Dots */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-30 bg-black/30 px-5 py-2.5 rounded-full backdrop-blur-sm border border-white/10">
+        <div className="absolute bottom-[20px] left-1/2 -translate-x-1/2 flex gap-3 z-10 bg-black/30 px-5 py-2.5 rounded-full backdrop-blur-sm border border-white/10">
           {slides.map((_, idx) => (
             <button
               key={idx}
