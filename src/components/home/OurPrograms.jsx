@@ -38,7 +38,7 @@ const programs = [
 
 const OurPrograms = () => {
   return (
-    <section className="py-16 px-6 md:px-20 bg-brandBeige">
+    <section className="pt-[80px] pb-16 px-6 md:px-20 mt-0 bg-brandBeige relative z-10 w-full relative">
       <div className="max-w-[1400px] mx-auto text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-outfit font-black text-[#0A0A0A] mb-4">Our Programs</h2>
         <p className="text-[#888888] text-md md:text-lg font-inter">Choose your path to success</p>
