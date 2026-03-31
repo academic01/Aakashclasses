@@ -234,26 +234,28 @@ const HeroSection = () => {
                 </motion.div>
                 
                 <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.4 }} className="mb-[8px]">
-                   <h1 className="text-white text-[58px] font-[900] leading-[1] font-orbitron">
+                   <h1 className="text-white text-[64px] md:text-[84px] font-[900] leading-[1] font-orbitron drop-shadow-xl">
                      CUET <span className="text-[#F5A623]">2026</span>
                    </h1>
                 </motion.div>
                 
-                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.4 }} className="text-[rgba(255,255,255,0.7)] text-[16px] mb-[12px] font-exo">
+                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.4 }} className="text-[rgba(255,255,255,0.85)] text-[18px] md:text-[22px] font-[600] mb-[16px] font-exo tracking-wide">
                    Central Universities Entrance Test
                 </motion.div>
                 
-                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.4, duration: 0.4 }} className="text-[#F5A623] font-[700] text-[14px] mb-[24px]">
-                   ⚡ Limited Seats Available!
+                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.4, duration: 0.4 }} className="text-[#F5A623] font-[800] text-[16px] md:text-[18px] mb-[30px] flex items-center gap-2">
+                   ⚡ <span className="underline decoration-2 underline-offset-4">Limited Seats Available!</span>
                 </motion.div>
                 
-                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.4 }} className="flex flex-col gap-[10px] mb-[32px]">
-                   {["Complete Syllabus Coverage", "Domain + General Test Prep", "Language Section Mastery", "Previous Year Papers & Mock Tests", "Expert Faculty Guidance"].map((f, i) => (
-                     <div key={i} className="flex items-center gap-[10px]">
-                       <div className="w-[20px] h-[20px] bg-[#F5A623] rounded-[50%] flex text-[#0D2240] font-[900] text-[11px] items-center justify-center shrink-0">
+                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.4 }} className="flex flex-col gap-[14px] mb-[40px]">
+                   {["15+ Years Expert Faculty Experience", "Complete Syllabus Coverage", "Domain + General Test Prep", "Previous Year Papers & Mock Tests", "Interactive Live Sessions"].map((f, i) => (
+                     <div key={i} className="flex items-center gap-[12px]">
+                       <div className="w-[24px] h-[24px] bg-[#F5A623] rounded-[50%] flex text-[#0D2240] font-[900] text-[13px] items-center justify-center shrink-0 shadow-lg">
                          ✓
                        </div>
-                       <span className="text-[rgba(255,255,255,0.82)] text-[14px] font-[500] font-inter">{f}</span>
+                       <span className={`font-inter ${f.includes('Experience') ? 'text-[#F5A623] text-[20px] md:text-[22px] font-[900] drop-shadow-md' : 'text-[rgba(255,255,255,0.92)] text-[16px] md:text-[18px] font-[600]'}`}>
+                         {f}
+                       </span>
                      </div>
                    ))}
                 </motion.div>
@@ -313,25 +315,27 @@ const HeroSection = () => {
             /* ========================================================= */
             <>
               <div className="hero-left">
-                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.1, duration: 0.4 }} className="inline-flex gap-[8px] items-center mb-[20px] p-[7px_18px] rounded-[50px] text-[12px] font-[600] tracking-[1.5px] w-max font-inter" style={{ background: currentSlide.topTag.bg, border: `1px solid ${currentSlide.topTag.border}`, color: currentSlide.topTag.color }}>
+                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.1, duration: 0.4 }} className="inline-flex gap-[8px] items-center mb-[20px] p-[8px_20px] rounded-[50px] text-[13px] md:text-[15px] font-[700] tracking-[1.5px] w-max font-inter shadow-sm" style={{ background: currentSlide.topTag.bg, border: `1px solid ${currentSlide.topTag.border}`, color: currentSlide.topTag.color }}>
                    {currentSlide.topTag.text}
                 </motion.div>
                 
-                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.4 }} className="inline-block p-[12px_28px] rounded-[10px] mb-[14px] text-[18px] md:text-[24px] font-[900] w-max font-orbitron" style={{ background: currentSlide.classBadge.bg, color: currentSlide.classBadge.color, boxShadow: currentSlide.classBadge.shadow }}>
+                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.4 }} className="inline-block p-[14px_32px] rounded-[16px] mb-[20px] text-[28px] md:text-[46px] leading-[1.1] font-[900] w-max font-orbitron shadow-xl" style={{ background: currentSlide.classBadge.bg, color: currentSlide.classBadge.color, boxShadow: currentSlide.classBadge.shadow }}>
                    {currentSlide.classBadge.text}
                 </motion.div>
                 
-                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.4 }} className="mb-[32px] text-[rgba(255,255,255,0.88)] text-[14px] md:text-[18px] font-[600] tracking-[1px] md:tracking-[2px] font-exo">
+                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.4 }} className="mb-[36px] text-[rgba(255,255,255,0.95)] text-[18px] md:text-[24px] font-[800] tracking-[2px] md:tracking-[3px] font-exo drop-shadow-lg">
                    {currentSlide.subjectLine}
                 </motion.div>
                 
-                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.4 }} className="grid grid-cols-1 md:grid-cols-2 gap-[10px_20px] mb-[32px]">
+                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.4 }} className="grid grid-cols-1 md:grid-cols-2 gap-[16px_28px] mb-[44px]">
                    {currentSlide.features.map((f, i) => (
-                     <div key={i} className="flex items-center gap-[10px]">
-                       <div className="w-[20px] h-[20px] rounded-[50%] flex text-[#0D2240] font-[900] text-[11px] items-center justify-center shrink-0" style={{ background: currentSlide.featureIconBg }}>
+                     <div key={i} className="flex items-center gap-[12px]">
+                       <div className="w-[24px] h-[24px] rounded-[50%] flex text-[#0D2240] font-[900] text-[13px] items-center justify-center shrink-0 shadow-md" style={{ background: currentSlide.featureIconBg }}>
                           ✓
                        </div>
-                       <span className="text-[rgba(255,255,255,0.82)] text-[14px] font-[500] font-inter">{f}</span>
+                       <span className={`font-inter ${f.includes('Experience') ? 'text-[#F5A623] text-[20px] md:text-[22px] font-[900] drop-shadow-md' : 'text-[rgba(255,255,255,0.92)] text-[16px] md:text-[18px] font-[600]'} `}>
+                         {f}
+                       </span>
                      </div>
                    ))}
                 </motion.div>
