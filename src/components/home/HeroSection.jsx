@@ -302,7 +302,7 @@ const HeroSection = () => {
                      <div className="w-[50px] h-[50px] rounded-full bg-[#F5A623] flex items-center justify-center text-[#0D2240] font-black text-[24px]">A</div>
                      <div>
                        <h3 className="text-white text-[22px] font-black leading-tight font-orbitron">Aakash Sir</h3>
-                       <p className="text-[#F5A623] text-[12px] font-bold tracking-[1.5px] uppercase mt-1">CUET Expert Faculty</p>
+                       <p className="text-[#F5A623] text-[12px] font-bold tracking-[1.5px] uppercase mt-1">Expert Faculty</p>
                      </div>
                    </motion.div>
 
