@@ -268,26 +268,43 @@ const HeroSection = () => {
                 </motion.div>
               </div>
               
-              <div className="hero-right mobile-hide flex flex-col justify-center relative">
-                 <div className="flex flex-wrap gap-[12px] p-[40px] justify-center items-center content-center h-[50%] mb-[20px]">
-                    {['English', 'Domain Subjects', 'General Test', 'Languages', 'Mock Tests', 'PYP'].map((chip, i) => (
-                       <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.6 + (i * 0.1), duration: 0.4 }} key={i} className="bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.2)] text-white text-[14px] font-[600] px-[20px] py-[10px] rounded-[50px] hover:bg-[rgba(245,166,35,0.15)] hover:border-[#F5A623] cursor-default transition-all">
-                         {chip}
-                       </motion.div>
-                    ))}
-                 </div>
+              <div className="hero-right mobile-hide flex flex-col justify-center relative items-center">
+                 {/* Decorative background ambient glow */}
+                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full blur-[100px] opacity-40 pointer-events-none bg-[#F5A623]"></div>
                  
-                 <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.7, duration: 0.4 }} className="bg-white rounded-[20px] p-[24px_28px] shadow-[0_20px_60px_rgba(0,0,0,0.3)] w-[280px] m-[0_auto]">
-                    <div className="text-[#888] text-[11px] font-[600] tracking-[1.5px] uppercase mb-[8px]">COURSE FEE</div>
-                    <div className="flex items-center gap-[10px]">
-                       <span className="text-[#0D2240] text-[32px] font-[900]">₹2,999</span>
-                       <span className="text-[#BBBBBB] text-[16px] line-through decoration-1">₹8,999</span>
-                    </div>
-                    <div className="flex items-center gap-[8px] mt-[8px]">
-                       <span className="bg-[#DCFCE7] text-[#16A34A] text-[11px] font-[700] px-[10px] py-[4px] rounded-[6px]">67% OFF</span>
-                       <span className="text-[#888] text-[12px]">EMI from ₹499/mo</span>
-                    </div>
-                 </motion.div>
+                 {/* Aakash Sir Image & Nameplate Area */}
+                 <div className="relative z-10 w-full max-w-[400px] flex justify-center items-end mt-12">
+                   
+                   {/* Person Image (Transparent PNG recommended) */}
+                   <img src="/WhatsApp%20Image%202026-03-30%20at%2010.44.17.jpeg" alt="Aakash Sir" className="relative z-10 w-[300px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] rounded-full object-cover aspect-square" />
+
+
+                   {/* Experience Badge Floating */}
+                   <motion.div 
+                     initial={{ scale: 0, opacity: 0 }} 
+                     animate={{ scale: 1, opacity: 1 }} 
+                     transition={{ delay: 0.8, type: "spring" }} 
+                     className="absolute -right-[20px] top-[40px] z-20 bg-gradient-to-br from-[#16A34A] to-[#22C55E] p-[16px_20px] rounded-[16px] shadow-[0_20px_40px_rgba(34,197,94,0.4)] border-2 border-white transform rotate-6 rotate-[6deg]"
+                   >
+                     <div className="text-white font-[900] text-[28px] leading-none mb-1 text-center font-orbitron">15+</div>
+                     <div className="text-[12px] text-[rgba(255,255,255,0.9)] font-[700] tracking-[1px] leading-tight text-center uppercase">Years<br/>Experience</div>
+                   </motion.div>
+
+                   {/* Name and Subject Badge */}
+                   <motion.div 
+                     initial={{ y: 20, opacity: 0 }} 
+                     animate={{ y: 0, opacity: 1 }} 
+                     transition={{ delay: 0.9 }} 
+                     className="absolute bottom-[20px] z-20 w-[90%] bg-[rgba(10,22,40,0.85)] backdrop-blur-md rounded-[20px] border border-[rgba(255,255,255,0.15)] p-[20px] shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex items-center gap-4"
+                   >
+                     <div className="w-[50px] h-[50px] rounded-full bg-[#F5A623] flex items-center justify-center text-[#0D2240] font-black text-[24px]">A</div>
+                     <div>
+                       <h3 className="text-white text-[22px] font-black leading-tight font-orbitron">Aakash Sir</h3>
+                       <p className="text-[#F5A623] text-[12px] font-bold tracking-[1.5px] uppercase mt-1">CUET Expert Faculty</p>
+                     </div>
+                   </motion.div>
+
+                 </div>
               </div>
             </>
           ) : (
