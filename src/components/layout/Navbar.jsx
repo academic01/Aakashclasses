@@ -78,12 +78,12 @@ const Navbar = () => {
         className={`fixed w-full z-50 transition-all duration-300 flex flex-col bg-[#FFFFFF] backdrop-blur-md border-b border-[#E5E5E5] ${scrolled && !showAnnouncement ? 'shadow-md' : ''}`}
       >
         {showAnnouncement && (
-          <div className="bg-[#22C55E] h-[40px] flex items-center justify-center text-white text-[13px] font-bold w-full relative z-[60]">
+          <div className="bg-gradient-to-r from-[#0D2240] to-[#1a3a6b] h-[40px] flex items-center justify-center text-white text-[13px] w-full relative z-[60] tracking-wide font-inter border-b border-[#F5A623]/20">
             <span>
               🎉 CUET 2026 New Batch Starting 1st April! Limited Seats —{' '}
               <span 
                 onClick={() => navigate('/courses/cuet')} 
-                className="text-[#FFFF00] font-bold cursor-pointer hover:underline"
+                className="text-[#F5A623] font-bold cursor-pointer hover:underline"
               >
                 Enroll Now →
               </span>
