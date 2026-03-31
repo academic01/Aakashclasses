@@ -120,12 +120,12 @@ const HeroSection = () => {
       <style>{`
         .hero-section {
           width: 100%;
-          height: calc(100vh - 80px);
+          height: calc(100vh - 112px);
           min-height: 620px;
           max-height: 780px;
           position: relative;
           overflow: hidden;
-          margin-top: 0;
+          margin-top: 112px;
           padding-top: 0;
         }
         
@@ -381,12 +381,12 @@ const HeroSection = () => {
                     </div>
                  </motion.div>
                  
-                 {/* Floating Badges */}
-                 <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="mobile-hide absolute top-[15%] right-[8%] bg-[rgba(10,22,40,0.6)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] rounded-[50px] px-[20px] py-[10px] text-[rgba(255,255,255,0.9)] text-[13px] font-[600] z-20 shadow-xl flex items-center gap-2 font-inter">
+                 {/* Floating Badges (Placed behind the glass card for a cool layered depth effect) */}
+                 <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="mobile-hide absolute top-[12%] right-[5%] bg-[rgba(10,22,40,0.6)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] rounded-[50px] px-[20px] py-[10px] text-[rgba(255,255,255,0.9)] text-[13px] font-[600] z-0 shadow-xl flex items-center gap-2 font-inter">
                     <span style={{ color: currentSlide.featureIconBg }}>🎯</span> Interactive Live Classes
                  </motion.div>
                  
-                 <motion.div animate={{ y: [0, 12, 0] }} transition={{ duration: 5, repeat: Infinity, delay: 1, ease: "easeInOut" }} className="mobile-hide absolute bottom-[18%] left-[5%] bg-[rgba(10,22,40,0.6)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] rounded-[50px] px-[20px] py-[10px] text-[rgba(255,255,255,0.9)] text-[13px] font-[600] z-20 shadow-xl flex items-center gap-2 font-inter">
+                 <motion.div animate={{ y: [0, 12, 0] }} transition={{ duration: 5, repeat: Infinity, delay: 1, ease: "easeInOut" }} className="mobile-hide absolute bottom-[15%] left-[2%] bg-[rgba(10,22,40,0.6)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] rounded-[50px] px-[20px] py-[10px] text-[rgba(255,255,255,0.9)] text-[13px] font-[600] z-0 shadow-xl flex items-center gap-2 font-inter">
                     <span style={{ color: currentSlide.featureIconBg }}>📚</span> Quality Study Material
                  </motion.div>
               </div>
