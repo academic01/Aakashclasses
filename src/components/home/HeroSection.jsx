@@ -162,18 +162,20 @@ const HeroSection = () => {
           z-index: 5;
         }
         
-        /* Desktop Image Cropping to hide baked-in text */
+        /* Desktop Image Cropping & Masking to hide baked-in background/text */
         .hero-photo-desktop {
           position: absolute;
-          bottom: -2%;
-          right: -8%;
-          height: 115%;
+          bottom: -4%;
+          right: -12%;
+          height: 125%;
           width: auto;
           max-width: none;
           object-fit: contain;
           object-position: bottom right;
           pointer-events: none;
           z-index: 2;
+          -webkit-mask-image: linear-gradient(to left, black 0%, black 22%, transparent 44%);
+          mask-image: linear-gradient(to left, black 0%, black 22%, transparent 44%);
         }
         
         @media (max-width: 768px) {
@@ -192,14 +194,16 @@ const HeroSection = () => {
              order: -1;
              display: block;
           }
-          /* Mobile Image Cropping */
+          /* Mobile Image Cropping & Masking */
           .hero-photo-desktop {
              height: 380px !important;
              width: auto !important;
              object-fit: contain !important;
              object-position: bottom right !important;
-             right: -15% !important;
+             right: -20% !important;
              bottom: -20px !important;
+             -webkit-mask-image: linear-gradient(to left, black 0%, black 25%, transparent 55%) !important;
+             mask-image: linear-gradient(to left, black 0%, black 25%, transparent 55%) !important;
           }
           .hero-photo-gradient::after {
              content: '';
