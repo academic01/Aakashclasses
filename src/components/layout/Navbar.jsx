@@ -76,11 +76,11 @@ const Navbar = () => {
 
             {/* Left Section: Logo & All Courses Button */}
             <div className="flex items-center gap-6">
-              <Link to="/" className="flex items-center">
+              <Link to="/" className="flex items-center shrink-0">
                 <img
                   src="/aakashlogo.png"
                   alt="Aakash Academics"
-                  className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-8' : 'h-10'}`}
+                  className={`object-contain transition-all duration-300 ${scrolled ? 'h-[32px] w-[140px]' : 'h-[42px] w-[180px]'}`}
                 />
               </Link>
 
