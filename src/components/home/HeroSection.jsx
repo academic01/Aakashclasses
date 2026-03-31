@@ -162,6 +162,20 @@ const HeroSection = () => {
           z-index: 5;
         }
         
+        /* Desktop Image Cropping to hide baked-in text */
+        .hero-photo-desktop {
+          position: absolute;
+          bottom: -2%;
+          right: -8%;
+          height: 115%;
+          width: auto;
+          max-width: none;
+          object-fit: contain;
+          object-position: bottom right;
+          pointer-events: none;
+          z-index: 2;
+        }
+        
         @media (max-width: 768px) {
           .hero-section {
             height: auto !important;
@@ -173,16 +187,19 @@ const HeroSection = () => {
             flex-direction: column;
           }
           .hero-right {
-             height: 260px;
+             height: 280px;
              width: 100%;
              order: -1;
              display: block;
           }
-          .hero-photo-mobile {
-             height: 260px !important;
-             width: 100% !important;
-             object-fit: cover !important;
-             object-position: top center !important;
+          /* Mobile Image Cropping */
+          .hero-photo-desktop {
+             height: 380px !important;
+             width: auto !important;
+             object-fit: contain !important;
+             object-position: bottom right !important;
+             right: -15% !important;
+             bottom: -20px !important;
           }
           .hero-photo-gradient::after {
              content: '';
@@ -357,7 +374,7 @@ const HeroSection = () => {
                     transition={{ delay: 0.3, duration: 0.5 }}
                     src={currentSlide.image} 
                     alt={currentSlide.facultyNameplate.name}
-                    className="hero-photo-mobile absolute bottom-0 right-0 h-full w-auto object-contain object-[bottom_right] z-[2]"
+                    className="hero-photo-desktop"
                  />
                  
                  <motion.div 
