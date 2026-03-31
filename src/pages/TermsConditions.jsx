@@ -1,13 +1,11 @@
 import React from 'react';
-import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
+
 import { motion } from 'framer-motion';
 import { FileText, Gavel, Users, Info } from 'lucide-react';
 
 const TermsConditions = () => {
   return (
     <div className="min-h-screen bg-brandBeige pt-[120px]">
-      <Navbar />
 
       {/* Header Section */}
       <section className="px-6 md:px-20 py-16 text-center border-b border-brandNavy/5">
@@ -78,7 +76,6 @@ const TermsConditions = () => {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 };

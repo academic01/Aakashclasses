@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
+
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -21,7 +20,6 @@ const ContactSupport = () => {
 
   return (
     <div className="min-h-screen bg-brandBeige pt-[120px]">
-      <Navbar />
 
       {/* Header */}
       <section className="px-6 md:px-20 py-16 text-center">
@@ -132,7 +130,6 @@ const ContactSupport = () => {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 };

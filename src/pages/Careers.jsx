@@ -1,6 +1,5 @@
 import React from 'react';
-import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
+
 import { motion } from 'framer-motion';
 import { Briefcase, MapPin, Clock, ArrowRight, Sparkles } from 'lucide-react';
 
@@ -15,7 +14,6 @@ const jobs = [
 const Careers = () => {
   return (
     <div className="min-h-screen bg-brandBeige pt-[120px]">
-      <Navbar />
 
       {/* Hero Section */}
       <section className="px-6 md:px-20 py-20 text-center relative overflow-hidden bg-brandNavy text-brandBeige rounded-[80px] mx-6 md:mx-20 mt-10">
@@ -96,7 +94,6 @@ const Careers = () => {
          </div>
       </section>
 
-      <Footer />
     </div>
   );
 };

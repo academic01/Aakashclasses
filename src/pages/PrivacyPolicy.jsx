@@ -1,13 +1,11 @@
 import React from 'react';
-import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
+
 import { motion } from 'framer-motion';
 import { ShieldCheck, Lock, Eye, FileText } from 'lucide-react';
 
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-brandBeige pt-[120px]">
-      <Navbar />
 
       {/* Header Section */}
       <section className="px-6 md:px-20 py-16 text-center border-b border-brandNavy/5">
@@ -89,7 +87,6 @@ const PrivacyPolicy = () => {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 };
