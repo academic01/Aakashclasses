@@ -90,7 +90,7 @@ const HeroSection = () => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slidesData.length);
       setKey(prev => prev + 1);
-    }, 5000);
+    }, 4000);
     return () => clearInterval(timer);
   }, [current, isHovered]);
 
@@ -194,7 +194,7 @@ const HeroSection = () => {
           to { width: 100%; }
         }
         .anim-fill-bar {
-          animation: fillBar 5s linear forwards;
+          animation: fillBar 4s linear forwards;
         }
         @keyframes bounce-down {
           0%, 100% { transform: translateY(0); }
