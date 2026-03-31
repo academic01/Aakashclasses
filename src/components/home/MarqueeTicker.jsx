@@ -3,28 +3,34 @@ import { motion } from 'framer-motion';
 
 const MarqueeTicker = () => {
   const tickerItems = [
-    "🏆 Rohan S. secured AIR 47 in JEE 2024",
-    "🎉 New Batch Starting: NEET 2025 Dropper",
+    "🎉 New Batch Starting: CUET 2026 — 1st April! Enroll Now →",
     "📢 Free Mock Test Live Now →",
-    "🔥 Highest Selections in State Boards 2023",
-    "⭐ Daily Live Classes at 6PM – Join Now"
+    "🏆 Highest Selections in State Boards 2023",
+    "⭐ Daily Live Classes at 6PM — Join Now",
+    "🎯 Class VI-X New Batch Open — Limited Seats!",
+    "📚 Study Materials Available — Download Free"
   ];
 
-  const fullText = [...tickerItems, ...tickerItems, ...tickerItems].join('   |   ');
-
   return (
-    <div className="w-full bg-white/90 border-y border-[#E5E5E5] py-4 overflow-hidden flex items-center shadow-sm relative z-10">
+    <div className="w-full bg-[#0D2240] py-4 overflow-hidden flex items-center shadow-sm relative z-10 border-b border-white/10">
       <motion.div
-        className="whitespace-nowrap font-exo font-bold text-textPrimary tracking-widest text-sm md:text-base flex"
+        className="whitespace-nowrap font-exo font-bold text-white tracking-widest text-[13px] md:text-sm flex items-center"
         animate={{ x: [0, -2000] }}
         transition={{
           repeat: Infinity,
           repeatType: 'loop',
-          duration: 50,
+          duration: 35,
           ease: 'linear'
         }}
       >
-        <span className="mr-8 opacity-80">{fullText}</span>
+        <span className="flex items-center">
+          {[...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems].map((item, index) => (
+            <React.Fragment key={index}>
+              <span className="mx-6 hover:text-[#F5A623] cursor-pointer transition-colors">{item}</span>
+              <span className="text-[#F5A623] font-bold">|</span>
+            </React.Fragment>
+          ))}
+        </span>
       </motion.div>
     </div>
   );

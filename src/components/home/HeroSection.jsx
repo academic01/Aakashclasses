@@ -45,7 +45,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative w-full overflow-hidden bg-brandBeige !mt-0 !pt-0">
-      <div className="relative w-full min-h-[600px] lg:min-h-[calc(100vh-88px)] flex flex-col">
+      <div className="relative w-full min-h-auto md:min-h-[580px] lg:min-h-[calc(100vh-88px)] flex flex-col">
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
@@ -57,11 +57,11 @@ const HeroSection = () => {
           >
             {/* Slide Content */}
             {slides[current].type === "image" ? (
-              <Link to={slides[current].link} className="w-full h-full block relative cursor-pointer group">
+              <Link to={slides[current].link} className="w-full h-[280px] md:h-full block relative cursor-pointer group">
                 <img 
                   src={slides[current].image} 
                   alt={`Hero Banner ${current + 1}`} 
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-contain md:object-cover object-top max-[480px]:hidden"
                   loading={current === 0 ? "eager" : "lazy"} 
                 />
               </Link>
@@ -122,8 +122,8 @@ const HeroSection = () => {
 
                 {/* Right Image */}
                 <div className="hidden lg:block w-[40%] h-full relative z-10">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#1a3a6b] to-transparent w-full z-10 mix-blend-multiply"></div>
-                  <img src={slides[current].image} alt="CUET Students" className="w-full h-full object-cover object-left shadow-[inset_0_0_50px_rgba(0,0,0,0.5)]" style={{ maskImage: 'linear-gradient(to right, transparent, black 15%)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%)' }} />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#1a3a6b] to-transparent w-full z-10 mix-blend-multiply pointer-events-none"></div>
+                  <img src={slides[current].image} alt="CUET Students" className="absolute -top-[10px] w-full h-[110%] object-contain object-top" style={{ maskImage: 'linear-gradient(to right, transparent, black 15%)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%)' }} />
                 </div>
               </div>
             )}
