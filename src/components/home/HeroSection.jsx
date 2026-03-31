@@ -160,22 +160,9 @@ const HeroSection = () => {
           position: relative;
           overflow: hidden;
           z-index: 5;
-        }
-        
-        /* Desktop Image Cropping & Masking to hide baked-in background/text */
-        .hero-photo-desktop {
-          position: absolute;
-          bottom: -4%;
-          right: -12%;
-          height: 125%;
-          width: auto;
-          max-width: none;
-          object-fit: contain;
-          object-position: bottom right;
-          pointer-events: none;
-          z-index: 2;
-          -webkit-mask-image: linear-gradient(to left, black 0%, black 22%, transparent 44%);
-          mask-image: linear-gradient(to left, black 0%, black 22%, transparent 44%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         
         @media (max-width: 768px) {
@@ -189,28 +176,12 @@ const HeroSection = () => {
             flex-direction: column;
           }
           .hero-right {
-             height: 280px;
+             height: auto;
+             min-height: 380px;
              width: 100%;
              order: -1;
-             display: block;
-          }
-          /* Mobile Image Cropping & Masking */
-          .hero-photo-desktop {
-             height: 380px !important;
-             width: auto !important;
-             object-fit: contain !important;
-             object-position: bottom right !important;
-             right: -20% !important;
-             bottom: -20px !important;
-             -webkit-mask-image: linear-gradient(to left, black 0%, black 25%, transparent 55%) !important;
-             mask-image: linear-gradient(to left, black 0%, black 25%, transparent 55%) !important;
-          }
-          .hero-photo-gradient::after {
-             content: '';
-             position: absolute;
-             bottom: 0; left: 0; right: 0; top: 0;
-             background: linear-gradient(to bottom, transparent 40%, rgba(13,34,64,1) 100%);
-             z-index: 3;
+             display: flex;
+             padding: 40px 20px;
           }
           .hero-left {
              padding: 24px 24px 40px !important;
@@ -333,18 +304,8 @@ const HeroSection = () => {
                    {currentSlide.classBadge.text}
                 </motion.div>
                 
-                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.4 }} className="mb-[24px] text-[rgba(255,255,255,0.88)] text-[14px] md:text-[18px] font-[600] tracking-[1px] md:tracking-[2px] font-exo">
+                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.4 }} className="mb-[32px] text-[rgba(255,255,255,0.88)] text-[14px] md:text-[18px] font-[600] tracking-[1px] md:tracking-[2px] font-exo">
                    {currentSlide.subjectLine}
-                </motion.div>
-                
-                <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.4, duration: 0.4 }} className="inline-flex items-center gap-[14px] p-[12px_20px] rounded-[0_12px_12px_0] mb-[24px] bg-[rgba(255,255,255,0.07)] border-[1px] border-[rgba(255,255,255,0.12)] w-max" style={{ borderLeft: `4px solid ${currentSlide.facultyNameplate.borderColor}` }}>
-                   <div className="w-[44px] h-[44px] rounded-[50%] flex items-center justify-center font-[900] text-[18px] shrink-0 font-inter" style={{ background: currentSlide.facultyNameplate.iconBg, color: currentSlide.facultyNameplate.iconColor }}>
-                     {currentSlide.facultyNameplate.initial}
-                   </div>
-                   <div className="flex flex-col">
-                     <span className="text-[10px] font-[600] tracking-[2px] text-[rgba(255,255,255,0.5)] leading-[1]">{currentSlide.facultyNameplate.title}</span>
-                     <span className="text-[17px] font-[700] text-white pt-[4px] leading-[1]">{currentSlide.facultyNameplate.name}</span>
-                   </div>
                 </motion.div>
                 
                 <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.4 }} className="grid grid-cols-1 md:grid-cols-2 gap-[10px_20px] mb-[32px]">
@@ -368,33 +329,48 @@ const HeroSection = () => {
                 </motion.div>
               </div>
 
-              <div className="hero-right hero-photo-gradient">
-                 <div className="mobile-hide absolute right-[-80px] top-1/2 -translate-y-[50%] w-[520px] h-[520px] rounded-[50%] bg-[rgba(245,166,35,0.05)] border-[1px] border-[rgba(245,166,35,0.08)] pointer-events-none z-[1]"></div>
+              <div className="hero-right">
+                 {/* Decorative background ambient glow */}
+                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[450px] h-[300px] md:h-[450px] rounded-full blur-[80px] md:blur-[120px] opacity-30 pointer-events-none" style={{ background: currentSlide.featureIconBg }}></div>
                  
-                 <motion.img 
-                    key={`img-${current}`}
-                    initial={{ x: 20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.3, duration: 0.5 }}
-                    src={currentSlide.image} 
-                    alt={currentSlide.facultyNameplate.name}
-                    className="hero-photo-desktop"
-                 />
-                 
+                 {/* Premium Glassmorphic Faculty & Stats Card */}
                  <motion.div 
-                    initial={{ y: 10, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.7, duration: 0.4 }}
-                    className="mobile-hide absolute bottom-[32px] left-[20px] z-[3] flex"
+                    initial={{ y: 20, opacity: 0, scale: 0.95 }}
+                    animate={{ y: 0, opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.4, duration: 0.6 }}
+                    className="relative z-10 w-full max-w-[360px] rounded-[24px] border border-[rgba(255,255,255,0.12)] bg-[rgba(255,255,255,0.04)] backdrop-blur-[24px] p-[32px] md:p-[40px] shadow-[0_30px_60px_rgba(0,0,0,0.4)] flex flex-col items-center text-center"
                  >
-                    <div className="p-[10px_18px] rounded-[12px_0_0_12px]" style={{ background: currentSlide.statsBgSecondary, backdropFilter: 'blur(12px)', border: `1px solid ${currentSlide.statsBorder}`, borderRight: 'none' }}>
-                      <div className="font-[700] text-[14px] leading-tight" style={{ color: currentSlide.statsRatingColor }}>⭐ {currentSlide.stats.rating}</div>
-                      <div className="text-[11px] text-[rgba(255,255,255,0.55)] leading-tight mt-1">Rating</div>
+                    {/* Faculty Initial Badge */}
+                    <div className="w-[88px] h-[88px] rounded-full flex items-center justify-center text-[36px] font-[900] mb-[24px] shadow-[0_10px_30px_rgba(0,0,0,0.3)] font-inter" style={{ background: currentSlide.facultyNameplate.iconBg, color: currentSlide.facultyNameplate.iconColor, border: `2px solid ${currentSlide.facultyNameplate.borderColor}` }}>
+                        {currentSlide.facultyNameplate.initial}
                     </div>
-                    <div className="p-[10px_18px] rounded-[0_12px_12px_0]" style={{ background: currentSlide.statsBgMain, backdropFilter: 'blur(12px)' }}>
-                      <div className="font-[800] text-[14px] leading-tight" style={{ color: currentSlide.statsTextColorMain }}>{currentSlide.stats.students}</div>
-                      <div className="text-[11px] leading-tight mt-1" style={{ color: currentSlide.statsTextColorSecondary }}>Students</div>
+                    
+                    {/* Faculty Title */}
+                    <h3 className="text-white text-[24px] md:text-[28px] font-black mb-[6px] font-orbitron tracking-wide">{currentSlide.facultyNameplate.name}</h3>
+                    <div className="text-[11px] font-[700] tracking-[2.5px] uppercase mb-[32px] font-inter uppercase" style={{ color: currentSlide.featureIconBg }}>
+                       {currentSlide.facultyNameplate.title}
                     </div>
+                    
+                    {/* Stats Split Grid */}
+                    <div className="w-full grid grid-cols-2 gap-4 border-t border-[rgba(255,255,255,0.1)] pt-[28px]">
+                       <div className="flex flex-col items-center justify-center border-r border-[rgba(255,255,255,0.1)] pr-4">
+                          <span className="text-[28px] font-black leading-none mb-2" style={{ color: currentSlide.statsRatingColor }}>⭐ {currentSlide.stats.rating}</span>
+                          <span className="text-[rgba(255,255,255,0.5)] text-[11px] tracking-[1.5px] uppercase font-inter font-semibold">Avg Rating</span>
+                       </div>
+                       <div className="flex flex-col items-center justify-center pl-4">
+                          <span className="text-white text-[28px] font-black leading-none mb-2 font-inter">{currentSlide.stats.students}</span>
+                          <span className="text-[rgba(255,255,255,0.5)] text-[11px] tracking-[1.5px] uppercase font-inter font-semibold">Enrolled</span>
+                       </div>
+                    </div>
+                 </motion.div>
+                 
+                 {/* Floating Badges */}
+                 <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="mobile-hide absolute top-[15%] right-[8%] bg-[rgba(10,22,40,0.6)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] rounded-[50px] px-[20px] py-[10px] text-[rgba(255,255,255,0.9)] text-[13px] font-[600] z-20 shadow-xl flex items-center gap-2 font-inter">
+                    <span style={{ color: currentSlide.featureIconBg }}>🎯</span> Interactive Live Classes
+                 </motion.div>
+                 
+                 <motion.div animate={{ y: [0, 12, 0] }} transition={{ duration: 5, repeat: Infinity, delay: 1, ease: "easeInOut" }} className="mobile-hide absolute bottom-[18%] left-[5%] bg-[rgba(10,22,40,0.6)] backdrop-blur-md border border-[rgba(255,255,255,0.1)] rounded-[50px] px-[20px] py-[10px] text-[rgba(255,255,255,0.9)] text-[13px] font-[600] z-20 shadow-xl flex items-center gap-2 font-inter">
+                    <span style={{ color: currentSlide.featureIconBg }}>📚</span> Quality Study Material
                  </motion.div>
               </div>
             </>
