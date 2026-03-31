@@ -31,6 +31,15 @@ const TestSeriesPage = () => {
     }
     const matchSearch = test.title.toLowerCase().includes(searchTerm.toLowerCase());
     return matchCategory && matchSearch;
+  }).sort((a, b) => {
+    const getPriority = (test) => {
+      if (test.status === 'coming_soon' || test.locked === true || (test.exam || '').toUpperCase().includes('SOON')) return 4;
+      if (test.exam === 'CUET') return 1;
+      const coreTags = ['BOARDS', 'SCHOOL', 'GOVT JOBS', 'SENIOR', 'COMMERCE'];
+      if (coreTags.includes(test.exam)) return 2;
+      return 3;
+    };
+    return getPriority(a) - getPriority(b);
   });
 
   const handleStartTest = (test) => {
@@ -140,10 +149,26 @@ const TestSeriesPage = () => {
           {/* Main Listing (Col 8) */}
           <div className="lg:col-span-8 flex flex-col gap-5">
             <AnimatePresence mode="popLayout">
-              {filteredTests.map((test) => (
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.95 }}
+              {activeCategory === 'coming_soon' && (
+                 <div className="bg-[#EEF2FF] border border-[#C7D2FE] rounded-[12px] text-[#0D2240] p-[16px] mb-[20px] shadow-sm text-center">
+                   🚀 These batches are launching mid-2026!<br />
+                   Click <strong>Notify Me</strong> to get alerted when they go live.
+                 </div>
+              )}
+              {filteredTests.map((test, index) => {
+                const isFirstLocked = test.locked && (index === 0 || !filteredTests[index - 1].locked);
+                const showDivider = (activeCategory === 'all' || activeCategory === '') && isFirstLocked;
+
+                return (
+                  <React.Fragment key={test.id}>
+                    {showDivider && (
+                      <div className="bg-[#F8F8F8] text-[#888888] italic border-t border-b border-dashed border-[#DDDDDD] p-[12px] text-center text-[13px] my-2">
+                         🔜 Coming Soon Tests Below
+                      </div>
+                    )}
+                    <motion.div
+                      layout
+                      initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   key={test.id}
                   className={`border rounded-[16px] p-[20px] md:px-[24px] flex flex-col md:flex-row items-start md:items-center justify-between group transition-all duration-300 ${
@@ -199,7 +224,8 @@ const TestSeriesPage = () => {
                      )}
                    </button>
                 </motion.div>
-              ))}
+                </React.Fragment>
+              )})}
             </AnimatePresence>
             
             {filteredTests.length === 0 && (
