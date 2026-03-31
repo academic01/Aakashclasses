@@ -11,19 +11,41 @@ const CoursesPage = () => {
   const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState('');
   
-  // URL Param logic: /courses?exam=jee
   useEffect(() => {
-    const examParam = searchParams.get('exam');
-    if (examParam) setFilters({ ...filters, exam: examParam.toUpperCase() });
-  }, [searchParams]);
+    const categoryParam = searchParams.get('category');
+    if (categoryParam) {
+      setFilters(prev => ({ ...prev, category: categoryParam.toLowerCase() }));
+    } else {
+      setFilters(prev => ({ ...prev, category: '' }));
+    }
+  }, [searchParams, setFilters]);
 
   const filteredCourses = courses.filter(course => {
-    const matchExam = filters.exam ? course.exam === filters.exam : true;
-    const matchClass = filters.class ? course.class === filters.class : true;
+    const matchCategory = filters.category ? course.category === filters.category : true;
+    
+    let matchClass = true;
+    if (filters.class) {
+      if (filters.class === 'govt_exams') {
+        matchClass = course.category === 'govt';
+      } else {
+        matchClass = course.class === filters.class;
+      }
+    }
+
     const matchSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchFree = filters.type === 'free' ? course.free : (filters.type === 'paid' ? !course.free : true);
-    return matchExam && matchClass && matchSearch && matchFree;
+    return matchCategory && matchClass && matchSearch && matchFree;
   });
+
+  const getPageInfo = () => {
+    switch (filters.category) {
+      case 'senior': return { title: 'Class XI - XII Courses', subtitle: 'Board Exam Excellence — Science, Commerce & Humanities' };
+      case 'school': return { title: 'Class VI - X Courses', subtitle: 'Strong Foundation for Every Subject' };
+      case 'govt': return { title: 'Government Job Courses', subtitle: 'SSC, Railway, DSSSB & More — Crack Every Exam' };
+      default: return { title: 'Explore Courses', subtitle: "Top-tier curriculum for India's toughest exams" };
+    }
+  };
+  const pageInfo = getPageInfo();
 
   return (
     <div className="min-h-screen bg-white bg-graph pt-28 pb-20">
@@ -33,9 +55,11 @@ const CoursesPage = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="text-left">
             <h1 className="text-4xl md:text-5xl font-orbitron font-bold text-brandNavy mb-4 section-header-underline pb-4">
-              Explore <span className="text-brandNavy">Courses</span>
+              {pageInfo.title.split(' ').map((word, i, arr) => 
+                i === arr.length - 1 ? <span key={i} className="text-brandYellow">{word}</span> : word + ' '
+              )}
             </h1>
-            <p className="text-textSecondary font-exo text-lg">Top-tier curriculum for Indias toughest exams.</p>
+            <p className="text-textSecondary font-exo text-lg">{pageInfo.subtitle}</p>
           </div>
           
           {/* Search Bar */}
@@ -57,29 +81,45 @@ const CoursesPage = () => {
              <Filter className="w-4 h-4" /> Filter By:
           </div>
           
-          {/* Exam Filter */}
+          {/* Category Filter */}
           <select 
             className="bg-white border border-[#E5E5E5] px-4 py-2 rounded-lg font-exo font-bold text-xs uppercase"
-            value={filters.exam}
-            onChange={(e) => setFilters({...filters, exam: e.target.value})}
+            value={filters.category || ''}
+            onChange={(e) => {
+              setFilters({...filters, category: e.target.value});
+              setSearchParams(e.target.value ? { category: e.target.value } : {});
+            }}
           >
             <option value="">All Exams</option>
-            <option value="JEE">JEE</option>
-            <option value="NEET">NEET</option>
-            <option value="BOARDS">BOARDS</option>
-            <option value="CUET">CUET</option>
+            <optgroup label="─────────────────">
+              <option value="school">📚 School (VI-X)</option>
+              <option value="senior">🎓 Senior (XI-XII)</option>
+              <option value="govt">🏛️ Govt. Jobs</option>
+            </optgroup>
+            <optgroup label="─────────────────">
+              <option value="jee">🔜 JEE (Coming Soon)</option>
+              <option value="neet">🔜 NEET (Coming Soon)</option>
+              <option value="cuet">🔜 CUET (New Batch Soon)</option>
+            </optgroup>
           </select>
 
           {/* Class Filter */}
           <select 
             className="bg-white border border-[#E5E5E5] px-4 py-2 rounded-lg font-exo font-bold text-xs uppercase"
-            value={filters.class}
+            value={filters.class || ''}
             onChange={(e) => setFilters({...filters, class: e.target.value})}
           >
             <option value="">All Classes</option>
-            <option value="12">Class 12</option>
-            <option value="11">Class 11</option>
-            <option value="10">Class 10</option>
+            <optgroup label="──────────────">
+              <option value="6, 7, 8">Class 6, Class 7, Class 8</option>
+              <option value="9, 10">Class 9, Class 10</option>
+            </optgroup>
+            <optgroup label="──────────────">
+              <option value="11, 12">Class 11, Class 12</option>
+            </optgroup>
+            <optgroup label="──────────────">
+              <option value="govt_exams">All Govt Exams</option>
+            </optgroup>
           </select>
 
           {/* Price Filter */}
