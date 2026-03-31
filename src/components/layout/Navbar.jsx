@@ -174,7 +174,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`font-semibold text-[#0D2240] hover:text-[#F5A623] transition-all duration-300 font-outfit tracking-tight ${scrolled ? 'text-[13px]' : 'text-[14px]'}`}
+                  className={`font-semibold text-[#0D2240] hover:text-[#F5A623] transition-colors duration-300 font-outfit tracking-tight outline-none focus:outline-none focus:ring-0 ${scrolled ? 'text-[13px]' : 'text-[14px]'}`}
                 >
                   {link.name}
                 </Link>
