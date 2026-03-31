@@ -18,9 +18,12 @@ import TermsConditions from './pages/TermsConditions';
 import SyllabusPage from './pages/SyllabusPage';
 import CuetPage from './pages/CuetPage';
 
+import ScrollToTop from './components/common/ScrollToTop';
+
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="flex flex-col min-h-screen bg-lightBg1 text-textPrimary relative overflow-hidden">
         {/* Subtle Depth Blobs */}
         <div className="fixed top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
