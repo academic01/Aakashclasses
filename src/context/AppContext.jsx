@@ -40,9 +40,19 @@ const INITIAL_COURSES = [
 ];
 
 const INITIAL_TESTS = [
-  { id: 't1', title: 'Full JEE Mock Test 1', duration: 180, totalQuestions: 75, exam: 'JEE', premium: true },
-  { id: 't2', title: 'NEET Biology Chapter Test: Cell', duration: 30, totalQuestions: 45, exam: 'NEET', premium: false },
-  { id: 't3', title: 'Board Exam Pattern: Math Class 10', duration: 120, totalQuestions: 38, exam: 'BOARDS', premium: false },
+  // Locked
+  { id: 't1', title: 'Full JEE Mock Test 1', duration: 180, totalQuestions: 75, exam: 'JEE', category: 'jee', locked: true },
+  { id: 't2', title: 'NEET Biology Chapter Test: Cell', duration: 30, totalQuestions: 45, exam: 'NEET', category: 'neet', locked: true },
+  
+  // Active
+  { id: 't3', title: 'CLASS 10 MATHS FULL TEST', duration: 180, totalQuestions: 80, exam: 'BOARDS', category: 'school', tagBg: '#0D2240' },
+  { id: 't4', title: 'CLASS 10 SCIENCE MOCK TEST', duration: 150, totalQuestions: 60, exam: 'BOARDS', category: 'school' },
+  { id: 't5', title: 'CLASS 12 PHYSICS CHAPTER TEST', duration: 90, totalQuestions: 45, exam: 'SENIOR', category: 'senior' },
+  { id: 't6', title: 'CLASS 12 ACCOUNTANCY MOCK', duration: 120, totalQuestions: 60, exam: 'COMMERCE', category: 'senior' },
+  { id: 't7', title: 'SSC CGL FULL MOCK TEST 1', duration: 60, totalQuestions: 100, exam: 'GOVT JOBS', category: 'govt', tagBg: '#22C55E' },
+  { id: 't8', title: 'RAILWAY NTPC MOCK TEST', duration: 90, totalQuestions: 100, exam: 'GOVT JOBS', category: 'govt' },
+  { id: 't9', title: 'CUET 2026 FULL MOCK TEST', duration: 195, totalQuestions: 150, exam: 'CUET', category: 'cuet', tagBg: '#7C3AED', badge: '🆕 NEW', badgeBg: '#22C55E' },
+  { id: 't10', title: 'CLASS 9 MATHS CHAPTER TEST', duration: 60, totalQuestions: 30, exam: 'SCHOOL', category: 'school' },
 ];
 
 export const AppProvider = ({ children }) => {
