@@ -45,7 +45,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative w-full overflow-hidden bg-brandBeige !mt-0 !pt-0">
-      <div className="relative w-full min-h-auto md:min-h-[580px] lg:min-h-[calc(100vh-88px)] flex flex-col">
+      <div className="relative w-full min-h-auto md:min-h-[600px] lg:min-h-[calc(100vh-88px)] flex flex-col">
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
@@ -57,11 +57,11 @@ const HeroSection = () => {
           >
             {/* Slide Content */}
             {slides[current].type === "image" ? (
-              <Link to={slides[current].link} className="w-full h-[280px] md:h-full block relative cursor-pointer group">
+              <Link to={slides[current].link} className="w-full h-[280px] md:h-full block absolute inset-0 cursor-pointer group overflow-hidden">
                 <img 
                   src={slides[current].image} 
                   alt={`Hero Banner ${current + 1}`} 
-                  className="w-full h-full object-contain md:object-cover object-top max-[480px]:hidden"
+                  className="absolute -top-[20px] w-full h-[105%] object-contain md:object-cover object-top max-[480px]:hidden"
                   loading={current === 0 ? "eager" : "lazy"} 
                 />
               </Link>
@@ -75,7 +75,7 @@ const HeroSection = () => {
                 ></div>
 
                 {/* Left Content */}
-                <div className="w-full lg:w-[60%] h-full relative z-10 flex flex-col justify-center px-6 md:px-16 lg:px-24 pt-6 pb-10">
+                <div className="w-full lg:w-[60%] h-full relative z-10 flex flex-col justify-center px-6 md:px-16 lg:px-24 pt-6 pb-[60px]">
                   
                   {/* Notice Badges */}
                   <div className="flex flex-wrap items-center gap-3 mb-6">
@@ -121,9 +121,9 @@ const HeroSection = () => {
                 </div>
 
                 {/* Right Image */}
-                <div className="hidden lg:block w-[40%] h-full relative z-10">
+                <div className="hidden lg:block w-[40%] h-full relative z-10 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-[#1a3a6b] to-transparent w-full z-10 mix-blend-multiply pointer-events-none"></div>
-                  <img src={slides[current].image} alt="CUET Students" className="absolute -top-[10px] w-full h-[110%] object-contain object-top" style={{ maskImage: 'linear-gradient(to right, transparent, black 15%)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%)' }} />
+                  <img src={slides[current].image} alt="CUET Students" className="absolute -top-[20px] w-full h-[105%] object-contain object-top" style={{ maskImage: 'linear-gradient(to right, transparent, black 15%)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%)' }} />
                 </div>
               </div>
             )}
@@ -154,7 +154,7 @@ const HeroSection = () => {
         </button>
 
         {/* Bottom Dots */}
-        <div className="absolute bottom-[20px] left-1/2 -translate-x-1/2 flex gap-3 z-10 bg-black/30 px-5 py-2.5 rounded-full backdrop-blur-sm border border-white/10">
+        <div className="absolute bottom-[16px] left-1/2 -translate-x-1/2 flex gap-3 z-20 bg-black/30 px-5 py-2.5 rounded-full backdrop-blur-sm border border-white/10">
           {slides.map((_, idx) => (
             <button
               key={idx}
