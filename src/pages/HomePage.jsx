@@ -9,11 +9,13 @@ import StudyResources from '../components/home/StudyResources';
 import GamificationShowcase from '../components/home/GamificationShowcase';
 import FeaturesGrid from '../components/home/FeaturesGrid';
 import PromotionModal from '../components/common/PromotionModal';
+import CuetPopup from '../components/home/CuetPopup';
 
 const HomePage = () => {
   return (
     <div className="w-full relative">
       <PromotionModal />
+      <CuetPopup />
       <HeroSection />
       <MarqueeTicker />
       <OurPrograms />

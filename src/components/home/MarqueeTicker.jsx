@@ -12,9 +12,9 @@ const MarqueeTicker = () => {
   ];
 
   return (
-    <div className="w-full bg-[#0D2240] py-4 overflow-hidden flex items-center shadow-sm relative z-10 border-b border-white/10">
+    <div className="w-full bg-[#F5A623] h-[44px] px-[20px] overflow-hidden flex items-center shadow-sm relative z-10">
       <motion.div
-        className="whitespace-nowrap font-exo font-bold text-white tracking-widest text-[13px] md:text-sm flex items-center"
+        className="whitespace-nowrap font-exo font-bold text-[#0D2240] text-[14px] tracking-[0.3px] flex items-center"
         animate={{ x: [0, -2000] }}
         transition={{
           repeat: Infinity,
@@ -26,8 +26,8 @@ const MarqueeTicker = () => {
         <span className="flex items-center">
           {[...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems].map((item, index) => (
             <React.Fragment key={index}>
-              <span className="mx-6 hover:text-[#F5A623] cursor-pointer transition-colors">{item}</span>
-              <span className="text-[#F5A623] font-bold">|</span>
+              <span className="mx-6 hover:opacity-80 cursor-pointer transition-opacity">{item}</span>
+              <span className="text-[#0D2240] font-bold">|</span>
             </React.Fragment>
           ))}
         </span>
