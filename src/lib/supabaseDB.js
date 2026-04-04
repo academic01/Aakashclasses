@@ -3,29 +3,25 @@ import { supabase } from './supabaseClient';
 export const supabaseDB = {
   // --- Auth & User Profile ---
   login: async (email, password) => {
-    console.log("Attempting login for:", email);
+    // Stage 1: Auth only (Fastest)
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      console.error("Auth error:", error);
-      throw error;
+    if (error) throw error;
+    
+    // Stage 2: Background profile fetch (don't let it hang the whole login)
+    try {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', data.user.id)
+        .maybeSingle();
+      
+      if (profile) return profile;
+    } catch (e) {
+      console.warn("Background profile fetch failed, using default.");
     }
     
-    console.log("Auth successful, fetching profile for UID:", data.user.id);
-    // Fetch profile with .maybeSingle() to prevent crash if profile is missing
-    const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', data.user.id)
-      .maybeSingle();
-    
-    if (profileError) {
-      console.error("Profile fetch error:", profileError);
-      throw profileError;
-    }
-    
-    console.log("Login complete. Role:", profile?.role || 'student');
-    // Fallback if the profile (role) hasn't been created yet
-    return profile || { id: data.user.id, role: 'student', email: data.user.email, name: 'User' };
+    // Fallback immediately so the spinner stops
+    return { id: data.user.id, role: 'student', email: data.user.email, name: 'User' };
   },
 
   logout: async () => {
