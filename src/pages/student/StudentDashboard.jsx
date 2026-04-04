@@ -62,8 +62,8 @@ const StudentDashboard = () => {
               {currentUser?.name?.charAt(0) || 'S'}
             </div>
             <div>
-              <p className="font-bold text-sm leading-tight">{currentUser?.name}</p>
-              <p className="text-xs text-gray-300">ID: {currentUser?.id?.split('_')[1]}</p>
+              <p className="font-bold text-sm leading-tight">{currentUser?.name || 'User'}</p>
+              <p className="text-xs text-gray-300">ID: {currentUser?.id?.toString().substring(0, 8)}</p>
             </div>
           </div>
 
