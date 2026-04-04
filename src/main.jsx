@@ -7,12 +7,10 @@ import { AuthProvider } from './context/AuthContext'
 import { AppProvider } from './context/AppContext'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <AuthProvider>
-      <AppProvider>
-        <App />
-        <Toaster position="bottom-right" reverseOrder={false} />
-      </AppProvider>
-    </AuthProvider>
-  </StrictMode>,
+  <AuthProvider>
+    <AppProvider>
+      <App />
+      <Toaster position="bottom-right" reverseOrder={false} />
+    </AppProvider>
+  </AuthProvider>
 )
