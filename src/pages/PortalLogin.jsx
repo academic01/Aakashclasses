@@ -103,11 +103,7 @@ const PortalLogin = () => {
               )}
             </button>
             
-            <div className="mt-6 p-4 bg-blue-50 rounded-lg text-xs text-brandNavy font-medium flex flex-col gap-1 border border-blue-100">
-              <span className="text-brandBlue font-bold block mb-1">Admin Demo Credentials:</span>
-              <span>ID: admin@aakashclasses.com</span>
-              <span>Pass: admin</span>
-            </div>
+            {/* Demo credentials box removed for security */}
           </form>
         </div>
       </div>
