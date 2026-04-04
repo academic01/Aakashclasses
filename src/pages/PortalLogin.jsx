@@ -14,9 +14,11 @@ const PortalLogin = () => {
 
   useEffect(() => {
     if (currentUser) {
-      if (currentUser.role === 'admin') navigate('/admin');
-      else if (currentUser.role === 'teacher') navigate('/teacher-offline');
-      else if (currentUser.role === 'student') navigate('/student-offline');
+      console.log("Logged in user detected, redirecting to role:", currentUser.role);
+      const role = currentUser.role || 'student';
+      if (role === 'admin') navigate('/admin');
+      else if (role === 'teacher') navigate('/teacher-offline');
+      else if (role === 'student') navigate('/student-offline');
     }
   }, [currentUser, navigate]);
 
