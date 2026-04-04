@@ -16,13 +16,13 @@ export const AuthProvider = ({ children }) => {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user) {
-        // Fetch profile
+        // Fetch profile with .maybeSingle() to prevent crash
         const { data: profile } = await supabase
           .from('profiles')
           .select('*')
           .eq('id', session.user.id)
-          .single();
-        setCurrentUser(profile);
+          .maybeSingle();
+        setCurrentUser(profile || { id: session.user.id, role: 'student' });
       }
       setLoading(false);
     };
@@ -35,8 +35,8 @@ export const AuthProvider = ({ children }) => {
           .from('profiles')
           .select('*')
           .eq('id', session.user.id)
-          .single();
-        setCurrentUser(profile);
+          .maybeSingle();
+        setCurrentUser(profile || { id: session.user.id, role: 'student' });
       } else {
         setCurrentUser(null);
       }

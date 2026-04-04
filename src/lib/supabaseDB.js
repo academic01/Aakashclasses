@@ -6,15 +6,17 @@ export const supabaseDB = {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) throw error;
     
-    // Fetch profile
+    // Fetch profile with .maybeSingle() to prevent crash if profile is missing
     const { data: profile, error: profileError } = await supabase
       .from('profiles')
       .select('*')
       .eq('id', data.user.id)
-      .single();
+      .maybeSingle();
     
     if (profileError) throw profileError;
-    return profile;
+    
+    // Fallback if the profile (role) hasn't been created yet
+    return profile || { id: data.user.id, role: 'student', email: data.user.email, name: 'User' };
   },
 
   logout: async () => {
