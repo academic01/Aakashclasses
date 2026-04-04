@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
@@ -63,6 +63,7 @@ function App() {
               
               {/* Portal Routes */}
               <Route path="/portal-login" element={<PortalLogin />} />
+              <Route path="/login-portal" element={<Navigate to="/portal-login" replace />} />
               
               <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
                 <Route path="/admin" element={<AdminDashboard />} />
