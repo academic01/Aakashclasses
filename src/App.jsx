@@ -19,10 +19,17 @@ import SyllabusPage from './pages/SyllabusPage';
 import CuetPage from './pages/CuetPage';
 
 import ScrollToTop from './components/common/ScrollToTop';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import PortalLogin from './pages/PortalLogin';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import TeacherDashboard from './pages/teacher/TeacherDashboard';
+import StudentDashboard from './pages/student/StudentDashboard';
 
 function App() {
   return (
-    <Router>
+    <AuthProvider>
+      <Router>
       <ScrollToTop />
       <div className="flex flex-col min-h-screen bg-lightBg1 text-textPrimary relative overflow-hidden">
         {/* Subtle Depth Blobs */}
@@ -53,6 +60,22 @@ function App() {
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/syllabus" element={<SyllabusPage />} />
               <Route path="/terms-conditions" element={<TermsConditions />} />
+              
+              {/* Portal Routes */}
+              <Route path="/portal-login" element={<PortalLogin />} />
+              
+              <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+                <Route path="/admin" element={<AdminDashboard />} />
+              </Route>
+              
+              <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>
+                <Route path="/teacher-offline" element={<TeacherDashboard />} />
+              </Route>
+              
+              <Route element={<ProtectedRoute allowedRoles={['student']} />}>
+                <Route path="/student-offline" element={<StudentDashboard />} />
+              </Route>
+
               {/* Stub for other routes */}
               <Route path="*" element={<div className="flex flex-col items-center justify-center py-48 text-center bg-white"><h2 className="text-4xl font-orbitron font-bold text-brandNavy uppercase mb-4">Coming Soon...</h2><p className="text-textMuted font-exo font-semibold mb-8">We are building something magical for you.</p><a href="/" className="btn-primary px-10 py-3">Back to Homepage</a></div>} />
             </Routes>
@@ -60,7 +83,8 @@ function App() {
           <Footer />
         </div>
       </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 
