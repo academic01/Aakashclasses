@@ -56,7 +56,8 @@ const INITIAL_TESTS = [
 ];
 
 export const AppProvider = ({ children }) => {
-  const { user } = useAuth();
+  const { currentUser } = useAuth();
+  const user = currentUser; // Maintain internal 'user' alias for backward compatibility with existing functions
   const [courses] = useState(INITIAL_COURSES);
   const [tests] = useState(INITIAL_TESTS);
   const [userEnrollments, setUserEnrollments] = useState([]);
