@@ -14,17 +14,23 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     // Get initial session
     const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        // Fetch profile with .maybeSingle() to prevent crash
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .maybeSingle();
-        setCurrentUser(profile || { id: session.user.id, role: 'student' });
+      try {
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError) throw sessionError;
+        
+        if (session?.user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', session.user.id)
+            .maybeSingle();
+          setCurrentUser(profile || { id: session.user.id, role: 'student' });
+        }
+      } catch (err) {
+        console.error("Auth initialization error:", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     checkSession();
 
