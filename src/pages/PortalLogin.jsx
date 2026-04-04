@@ -24,7 +24,8 @@ const PortalLogin = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const user = await login(email, password);
+      // Trim inputs to avoid "Invalid credentials" due to accidental spaces
+      const user = await login(email.trim(), password.trim());
       toast.success(`Welcome back, ${user.name}`);
     } catch (error) {
       // toast is handled in AuthContext
