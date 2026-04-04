@@ -3,9 +3,14 @@ import { supabase } from './supabaseClient';
 export const supabaseDB = {
   // --- Auth & User Profile ---
   login: async (email, password) => {
+    console.log("Attempting login for:", email);
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) throw error;
+    if (error) {
+      console.error("Auth error:", error);
+      throw error;
+    }
     
+    console.log("Auth successful, fetching profile for UID:", data.user.id);
     // Fetch profile with .maybeSingle() to prevent crash if profile is missing
     const { data: profile, error: profileError } = await supabase
       .from('profiles')
@@ -13,8 +18,12 @@ export const supabaseDB = {
       .eq('id', data.user.id)
       .maybeSingle();
     
-    if (profileError) throw profileError;
+    if (profileError) {
+      console.error("Profile fetch error:", profileError);
+      throw profileError;
+    }
     
+    console.log("Login complete. Role:", profile?.role || 'student');
     // Fallback if the profile (role) hasn't been created yet
     return profile || { id: data.user.id, role: 'student', email: data.user.email, name: 'User' };
   },
