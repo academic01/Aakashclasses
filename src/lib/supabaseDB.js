@@ -4,24 +4,82 @@ export const supabaseDB = {
   // --- Auth & User Profile ---
   login: async (email, password) => {
     // Stage 1: Auth only (Fastest)
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({ 
+      email: email.trim(), 
+      password: password.trim() 
+    });
     if (error) throw error;
     
-    // Stage 2: Background profile fetch (don't let it hang the whole login)
+    if (!data?.user) throw new Error("No user found");
+
+    // Stage 2: Fast profile fetch
     try {
-      const { data: profile } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', data.user.id)
         .maybeSingle();
       
-      if (profile) return profile;
+      if (!profileError && profile) {
+        return { ...profile, email: data.user.email };
+      }
     } catch (e) {
-      console.warn("Background profile fetch failed, using default.");
+      console.error("Profile fetch error:", e);
     }
     
-    // Fallback immediately so the spinner stops
-    return { id: data.user.id, role: 'student', email: data.user.email, name: 'User' };
+    // Stage 3: Immediate Fallback to ensure UI doesn't hang
+    return { 
+      id: data.user.id, 
+      role: 'student', 
+      email: data.user.email, 
+      name: data.user.user_metadata?.full_name || 'User' 
+    };
+  },
+
+  signup: async (email, password, name, mobile) => {
+    // 1. Sign up user
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { full_name: name, mobile: mobile }
+      }
+    });
+    if (error) throw error;
+    
+    // 2. Create Profile record (Rls should allow this or use service key)
+    // Note: Profile might already be created by a trigger if configured
+    try {
+      if (data.user) {
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .insert([{ 
+            id: data.user.id, 
+            name, 
+            email, 
+            mobile, 
+            role: 'student' 
+          }]);
+        if (profileError && profileError.code !== '23505') { // Ignore duplicate key
+          console.warn("Profile creation warning:", profileError);
+        }
+      }
+    } catch (e) {
+      console.error("Profile insert error:", e);
+    }
+    
+    return data.user;
+  },
+
+  loginWithGoogle: async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin + '/goal-selection'
+      }
+    });
+    if (error) throw error;
+    return data;
   },
 
   logout: async () => {

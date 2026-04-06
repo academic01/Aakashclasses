@@ -24,13 +24,20 @@ const PortalLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isLoading) return;
     setIsLoading(true);
     try {
-      // Trim inputs to avoid "Invalid credentials" due to accidental spaces
       const user = await login(email.trim(), password.trim());
-      toast.success(`Welcome back, ${user.name}`);
+      if (user) {
+        toast.success(`Welcome back, ${user.name}`);
+        // Role check & navigation as fallback (useEffect also handles it)
+        const role = user.role || 'student';
+        if (role === 'admin') navigate('/admin');
+        else if (role === 'teacher') navigate('/teacher-offline');
+        else navigate('/student-offline');
+      }
     } catch (error) {
-      // toast is handled in AuthContext
+      console.error("Login failed:", error);
     } finally {
       setIsLoading(false);
     }

@@ -52,16 +52,33 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    setLoading(true);
     try {
-      const user = await supabaseDB.login(email, password);
+      const user = await supabaseDB.login(email.trim(), password.trim());
       setCurrentUser(user);
       return user;
     } catch (error) {
       toast.error(error.message || "Login failed");
       throw error;
-    } finally {
-      setLoading(false);
+    }
+  };
+
+  const signup = async (email, password, name, mobile) => {
+    try {
+      const user = await supabaseDB.signup(email, password, name, mobile);
+      toast.success("Account created! Check your email if verification is required.");
+      return user;
+    } catch (error) {
+      toast.error(error.message || "Signup failed");
+      throw error;
+    }
+  };
+
+  const loginWithGoogle = async () => {
+    try {
+      await supabaseDB.loginWithGoogle();
+    } catch (error) {
+      toast.error(error.message || "Google login failed");
+      throw error;
     }
   };
 
@@ -74,6 +91,8 @@ export const AuthProvider = ({ children }) => {
   const value = {
     currentUser,
     login,
+    signup,
+    loginWithGoogle,
     logout,
     loading
   };

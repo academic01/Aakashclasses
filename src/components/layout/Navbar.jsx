@@ -42,7 +42,7 @@ const courseCategories = [
 ];
 
 const Navbar = () => {
-  const { user, logout } = useAuth();
+  const { currentUser, logout } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState('available');
@@ -195,14 +195,14 @@ const Navbar = () => {
                     <YoutubeIcon className="w-5 h-5 text-white" />
                  </a>
               </div>
-              {user ? (
+              {currentUser ? (
                 <div className="flex items-center gap-4">
                   <div className="flex flex-col items-end">
                     <span className="text-xs font-bold text-gray-500 uppercase tracking-tighter">My Account</span>
-                    <span className="text-[15px] font-bold text-gray-800 leading-none">{user.displayName || 'Student'}</span>
+                    <span className="text-[15px] font-bold text-gray-800 leading-none">{currentUser.name || 'User'}</span>
                   </div>
                   <div className="w-10 h-10 rounded-full bg-[#0D2240] text-white flex items-center justify-center font-bold text-lg border-2 border-white shadow-sm overflow-hidden ring-2 ring-gray-100">
-                    {user.displayName?.[0]?.toUpperCase() || 'S'}
+                    {currentUser.name?.[0]?.toUpperCase() || 'U'}
                   </div>
                   <button
                     onClick={() => logout()}
