@@ -22,8 +22,18 @@ const AdminLogin = () => {
     e.preventDefault();
     if (isLoading) return;
     setIsLoading(true);
+    
+    // Emergency local timeout to reset state if everything else fails
+    const emergencyTimeout = setTimeout(() => {
+      if (isLoading) {
+        setIsLoading(false);
+        toast.error("Process took too long. Forcing reset.");
+      }
+    }, 15500);
+
     try {
       const user = await login(email.trim(), password.trim());
+      clearTimeout(emergencyTimeout);
       if (user.role !== 'admin') {
         toast.error("Unauthorized. Only administrators can access this panel.");
         return;
@@ -31,8 +41,9 @@ const AdminLogin = () => {
       toast.success(`Welcome back, Administrator ${user.name}`);
       navigate('/admin');
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error("Login component caught error:", error);
     } finally {
+      clearTimeout(emergencyTimeout);
       setIsLoading(false);
     }
   };

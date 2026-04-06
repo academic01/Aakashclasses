@@ -52,25 +52,25 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    console.log("Starting login phase for:", email);
+    console.log("[Auth] Attempting login for email:", email);
     try {
-      // Use a generous 60s timeout to catch cold-starts or network hangs
       const loginPromise = (async () => {
+        console.log("[Auth] Calling supabaseDB.login...");
         const user = await supabaseDB.login(email.trim(), password.trim());
-        console.log("Login logic completed successfully");
+        console.log("[Auth] supabaseDB.login response received:", !!user);
         return user;
       })();
 
       const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error("Supabase is taking too long to respond. Check your connection or database status.")), 60000)
+        setTimeout(() => reject(new Error("Supabase internal connection timeout. Verify Vercel Env Vars.")), 15000)
       );
 
       const user = await Promise.race([loginPromise, timeoutPromise]);
       setCurrentUser(user);
       return user;
     } catch (error) {
-      console.error("Critical Login Error:", error);
-      toast.error(error.message || "An unexpected error occurred during login.");
+      console.error("[Auth] CRITICAL LOGIN ERROR:", error);
+      toast.error(error.message || "Authentication system failure.");
       throw error;
     }
   };
