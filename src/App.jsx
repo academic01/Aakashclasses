@@ -21,6 +21,9 @@ import CuetPage from './pages/CuetPage';
 import ScrollToTop from './components/common/ScrollToTop';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import PortalLogin from './pages/PortalLogin';
+import AdminLogin from './pages/admin/AdminLogin';
+import TeacherLogin from './pages/teacher/TeacherLogin';
+import StudentLogin from './pages/student/StudentLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import StudentDashboard from './pages/student/StudentDashboard';
@@ -61,6 +64,9 @@ function App() {
               
               {/* Portal Routes */}
               <Route path="/portal-login" element={<PortalLogin />} />
+              <Route path="/admin-login" element={<AdminLogin />} />
+              <Route path="/teacher-login" element={<TeacherLogin />} />
+              <Route path="/student-login" element={<StudentLogin />} />
               <Route path="/login-portal" element={<Navigate to="/portal-login" replace />} />
               
               <Route element={<ProtectedRoute allowedRoles={['admin']} />}>

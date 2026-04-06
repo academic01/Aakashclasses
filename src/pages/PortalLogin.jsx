@@ -1,128 +1,89 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { Lock, User, LogIn, Eye, EyeOff } from 'lucide-react';
-import toast from 'react-hot-toast';
+import { ShieldCheck, GraduationCap, BookOpenCheck, ArrowRight } from 'lucide-react';
 
 const PortalLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const { login, currentUser } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (currentUser) {
-      console.log("Logged in user detected, redirecting to role:", currentUser.role);
-      const role = currentUser.role || 'student';
-      if (role === 'admin') navigate('/admin');
-      else if (role === 'teacher') navigate('/teacher-offline');
-      else if (role === 'student') navigate('/student-offline');
+  const hubs = [
+    {
+      id: 'admin',
+      title: 'Administrator Hub',
+      desc: 'System management, faculty oversight, and backend controls.',
+      icon: <ShieldCheck size={32} />,
+      color: 'from-gray-900 to-slate-900',
+      label: 'Admin',
+      path: '/admin-login'
+    },
+    {
+      id: 'teacher',
+      title: 'Educator Space',
+      desc: 'Attendance tracking, marks entry, and student feedback.',
+      icon: <BookOpenCheck size={32} />,
+      color: 'from-teal-600 to-cyan-600',
+      label: 'Faculty',
+      path: '/teacher-login'
+    },
+    {
+      id: 'student',
+      title: 'Success Portal',
+      desc: 'Self-performance records, attendance, and teacher remarks.',
+      icon: <GraduationCap size={32} />,
+      color: 'from-indigo-600 to-purple-600',
+      label: 'Student',
+      path: '/student-login'
     }
-  }, [currentUser, navigate]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (isLoading) return;
-    setIsLoading(true);
-    try {
-      const user = await login(email.trim(), password.trim());
-      if (user) {
-        toast.success(`Welcome back, ${user.name}`);
-        // Role check & navigation as fallback (useEffect also handles it)
-        const role = user.role || 'student';
-        if (role === 'admin') navigate('/admin');
-        else if (role === 'teacher') navigate('/teacher-offline');
-        else navigate('/student-offline');
-      }
-    } catch (error) {
-      console.error("Login failed:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  ];
 
   return (
-    <div className="min-h-screen bg-lightBg1 flex flex-col items-center justify-center p-4 relative overflow-hidden">
-      {/* Background aesthetics */}
-      <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-brandBlue/10 rounded-full blur-[100px]" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-brandNavy/10 rounded-full blur-[100px]" />
-
-      <div className="w-full max-w-md relative z-10">
-        <a href="/" className="flex items-center justify-center mb-8 gap-3">
-          <img src="/logoaakash.png" alt="Logo" className="h-10 w-auto" />
-          <span className="text-3xl font-orbitron font-bold text-brandNavy tracking-wider uppercase">
-            Aakash<span className="text-brandBlue">Portal</span>
+    <div className="min-h-screen bg-[#FDFDFF] flex flex-col items-center justify-center p-6 relative overflow-hidden font-exo">
+      {/* Dynamic Background */}
+      <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-blue-50/50 rounded-full blur-[100px]" />
+      <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-indigo-50/30 rounded-full blur-[80px]" />
+      
+      <div className="w-full max-w-5xl relative z-10 text-center mb-16">
+        <a href="/" className="inline-flex items-center gap-4 mb-10 transition-transform hover:scale-105">
+          <img src="/aakashlogo.png" alt="Aakash Logo" className="h-12 w-auto" />
+          <div className="h-8 w-px bg-gray-200"></div>
+          <span className="text-3xl font-orbitron font-extrabold text-[#0D2240] tracking-[3px] uppercase">
+            Aakash<span className="text-blue-600">Portal</span>
           </span>
         </a>
+        <h1 className="text-5xl font-orbitron font-extrabold text-gray-900 mb-4 tracking-[-1px]">Management Systems</h1>
+        <p className="text-gray-500 font-medium text-lg max-w-2xl mx-auto">Access your dedicated administrative or academic dashboard by selecting your role below.</p>
+      </div>
 
-        <div className="bg-white p-8 rounded-2xl shadow-2xl border border-gray-100">
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-exo font-bold text-brandNavy mb-2">System Login</h1>
-            <p className="text-textMuted text-sm">Enter your credentials to access your dashboard.</p>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-textPrimary mb-2">Login ID / Email</label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User size={18} className="text-textMuted" />
-                </div>
-                <input
-                  type="text"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brandBlue/50 focus:border-brandBlue transition-all duration-300"
-                  placeholder="admin@aakashclasses.com"
-                  required
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-textPrimary mb-2">Password</label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock size={18} className="text-textMuted" />
-                </div>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-12 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brandBlue/50 focus:border-brandBlue transition-all duration-300"
-                  placeholder="••••••••"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-textMuted hover:text-brandBlue transition-colors"
-                >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full py-3.5 bg-gradient-to-r from-brandNavy to-brandBlue text-white rounded-lg font-exo font-bold tracking-wide transition-all duration-300 hover:shadow-[0_4px_20px_rgba(30,58,138,0.4)] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            >
-              {isLoading ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              ) : (
-                <>
-                  <LogIn size={20} />
-                  <span>Access Portal</span>
-                </>
-              )}
-            </button>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl relative z-10 px-4">
+        {hubs.map((hub) => (
+          <button
+            key={hub.id}
+            onClick={() => navigate(hub.path)}
+            className="group relative bg-white p-8 md:p-10 rounded-[48px] shadow-[0_20px_50px_-20px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col items-start text-left transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] overflow-hidden active:scale-[0.97]"
+          >
+            {/* Hover Gradient Overlay */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${hub.color} opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500`} />
             
-            {/* Demo credentials box removed for security */}
-          </form>
-        </div>
+            <div className={`p-5 rounded-[28px] bg-gradient-to-br ${hub.color} text-white mb-10 shadow-lg shadow-gray-200 group-hover:scale-110 transition-transform duration-500`}>
+                {hub.icon}
+            </div>
+            
+            <span className={`text-[11px] font-black uppercase tracking-[3px] mb-3 ${hub.id === 'admin' ? 'text-gray-500' : hub.id === 'teacher' ? 'text-teal-600' : 'text-indigo-600'}`}>
+                {hub.label} Portal
+            </span>
+            <h3 className="text-2xl font-orbitron font-bold text-gray-900 mb-4 tracking-tight">{hub.title}</h3>
+            <p className="text-gray-500 font-medium leading-relaxed mb-10 flex-1">{hub.desc}</p>
+            
+            <div className="flex items-center gap-3 font-extrabold text-[#0D2240] group-hover:text-blue-600 transition-colors">
+                <span className="uppercase text-xs tracking-widest">Enter Securely</span>
+                <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform duration-500" />
+            </div>
+          </button>
+        ))}
+      </div>
+      
+      <div className="mt-20 flex flex-col items-center gap-4 opacity-40">
+        <div className="h-px w-24 bg-gray-300"></div>
+        <p className="text-gray-500 font-bold text-[10px] uppercase tracking-[5px] text-center">Aakash Academy Infrastructure v2.0</p>
       </div>
     </div>
   );
