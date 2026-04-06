@@ -53,13 +53,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      // Add a timeout of 8 seconds to prevent hanging
-      const loginPromise = supabaseDB.login(email.trim(), password.trim());
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error("Request timed out. Please try again.")), 30000)
-      );
-
-      const user = await Promise.race([loginPromise, timeoutPromise]);
+      // Remove custom timeout to see real Supabase error
+      const user = await supabaseDB.login(email.trim(), password.trim());
       setCurrentUser(user);
       return user;
     } catch (error) {
