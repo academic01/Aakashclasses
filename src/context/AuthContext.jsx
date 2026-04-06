@@ -52,13 +52,25 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
+    console.log("Starting login phase for:", email);
     try {
-      // Remove custom timeout to see real Supabase error
-      const user = await supabaseDB.login(email.trim(), password.trim());
+      // Use a generous 60s timeout to catch cold-starts or network hangs
+      const loginPromise = (async () => {
+        const user = await supabaseDB.login(email.trim(), password.trim());
+        console.log("Login logic completed successfully");
+        return user;
+      })();
+
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error("Supabase is taking too long to respond. Check your connection or database status.")), 60000)
+      );
+
+      const user = await Promise.race([loginPromise, timeoutPromise]);
       setCurrentUser(user);
       return user;
     } catch (error) {
-      toast.error(error.message || "Login failed");
+      console.error("Critical Login Error:", error);
+      toast.error(error.message || "An unexpected error occurred during login.");
       throw error;
     }
   };
