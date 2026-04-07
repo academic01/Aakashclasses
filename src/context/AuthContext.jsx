@@ -21,7 +21,21 @@ export const AuthProvider = ({ children }) => {
         console.log("[Firebase] Session detected for:", user.email);
         try {
           // 2. Fetch profile from Firestore
-          const profile = await firebaseDB.getProfile(user.uid);
+          let profile = await firebaseDB.getProfile(user.uid);
+
+          // AUTO-PROVISIONING logic for Admin
+          if (!profile && user.email === 'aakashacademics01@gmail.com') {
+            const adminProfile = {
+              id: user.uid,
+              email: user.email,
+              name: "Aakash Admin",
+              role: 'admin',
+              createdAt: serverTimestamp()
+            };
+            await setDoc(doc(db, 'profiles', user.uid), adminProfile);
+            profile = adminProfile;
+            toast.success("Welcome back, Chief!");
+          }
 
           // Merge Firebase global user with Firestore profile info
           setCurrentUser(profile || { 
