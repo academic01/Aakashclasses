@@ -117,7 +117,7 @@ const AdminLogin = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-4.5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-orbitron font-bold tracking-[2px] transition-all duration-300 shadow-lg shadow-blue-600/20 disabled:opacity-50 flex items-center justify-center gap-3 active:scale-[0.98]"
+              className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-orbitron font-bold tracking-[2px] transition-all duration-300 shadow-lg shadow-blue-600/20 disabled:opacity-50 flex items-center justify-center gap-3 active:scale-[0.98]"
             >
               {isLoading ? (
                 <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />

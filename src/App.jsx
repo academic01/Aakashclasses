@@ -30,7 +30,7 @@ import StudentDashboard from './pages/student/StudentDashboard';
 
 function App() {
   const location = useLocation();
-  const isDashboard = ['/admin', '/teacher-offline', '/student-offline'].some(path => location.pathname.startsWith(path));
+  const isDashboard = ['/admin', '/teacher-offline', '/student-offline'].includes(location.pathname);
 
   return (
     <div className="flex flex-col min-h-screen bg-lightBg1 text-textPrimary relative overflow-hidden">

@@ -117,9 +117,23 @@ export const AuthProvider = ({ children }) => {
     loading
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#030712] flex flex-col items-center justify-center font-exo">
+        <div className="relative">
+          <div className="w-24 h-24 border-b-4 border-blue-500 rounded-full animate-spin"></div>
+          <div className="absolute inset-x-0 inset-y-0 flex items-center justify-center">
+            <img src="/aakashlogo.png" alt="Aakash Logo" className="h-10 w-auto opacity-50 animate-pulse" />
+          </div>
+        </div>
+        <p className="mt-8 text-blue-400 font-orbitron font-bold tracking-[4px] uppercase text-xs animate-pulse">Syncing Portal Engine</p>
+      </div>
+    );
+  }
+
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

@@ -64,7 +64,7 @@ const StudentLogin = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-11 pr-4 py-4.5 bg-gray-50/80 border-2 border-transparent rounded-[24px] focus:outline-none focus:border-indigo-400 focus:bg-white text-gray-800 transition-all duration-300 font-medium"
+                  className="w-full pl-11 pr-4 py-4 bg-gray-50/80 border-2 border-transparent rounded-[24px] focus:outline-none focus:border-indigo-400 focus:bg-white text-gray-800 transition-all duration-300 font-medium"
                   placeholder="student@aakash.com"
                   required
                 />
@@ -81,7 +81,7 @@ const StudentLogin = () => {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-11 pr-12 py-4.5 bg-gray-50/80 border-2 border-transparent rounded-[24px] focus:outline-none focus:border-indigo-400 focus:bg-white text-gray-800 transition-all duration-300 font-medium"
+                  className="w-full pl-11 pr-12 py-4 bg-gray-50/80 border-2 border-transparent rounded-[24px] focus:outline-none focus:border-indigo-400 focus:bg-white text-gray-800 transition-all duration-300 font-medium"
                   placeholder="••••••••"
                   required
                 />
@@ -98,7 +98,7 @@ const StudentLogin = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-5 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-[length:200%_auto] hover:bg-right text-white rounded-[24px] font-orbitron font-bold tracking-[2px] transition-all duration-500 shadow-xl shadow-indigo-600/30 disabled:opacity-50 flex items-center justify-center gap-3 active:scale-[0.98]"
+              className="w-full py-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-[length:200%_auto] hover:bg-right text-white rounded-[24px] font-orbitron font-bold tracking-[2px] transition-all duration-500 shadow-xl shadow-indigo-600/30 disabled:opacity-50 flex items-center justify-center gap-3 active:scale-[0.98]"
             >
               {isLoading ? (
                 <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
