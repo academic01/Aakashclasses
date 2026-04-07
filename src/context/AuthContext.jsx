@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from '../lib/firebase';
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { supabase } from '../lib/supabaseClient';
+import { firebaseDB } from '../lib/firebaseDB';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
@@ -13,21 +15,15 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 1. Listen to Firebase Auth changes (Much faster/reliable than Supabase persistent sessions)
+    // 1. Listen to Firebase Auth changes
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         console.log("[Firebase] Session detected for:", user.email);
         try {
-          // 2. Fetch full profile from Supabase using Firebase UID as the key
-          const { data: profile, error: profileError } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', user.uid)
-            .maybeSingle();
+          // 2. Fetch profile from Firestore
+          const profile = await firebaseDB.getProfile(user.uid);
 
-          if (profileError) throw profileError;
-
-          // Merge Firebase global user with Supabase localized profile info
+          // Merge Firebase global user with Firestore profile info
           setCurrentUser(profile || { 
             id: user.uid, 
             email: user.email, 
@@ -53,13 +49,8 @@ export const AuthProvider = ({ children }) => {
       const result = await signInWithEmailAndPassword(auth, email.trim(), password.trim());
       console.log("[Firebase] Success!");
       
-      // Fetch profile immediately after login to prevent UI delay
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', result.user.uid)
-        .maybeSingle();
-
+      // Fetch profile immediately after login
+      const profile = await firebaseDB.getProfile(result.user.uid);
       const userData = profile || { id: result.user.uid, role: 'student' };
       setCurrentUser(userData);
       return userData;
@@ -79,15 +70,16 @@ export const AuthProvider = ({ children }) => {
       const result = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(result.user, { displayName: name });
       
-      // Link with Supabase Profile
-      const { error: profileError } = await supabase.from('profiles').upsert({
+      // Create Firestore Profile
+      const profileData = {
         id: result.user.uid,
         email: email,
         name: name,
-        role: 'student'
-      });
+        role: 'student',
+        createdAt: serverTimestamp()
+      };
       
-      if (profileError) console.error("Supabase profile sync error:", profileError);
+      await setDoc(doc(db, 'profiles', result.user.uid), profileData);
       
       toast.success("Account created successfully!");
       return result.user;

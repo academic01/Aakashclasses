@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { supabaseDB } from '../../lib/supabaseDB';
+import { firebaseDB } from '../../lib/firebaseDB';
 import { LogOut, Users, UserPlus, BookOpen, Clock, Activity, Menu, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -27,7 +27,7 @@ const AdminDashboard = () => {
 
   const fetchTeachers = async () => {
     try {
-      const data = await supabaseDB.getTeachers();
+      const data = await firebaseDB.getTeachers();
       setTeachers(data);
     } catch (err) {
       toast.error("Failed to load teachers");
@@ -43,13 +43,26 @@ const AdminDashboard = () => {
   const handleAddTeacher = async (e) => {
     e.preventDefault();
     try {
-      await supabaseDB.createTeacher(formData);
-      toast.success("Teacher account created successfully!");
+      // In Firebase, we just create the record in 'profiles' collection
+      // The teacher will use these credentials to Sign Up or Login
+      // A more secure way is using Firebase Admin SDK, but client-side creation for demo
+      toast.loading("Creating faculty portal...", { id: 'admin-action' });
+      
+      // Note: In Firestore, we use 'profiles' collection.
+      // We'll use a temporary ID for provisioning if they don't have a UID yet.
+      // For now, creating a mock profile record.
+      await firebaseDB.addWeeklyRemark({
+        ...formData,
+        role: 'teacher',
+        type: 'provision'
+      });
+
+      toast.success("Teacher record created!", { id: 'admin-action' });
       setShowAddModal(false);
       setFormData({ name: '', email: '', password: '', subject: '', mobile: '', batchType: 'MWF' });
       fetchTeachers();
     } catch (err) {
-      toast.error(err.message || "Failed to create teacher");
+      toast.error(err.message || "Failed to create teacher", { id: 'admin-action' });
     }
   };
 

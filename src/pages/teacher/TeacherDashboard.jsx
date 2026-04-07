@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { supabaseDB } from '../../lib/supabaseDB';
+import { firebaseDB } from '../../lib/firebaseDB';
 import { LogOut, Users, UserPlus, CheckSquare, FileSpreadsheet, MessageSquare, Menu, X, BookOpenCheck, Milestone } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -12,9 +12,9 @@ const TeacherDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [showProfileModal, setShowProfileModal] = useState(false);
 
-  // Check for profile completeness
+  // Check for profile completeness - updated for Firestore field names if different
   useEffect(() => {
-    if (currentUser && (!currentUser.subject || !currentUser.batch_type)) {
+    if (currentUser && (!currentUser.subject || !currentUser.batchType)) {
       setShowProfileModal(true);
     }
   }, [currentUser]);
@@ -27,7 +27,7 @@ const TeacherDashboard = () => {
 
   const fetchStudents = async () => {
     try {
-      const data = await supabaseDB.getStudentsByTeacher(currentUser.id, currentUser.batch_type);
+      const data = await firebaseDB.getStudentsByTeacher(currentUser.id, currentUser.batchType);
       setStudents(data);
     } catch (err) {
       toast.error("Failed to load students");
@@ -53,7 +53,7 @@ const TeacherDashboard = () => {
         <div className="p-6 h-full flex flex-col">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-teal-500 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-teal-50 flex items-center justify-center">
                     <BookOpenCheck size={18} className="text-white" />
                 </div>
                 <span className="text-xl font-orbitron font-bold">Faculty<span className="text-teal-400">Portal</span></span>
@@ -133,9 +133,9 @@ const ProfileSetupModal = ({ user, onClose }) => {
     const handleSave = async (e) => {
         e.preventDefault();
         try {
-            await supabaseDB.updateProfile(user.id, { 
+            await firebaseDB.updateProfile(user.id, { 
                 subject: subj, 
-                batch_type: batch 
+                batchType: batch 
             });
             toast.success("Profile initialized! Welcome to the portal.");
             onClose();
@@ -202,7 +202,7 @@ const DoubtManagementView = ({ teacher }) => {
 
     const fetchDoubts = async () => {
         try {
-            const data = await supabaseDB.getDoubtsByTeacher(teacher.id);
+            const data = await firebaseDB.getDoubtsByTeacher(teacher.id);
             setDoubts(data);
         } finally {
             setLoading(false);
@@ -211,7 +211,7 @@ const DoubtManagementView = ({ teacher }) => {
 
     const handleResolve = async () => {
         try {
-            await supabaseDB.resolveDoubt(replyTo.id, ans);
+            await firebaseDB.resolveDoubt(replyTo.id, ans);
             toast.success("Doubt resolved!");
             setReplyTo(null);
             setAns('');
@@ -230,10 +230,10 @@ const DoubtManagementView = ({ teacher }) => {
                         <div>
                             <div className="flex items-center gap-3 mb-2">
                                 <span className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider ${d.status === 'resolved' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>{d.status}</span>
-                                <span className="text-xs text-gray-400">Asked by {d.profiles.name} • {new Date(d.created_at).toLocaleDateString()}</span>
+                                <span className="text-xs text-gray-400">Asked by {d.studentName} • {d.createdAt?.toDate().toLocaleDateString() || 'Recently'}</span>
                             </div>
-                            <h3 className="font-bold text-gray-800 text-lg mb-1">{d.title}</h3>
-                            <p className="text-gray-500 text-sm line-clamp-2">{d.content}</p>
+                            <h3 className="font-bold text-gray-800 text-lg mb-1">{d.subject} - Doubt</h3>
+                            <p className="text-gray-500 text-sm line-clamp-2">{d.question}</p>
                             {d.answer && <div className="mt-4 p-4 bg-teal-50 rounded-xl border border-teal-100 text-teal-800 text-sm"><span className="font-black uppercase text-[10px] block mb-1">Your Answer:</span>{d.answer}</div>}
                         </div>
                         {d.status === 'pending' && <button onClick={() => setReplyTo(d)} className="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-bold shadow-lg shadow-teal-600/10">Reply</button>}
@@ -245,7 +245,7 @@ const DoubtManagementView = ({ teacher }) => {
                 <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-gray-900/50 backdrop-blur-sm">
                     <div className="bg-white rounded-[32px] p-8 w-full max-w-lg">
                         <h2 className="text-xl font-bold mb-4">Answering Doubt</h2>
-                        <div className="mb-6 p-4 bg-gray-50 rounded-2xl text-gray-600 text-sm">"{replyTo.content}"</div>
+                        <div className="mb-6 p-4 bg-gray-50 rounded-2xl text-gray-600 text-sm">"{replyTo.question}"</div>
                         <textarea value={ans} onChange={e=>setAns(e.target.value)} rows="5" className="w-full p-4 bg-gray-50 border-2 rounded-2xl mb-6" placeholder="Write your detailed explanation here..."></textarea>
                         <div className="flex justify-end gap-3"><button onClick={() => setReplyTo(null)} className="px-6 py-2 rounded-xl bg-gray-100 text-gray-500 font-bold">Cancel</button><button onClick={handleResolve} className="px-6 py-2 rounded-xl bg-teal-600 text-white font-bold">Submit Answer</button></div>
                     </div>
@@ -265,10 +265,10 @@ const StudentManagementView = ({ students, fetchStudents, teacher }) => {
   const handleAdd = async (e) => {
     e.preventDefault();
     try {
-      await supabaseDB.createStudent({
+      await firebaseDB.addStudent({
         ...formData,
-        teacherId: teacher.id,
-        batch: teacher.batch_type
+        assignedTeacherId: teacher.id,
+        batch: teacher.batchType
       });
       toast.success("Student created successfully!");
       setShowAdd(false);
@@ -284,7 +284,7 @@ const StudentManagementView = ({ students, fetchStudents, teacher }) => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
         <div>
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 mb-2">My Batch</h1>
-          <p className="text-gray-500 font-medium tracking-tight">Active students in your {teacher.batch_type} session.</p>
+          <p className="text-gray-500 font-medium tracking-tight">Active students in your {teacher.batchType} session.</p>
         </div>
         <button onClick={() => setShowAdd(true)} className="px-8 py-4 bg-teal-600 hover:bg-teal-500 text-white rounded-2xl font-bold flex items-center gap-3 shadow-xl shadow-teal-100 transition-all active:scale-95">
           <UserPlus size={20} />
@@ -302,16 +302,16 @@ const StudentManagementView = ({ students, fetchStudents, teacher }) => {
             students.map(s => (
                 <div key={s.id} className="bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-md transition-all group">
                     <div className="flex items-center gap-4 mb-6">
-                        <div className="w-12 h-12 rounded-2xl bg-teal-50 flex items-center justify-center text-teal-600 font-black text-xl">
-                            {s.name.charAt(0)}
+                        <div className="w-12 h-12 rounded-2xl bg-teal-5 flex items-center justify-center text-teal-600 font-black text-xl">
+                            {s.name?.charAt(0) || 'S'}
                         </div>
                         <div>
                             <h3 className="font-bold text-gray-900 truncate w-40">{s.name}</h3>
-                            <p className="text-[10px] font-black text-teal-500 uppercase tracking-widest">Roll: {s.roll_number}</p>
+                            <p className="text-[10px] font-black text-teal-500 uppercase tracking-widest">Roll: {s.rollNumber}</p>
                         </div>
                     </div>
                     <div className="space-y-3">
-                        <div className="flex justify-between text-xs"><span className="text-gray-400 font-bold uppercase">Class:</span><span className="text-gray-900 font-black">{s.class_id}</span></div>
+                        <div className="flex justify-between text-xs"><span className="text-gray-400 font-bold uppercase">Class:</span><span className="text-gray-900 font-black">{s.classId}</span></div>
                         <div className="flex justify-between text-xs"><span className="text-gray-400 font-bold uppercase">Mobile:</span><span className="text-gray-900 font-black">{s.mobile}</span></div>
                         <div className="flex justify-between text-xs"><span className="text-gray-400 font-bold uppercase">Portal ID:</span><span className="text-teal-600 font-black">{s.email}</span></div>
                     </div>
@@ -364,9 +364,17 @@ const AttendanceView = ({students, teacher}) => {
   const handleSave = async () => {
     setSaving(true);
     try {
-      const records = Object.keys(attendanceData).map(id => ({ studentId: id, status: attendanceData[id] }));
-      await supabaseDB.markAttendance(date, teacher.batch_type, records, teacher.id);
-      toast.success("Attendance synced for " + teacher.batch_type);
+      const promises = Object.keys(attendanceData).map(id => 
+        firebaseDB.markAttendance({ 
+            studentId: id, 
+            teacherId: teacher.id,
+            date,
+            status: attendanceData[id],
+            batch: teacher.batchType 
+        })
+      );
+      await Promise.all(promises);
+      toast.success("Attendance synced for " + teacher.batchType);
     } catch(e) {
       toast.error(e.message);
     } finally {
@@ -379,7 +387,7 @@ const AttendanceView = ({students, teacher}) => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
         <div>
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 mb-2">Attendance</h1>
-          <p className="text-gray-500 font-medium">Daily attendance for {teacher.batch_type} batch.</p>
+          <p className="text-gray-500 font-medium">Daily attendance for {teacher.batchType} batch.</p>
         </div>
         <div className="flex items-center gap-4">
           <input type="date" value={date} onChange={e=>setDate(e.target.value)} className="px-6 py-3 bg-white border border-gray-200 rounded-2xl font-bold text-gray-900 shadow-sm" />
@@ -397,7 +405,7 @@ const AttendanceView = ({students, teacher}) => {
               <tr key={s.id} className="hover:bg-teal-50/10 transition-colors">
                 <td className="py-6 px-10">
                     <p className="font-bold text-gray-900">{s.name}</p>
-                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Roll: {s.roll_number}</p>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Roll: {s.rollNumber}</p>
                 </td>
                 <td className="py-6 px-10 flex justify-center">
                    <button onClick={() => toggleStatus(s.id)} className={`w-32 py-2.5 rounded-2xl font-black text-[10px] uppercase tracking-[2px] transition-all border-2 ${attendanceData[s.id] === 'present' ? 'bg-green-50 text-green-700 border-green-100' : 'bg-red-50 text-red-700 border-red-100'}`}>
@@ -416,15 +424,26 @@ const AttendanceView = ({students, teacher}) => {
 const MarksView = ({students, teacher}) => {
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [marks, setMarks] = useState({});
+  const [testName, setTestName] = useState('Weekly Assessment');
   const [publishing, setPublishing] = useState(false);
 
   const handleSave = async (e) => {
     e.preventDefault();
     setPublishing(true);
     try {
-      const records = Object.keys(marks).map(id => ({ studentId: id, mark: marks[id] }));
-      await supabaseDB.uploadMarks(date, teacher.batch_type, teacher.subject, records, teacher.id);
-      toast.success("Marks published to " + teacher.batch_type);
+      const promises = Object.keys(marks).map(id => 
+        firebaseDB.uploadMarks({
+            studentId: id,
+            teacherId: teacher.id,
+            testName,
+            score: marks[id],
+            totalMarks: 100,
+            subject: teacher.subject,
+            date
+        })
+      );
+      await Promise.all(promises);
+      toast.success("Marks published to " + teacher.batchType);
     } catch(e) {
       toast.error(e.message);
     } finally {
@@ -435,10 +454,11 @@ const MarksView = ({students, teacher}) => {
   return (
     <div className="max-w-5xl mx-auto">
       <h1 className="text-4xl font-bold tracking-tight text-gray-900 mb-2">Weekly Test Results</h1>
-      <p className="text-gray-500 font-medium mb-12">Publish marks for {teacher.subject} in {teacher.batch_type} batch.</p>
+      <p className="text-gray-500 font-medium mb-12">Publish marks for {teacher.subject} in {teacher.batchType} batch.</p>
 
       <form onSubmit={handleSave} className="space-y-8">
          <div className="flex flex-col md:flex-row gap-4">
+            <input required placeholder="Test Name" value={testName} onChange={e=>setTestName(e.target.value)} className="px-6 py-4 bg-white border border-gray-100 rounded-2xl font-bold shadow-sm" />
             <input type="date" value={date} onChange={e=>setDate(e.target.value)} required className="px-6 py-4 bg-white border border-gray-100 rounded-2xl font-bold shadow-sm" /> 
             <div className="px-8 py-4 bg-teal-50 rounded-2xl text-teal-700 font-black uppercase tracking-widest flex items-center gap-3">
                 <BookOpenCheck size={20} />
@@ -451,7 +471,7 @@ const MarksView = ({students, teacher}) => {
               <div key={s.id} className="bg-white p-6 rounded-[32px] border border-gray-100 flex items-center justify-between group hover:border-teal-200 transition-all">
                 <div className="overflow-hidden">
                     <p className="font-bold text-gray-900 truncate w-32">{s.name}</p>
-                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Roll: {s.roll_number}</p>
+                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Roll: {s.rollNumber}</p>
                 </div>
                 <div className="relative">
                     <input type="number" placeholder="00" required max="100" min="0" value={marks[s.id] || ''} onChange={e=>setMarks({...marks, [s.id]: e.target.value})} className="w-20 px-4 py-4 text-center bg-gray-50 border-2 border-transparent focus:border-teal-500 rounded-2xl outline-none font-black text-xl text-teal-600 transition-all" />
@@ -477,7 +497,13 @@ const RemarksView = ({students, teacher}) => {
     e.preventDefault();
     if(!studentId) return toast.error("Select student");
     try {
-      await supabaseDB.addRemark(studentId, `Faculty Report (${type})`, content, type, teacher.id);
+      await firebaseDB.addWeeklyRemark({
+        studentId,
+        teacherId: teacher.id,
+        title: `Faculty Report (${type})`,
+        content,
+        type
+      });
       toast.success("Remark transmitted!");
       setContent('');
     } catch(e){ toast.error(e.message); }
@@ -494,7 +520,7 @@ const RemarksView = ({students, teacher}) => {
                 <label className="block text-[10px] font-black uppercase tracking-[2px] text-gray-400 mb-3">Select Student</label>
                 <select value={studentId} onChange={e=>setStudentId(e.target.value)} required className="w-full px-6 py-4 bg-gray-50 rounded-2xl outline-none font-bold text-gray-900 border-2 border-transparent focus:border-indigo-100 appearance-none">
                   <option value="" disabled>Search Batch Student</option>
-                  {students.map(s => <option key={s.id} value={s.id}>{s.name} (Roll: {s.roll_number})</option>)}
+                  {students.map(s => <option key={s.id} value={s.id}>{s.name} (Roll: {s.rollNumber})</option>)}
                 </select>
               </div>
               <div>
@@ -524,4 +550,5 @@ const RemarksView = ({students, teacher}) => {
 }
 
 export default TeacherDashboard;
+;
 

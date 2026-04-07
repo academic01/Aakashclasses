@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { supabaseDB } from '../../lib/supabaseDB';
+import { firebaseDB } from '../../lib/firebaseDB';
 import { LogOut, Calendar, Milestone, MessageSquare, LayoutDashboard, Menu, X, Activity, GraduationCap } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -24,10 +24,10 @@ const StudentDashboard = () => {
     setLoading(true);
     try {
       const [attData, marksData, remarksData, doubtsData] = await Promise.all([
-        supabaseDB.getAttendanceForStudent(currentUser.id),
-        supabaseDB.getMarksForStudent(currentUser.id),
-        supabaseDB.getRemarksForStudent(currentUser.id),
-        supabaseDB.getDoubtsByStudent(currentUser.id)
+        firebaseDB.getAttendanceByStudent(currentUser.id),
+        firebaseDB.getMarksByStudent(currentUser.id),
+        firebaseDB.getRemarksByStudent(currentUser.id),
+        firebaseDB.getDoubtsByStudent(currentUser.id)
       ]);
       setAttendance(attData);
       setMarks(marksData);
@@ -71,7 +71,7 @@ const StudentDashboard = () => {
             </div>
             <div className="w-full text-center">
               <p className="font-bold text-gray-900 leading-tight truncate px-2">{currentUser?.name || 'User'}</p>
-              <p className="text-[10px] font-black uppercase tracking-[2px] text-indigo-400 mt-2">Roll: {currentUser?.roll_number || 'N/A'}</p>
+              <p className="text-[10px] font-black uppercase tracking-[2px] text-indigo-400 mt-2">Roll: {currentUser?.rollNumber || 'N/A'}</p>
             </div>
           </div>
 
@@ -116,7 +116,7 @@ const StudentDashboard = () => {
                 <StudentMarks marks={marks} />
               )}
               {view === 'doubts' && (
-                <StudentDoubts doubts={doubts} fetchDoubts={fetchStudentData} studentId={currentUser.id} />
+                <StudentDoubts doubts={doubts} fetchDoubts={fetchStudentData} studentId={currentUser.id} studentName={currentUser.name} />
               )}
             </>
           )}
@@ -132,7 +132,7 @@ const StudentOverview = ({ attendance, marks, remarks }) => {
   const presentCount = attendance.filter(a => a.status === 'present').length;
   const attendanceRate = attendance.length > 0 ? (presentCount / attendance.length * 100).toFixed(1) : 0;
   
-  const scores = marks.map(m => parseFloat(m.mark)).filter(s => !isNaN(s));
+  const scores = marks.map(m => parseFloat(m.score)).filter(s => !isNaN(s));
   const avgScore = scores.length > 0 ? (scores.reduce((a,b) => a+b, 0) / scores.length).toFixed(1) : 0;
 
   const recentMarks = [...marks].reverse().slice(-5);
@@ -174,9 +174,9 @@ const StudentOverview = ({ attendance, marks, remarks }) => {
             <div className="h-[250px] flex items-end justify-around gap-6 px-10 border-b border-gray-100 pb-2">
                 {recentMarks.map((m, idx) => (
                     <div key={idx} className="flex-1 flex flex-col items-center group relative h-full justify-end">
-                        <div className="w-full max-w-[60px] bg-gradient-to-t from-indigo-700 to-indigo-400 rounded-t-2xl transition-all duration-500 hover:scale-[1.05]" style={{ height: `${m.mark}%` }} />
+                        <div className="w-full max-w-[60px] bg-gradient-to-t from-indigo-700 to-indigo-400 rounded-t-2xl transition-all duration-500 hover:scale-[1.05]" style={{ height: `${Math.min(m.score, 100)}%` }} />
                         <p className="absolute -bottom-8 text-[9px] font-black text-gray-400 uppercase tracking-widest">{m.subject}</p>
-                        <p className="absolute bottom-2 text-white font-black text-xs">{m.mark}</p>
+                        <p className="absolute bottom-2 text-white font-black text-xs">{m.score}</p>
                     </div>
                 ))}
             </div>
@@ -193,9 +193,9 @@ const StudentOverview = ({ attendance, marks, remarks }) => {
                     <div key={idx} className="flex items-center justify-between p-5 bg-[#FDFDFF] rounded-[24px] border border-gray-50">
                         <div>
                             <p className="font-bold text-gray-900">{m.subject}</p>
-                            <p className="text-[10px] text-gray-400 font-bold uppercase">{new Date(m.date).toLocaleDateString()}</p>
+                            <p className="text-[10px] text-gray-400 font-bold uppercase">{m.date}</p>
                         </div>
-                        <p className="text-2xl font-black text-[#0D2240]">{m.mark}</p>
+                        <p className="text-2xl font-black text-[#0D2240]">{m.score}</p>
                     </div>
                 ))}
              </div>
@@ -234,7 +234,7 @@ const StudentAttendance = ({ attendance }) => (
           ) : (
             attendance.map((a, idx) => (
               <tr key={idx} className="hover:bg-indigo-50/20">
-                <td className="py-6 px-10 text-gray-700 font-bold">{new Date(a.date).toLocaleDateString()}</td>
+                <td className="py-6 px-10 text-gray-700 font-bold">{a.date}</td>
                 <td className="py-6 px-10 flex justify-center">
                   <span className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${a.status === 'present' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                     {a.status}
@@ -261,12 +261,12 @@ const StudentMarks = ({ marks }) => (
                     </div>
                     <div>
                         <h3 className="text-xl font-bold text-gray-900">{m.subject}</h3>
-                        <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest">{new Date(m.date).toLocaleDateString()}</p>
+                        <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest">{m.date} - {m.testName}</p>
                     </div>
                 </div>
                 <div className="text-right">
-                    <p className="text-4xl font-black text-indigo-600">{m.mark}</p>
-                    <p className="text-[9px] font-black text-gray-300 uppercase tracking-widest">Total: 100</p>
+                    <p className="text-4xl font-black text-indigo-600">{m.score}</p>
+                    <p className="text-[9px] font-black text-gray-300 uppercase tracking-widest">Total: {m.totalMarks}</p>
                 </div>
             </div>
         ))}
@@ -274,19 +274,25 @@ const StudentMarks = ({ marks }) => (
   </div>
 );
 
-const StudentDoubts = ({ doubts, fetchDoubts, studentId }) => {
+const StudentDoubts = ({ doubts, fetchDoubts, studentId, studentName }) => {
     const [showForm, setShowForm] = useState(false);
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+    const [question, setQuestion] = useState('');
+    const [subject, setSubject] = useState('Physics');
     const [submitting, setSubmitting] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmitting(true);
         try {
-            await supabaseDB.submitDoubt(studentId, title, content);
+            await firebaseDB.submitDoubt({
+                studentId,
+                studentName,
+                teacherId: 'all',
+                question,
+                subject
+            });
             toast.success("Doubt pushed! Faculty will respond shortly.");
-            setTitle(''); setContent(''); setShowForm(false);
+            setQuestion(''); setShowForm(false);
             fetchDoubts();
         } catch (err) {
             toast.error("Submit failed");
@@ -313,10 +319,10 @@ const StudentDoubts = ({ doubts, fetchDoubts, studentId }) => {
                     <div key={d.id} className="bg-white p-8 rounded-[40px] border border-gray-50 text-left">
                         <div className="flex items-center gap-3 mb-4">
                             <span className={`px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-widest ${d.status === 'resolved' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>{d.status}</span>
-                            <span className="text-[10px] text-gray-400 font-bold">{new Date(d.created_at).toLocaleDateString()}</span>
+                            <span className="text-[10px] text-gray-400 font-bold">{d.createdAt?.toDate().toLocaleDateString() || 'Recently'}</span>
                         </div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-2">{d.title}</h3>
-                        <p className="text-gray-500 text-sm leading-relaxed mb-6">{d.content}</p>
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">{d.subject} Doubt</h3>
+                        <p className="text-gray-500 text-sm leading-relaxed mb-6">{d.question}</p>
                         
                         {d.status === 'resolved' && (
                             <div className="w-full p-6 bg-indigo-50/50 rounded-[32px] border border-indigo-100/50">
@@ -336,8 +342,13 @@ const StudentDoubts = ({ doubts, fetchDoubts, studentId }) => {
                             <button onClick={() => setShowForm(false)} className="text-gray-400"><X size={24}/></button>
                         </div>
                         <form onSubmit={handleSubmit} className="space-y-5">
-                            <input value={title} onChange={e=>setTitle(e.target.value)} placeholder="Topic (e.g. Mechanics)" required className="w-full px-6 py-4 bg-gray-50 rounded-2xl outline-none font-bold" />
-                            <textarea value={content} onChange={e=>setContent(e.target.value)} placeholder="Explain clearly..." rows="5" required className="w-full px-6 py-4 bg-gray-50 rounded-2xl outline-none" />
+                            <select value={subject} onChange={e=>setSubject(e.target.value)} className="w-full px-6 py-4 bg-gray-50 rounded-2xl outline-none font-bold">
+                                <option value="Physics">Physics</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Biology">Biology</option>
+                            </select>
+                            <textarea value={question} onChange={e=>setQuestion(e.target.value)} placeholder="Explain your doubt clearly..." rows="5" required className="w-full px-6 py-4 bg-gray-50 rounded-2xl outline-none shadow-inner" />
                             <button type="submit" disabled={submitting} className="w-full py-4 bg-indigo-600 text-white rounded-2xl font-bold shadow-xl shadow-indigo-100">
                                 {submitting ? 'Pushing...' : 'Push to Faculty'}
                             </button>
