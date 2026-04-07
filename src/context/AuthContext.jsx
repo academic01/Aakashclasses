@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { supabaseDB } from '../lib/supabaseDB';
+import { auth } from '../lib/firebase';
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { supabase } from '../lib/supabaseClient';
 import toast from 'react-hot-toast';
 
@@ -12,91 +13,92 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Get initial session
-    const checkSession = async () => {
-      try {
-        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        if (sessionError) throw sessionError;
-        
-        if (session?.user) {
-          const { data: profile } = await supabase
+    // 1. Listen to Firebase Auth changes (Much faster/reliable than Supabase persistent sessions)
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        console.log("[Firebase] Session detected for:", user.email);
+        try {
+          // 2. Fetch full profile from Supabase using Firebase UID as the key
+          const { data: profile, error: profileError } = await supabase
             .from('profiles')
             .select('*')
-            .eq('id', session.user.id)
+            .eq('id', user.uid)
             .maybeSingle();
-          setCurrentUser(profile || { id: session.user.id, role: 'student' });
-        }
-      } catch (err) {
-        console.error("Auth initialization error:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    checkSession();
 
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (session?.user) {
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .maybeSingle();
-        setCurrentUser(profile || { id: session.user.id, role: 'student' });
+          if (profileError) throw profileError;
+
+          // Merge Firebase global user with Supabase localized profile info
+          setCurrentUser(profile || { 
+            id: user.uid, 
+            email: user.email, 
+            role: 'student', 
+            name: user.displayName || 'User' 
+          });
+        } catch (err) {
+          console.error("Auth sync error:", err);
+          setCurrentUser({ id: user.uid, email: user.email, role: 'student' });
+        }
       } else {
         setCurrentUser(null);
       }
+      setLoading(false);
     });
 
-    return () => subscription.unsubscribe();
+    return () => unsubscribe();
   }, []);
 
   const login = async (email, password) => {
-    console.log("[Auth] Attempting login for email:", email);
+    console.log("[Firebase] Attempting login for:", email);
     try {
-      const loginPromise = (async () => {
-        console.log("[Auth] Calling supabaseDB.login...");
-        const user = await supabaseDB.login(email.trim(), password.trim());
-        console.log("[Auth] supabaseDB.login response received:", !!user);
-        return user;
-      })();
+      const result = await signInWithEmailAndPassword(auth, email.trim(), password.trim());
+      console.log("[Firebase] Success!");
+      
+      // Fetch profile immediately after login to prevent UI delay
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', result.user.uid)
+        .maybeSingle();
 
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error("Supabase internal connection timeout. Verify Vercel Env Vars.")), 15000)
-      );
-
-      const user = await Promise.race([loginPromise, timeoutPromise]);
-      setCurrentUser(user);
-      return user;
+      const userData = profile || { id: result.user.uid, role: 'student' };
+      setCurrentUser(userData);
+      return userData;
     } catch (error) {
-      console.error("[Auth] CRITICAL LOGIN ERROR:", error);
-      toast.error(error.message || "Authentication system failure.");
+      console.error("[Firebase] Error:", error.code);
+      let msg = "Invalid credentials. Please try again.";
+      if (error.code === 'auth/user-not-found') msg = "User not found. Please sign up.";
+      if (error.code === 'auth/wrong-password') msg = "Incorrect password.";
+      
+      toast.error(msg);
       throw error;
     }
   };
 
-  const signup = async (email, password, name, mobile) => {
+  const signup = async (email, password, name) => {
     try {
-      const user = await supabaseDB.signup(email, password, name, mobile);
-      toast.success("Account created! Check your email if verification is required.");
-      return user;
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(result.user, { displayName: name });
+      
+      // Link with Supabase Profile
+      const { error: profileError } = await supabase.from('profiles').upsert({
+        id: result.user.uid,
+        email: email,
+        name: name,
+        role: 'student'
+      });
+      
+      if (profileError) console.error("Supabase profile sync error:", profileError);
+      
+      toast.success("Account created successfully!");
+      return result.user;
     } catch (error) {
       toast.error(error.message || "Signup failed");
       throw error;
     }
   };
 
-  const loginWithGoogle = async () => {
-    try {
-      await supabaseDB.loginWithGoogle();
-    } catch (error) {
-      toast.error(error.message || "Google login failed");
-      throw error;
-    }
-  };
-
   const logout = async () => {
-    await supabaseDB.logout();
+    await signOut(auth);
     setCurrentUser(null);
     toast.success("Logged out successfully");
   };
@@ -105,14 +107,13 @@ export const AuthProvider = ({ children }) => {
     currentUser,
     login,
     signup,
-    loginWithGoogle,
     logout,
     loading
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };
