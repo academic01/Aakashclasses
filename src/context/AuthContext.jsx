@@ -7,15 +7,26 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const { user, isLoaded, isSignedIn } = useUser();
-  const { signOut } = useClerk();
-  const { sessionId } = useClerkAuth();
+  let clerkData = { isLoaded: true, isSignedIn: false, user: null };
+  let clerkMethods = { signOut: () => {} };
+
+  try {
+    // Attempt to use Clerk hooks - these will fail if ClerkProvider is missing
+    const { user, isLoaded, isSignedIn } = useUser();
+    const { signOut } = useClerk();
+    clerkData = { isLoaded, isSignedIn, user };
+    clerkMethods = { signOut };
+  } catch (e) {
+    console.warn("Clerk hooks failed (likely missing Provider). Running in guest mode.");
+  }
+
+  const { user, isLoaded, isSignedIn } = clerkData;
+  const { signOut } = clerkMethods;
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     if (isLoaded) {
       if (isSignedIn && user) {
-        // Map Clerk user to your app's user shape
         const mappedUser = {
           id: user.id,
           email: user.primaryEmailAddress?.emailAddress || '',
@@ -38,7 +49,6 @@ export const AuthProvider = ({ children }) => {
       toast.error("Logout failed");
     }
   };
-
 
   const value = {
     currentUser,
