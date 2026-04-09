@@ -39,7 +39,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const { navigate } = useClerk(); // useClerk provides navigate for some reason in some versions, but better use react-router navigate
 
   const value = {
     currentUser,
