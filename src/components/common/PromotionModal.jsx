@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Youtube, ExternalLink, Sparkles } from 'lucide-react';
+import { X, ExternalLink, Sparkles } from 'lucide-react';
+
+const YoutubeIcon = ({ className }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" className={className}>
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.498 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.377.55 9.377.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+  </svg>
+);
 
 const PromotionModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,7 +60,7 @@ const PromotionModal = () => {
                <div className="flex justify-center mb-6">
                   <div className="relative">
                      <div className="w-20 h-20 bg-[#FF0000] rounded-3xl flex items-center justify-center text-white rotate-6 shadow-xl">
-                        <Youtube className="w-10 h-10 -rotate-6" />
+                        <YoutubeIcon className="w-10 h-10 -rotate-6" />
                      </div>
                      <Sparkles className="absolute -top-4 -right-4 w-8 h-8 text-[#FF0000] animate-pulse" />
                   </div>
