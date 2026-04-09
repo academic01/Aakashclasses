@@ -54,7 +54,7 @@ const LivePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white bg-graph pt-28 pb-20">
+    <div className="min-h-screen bg-white bg-graph pb-20">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}

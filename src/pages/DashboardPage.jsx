@@ -19,7 +19,7 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] bg-graph pt-28 pb-20 text-left">
+    <div className="min-h-screen bg-[#F8F9FA] bg-graph pb-20 text-left">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12">
         
         {/* Welcome Block */}
