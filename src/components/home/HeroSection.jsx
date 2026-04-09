@@ -157,7 +157,7 @@ const HeroSection = () => {
 
           {/* Floating Glass Cards - Hidden on mobile */}
           <div className="hidden lg:block">
-            <div className="absolute top-6 right-6 z-[3] flex items-center gap-[10px] bg-[rgba(13,34,64,0.75)] backdrop-blur-[16px] border border-[rgba(255,255,255,0.15)] rounded-[14px] p-[12px_16px] shadow-[0_8px_24px_rgba(0,0,0,0.25)] animate-float" style={{ animationDelay: '0s' }}>
+            <div className="absolute top-[12%] right-[10%] z-[3] flex items-center gap-[10px] bg-[rgba(13,34,64,0.75)] backdrop-blur-[16px] border border-[rgba(255,255,255,0.15)] rounded-[14px] p-[12px_16px] shadow-[0_12px_32px_rgba(0,0,0,0.3)] animate-float" style={{ animationDelay: '0s' }}>
               <span className="text-[22px] leading-none">🏆</span>
               <div className="flex flex-col text-left">
                 <span className="text-white font-bold text-[13px] leading-tight">Best Faculty Team</span>
@@ -165,7 +165,7 @@ const HeroSection = () => {
               </div>
             </div>
 
-            <div className="absolute top-[44%] right-5 z-[3] flex items-center gap-[10px] bg-[rgba(13,34,64,0.75)] backdrop-blur-[16px] border border-[rgba(255,255,255,0.15)] rounded-[14px] p-[12px_16px] shadow-[0_8px_24px_rgba(0,0,0,0.25)] animate-float" style={{ animationDelay: '1.2s' }}>
+            <div className="absolute top-[48%] right-[4%] z-[3] flex items-center gap-[10px] bg-[rgba(13,34,64,0.75)] backdrop-blur-[16px] border border-[rgba(255,255,255,0.15)] rounded-[14px] p-[12px_16px] shadow-[0_12px_32px_rgba(0,0,0,0.3)] animate-float" style={{ animationDelay: '1.2s' }}>
               <span className="text-[22px] leading-none">⭐</span>
               <div className="flex flex-col text-left">
                 <span className="text-white font-bold text-[13px] leading-tight">4.9 / 5.0 Rating</span>
@@ -173,7 +173,7 @@ const HeroSection = () => {
               </div>
             </div>
 
-            <div className="absolute bottom-[48px] right-6 z-[3] flex items-center gap-[10px] bg-[rgba(13,34,64,0.75)] backdrop-blur-[16px] border border-[rgba(255,255,255,0.15)] rounded-[14px] p-[12px_16px] shadow-[0_8px_24px_rgba(0,0,0,0.25)] animate-float" style={{ animationDelay: '2.4s' }}>
+            <div className="absolute bottom-[12%] right-[12%] z-[3] flex items-center gap-[10px] bg-[rgba(13,34,64,0.75)] backdrop-blur-[16px] border border-[rgba(255,255,255,0.15)] rounded-[14px] p-[12px_16px] shadow-[0_12px_32px_rgba(0,0,0,0.3)] animate-float" style={{ animationDelay: '2.4s' }}>
               <span className="text-[22px] leading-none">🎓</span>
               <div className="flex flex-col text-left">
                 <span className="text-white font-bold text-[13px] leading-tight">39+ Years</span>
