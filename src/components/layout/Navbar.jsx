@@ -7,6 +7,8 @@ import {
   Atom, Stethoscope, Landmark, Users,
   Backpack, Award, LogOut, Bell, BookOpen
 } from 'lucide-react';
+import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
+
 
 const YoutubeIcon = ({ className }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" className={className}>
@@ -200,30 +202,32 @@ const Navbar = () => {
                     <YoutubeIcon className="w-5 h-5 text-white" />
                  </a>
               </div>
-              {currentUser ? (
-                <div className="flex items-center gap-4">
-                  <div className="flex flex-col items-end">
-                    <span className="text-xs font-bold text-gray-500 uppercase tracking-tighter">My Account</span>
-                    <span className="text-[15px] font-bold text-gray-800 leading-none">{currentUser.name || 'User'}</span>
+              <SignedIn>
+                <div className="flex items-center gap-3">
+                  <div className="flex flex-col items-end hidden sm:flex">
+                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-tighter">Welcome</span>
+                    <span className="text-[13px] font-bold text-gray-800 leading-none">My Account</span>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-[#0D2240] text-white flex items-center justify-center font-bold text-lg border-2 border-white shadow-sm overflow-hidden ring-2 ring-gray-100">
-                    {currentUser.name?.[0]?.toUpperCase() || 'U'}
-                  </div>
-                  <button
-                    onClick={() => logout()}
-                    className="p-2 text-gray-400 hover:text-red-500 transition-colors"
-                  >
-                    <LogOut className="w-5 h-5" />
-                  </button>
+                  <UserButton 
+                    afterSignOutUrl="/" 
+                    appearance={{
+                      elements: {
+                        userButtonAvatarBox: "w-10 h-10 border-2 border-white shadow-sm ring-2 ring-gray-100",
+                        userButtonTrigger: "focus:shadow-none focus:outline-none"
+                      }
+                    }}
+                  />
                 </div>
-              ) : (
+              </SignedIn>
+
+              <SignedOut>
                 <Link
                   to="/login"
                   className={`btn-primary bg-[#0D2240] hover:bg-[#1a3a6b] text-white rounded-full font-bold font-nunito transition-all duration-300 shadow-lg ${scrolled ? 'px-5 py-2 text-[13px]' : 'px-6 py-2 text-[14px]'} flex items-center justify-center cursor-pointer`}
                 >
                   Login/Register
                 </Link>
-              )}
+              </SignedOut>
             </div>
 
             {/* Mobile Menu Toggle */}

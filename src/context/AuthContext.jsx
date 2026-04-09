@@ -1,9 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { auth } from '../lib/firebase';
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { firebaseDB } from '../lib/firebaseDB';
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../lib/firebase';
+import { useUser, useClerk, useAuth as useClerkAuth } from '@clerk/clerk-react';
 import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
@@ -11,113 +7,50 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
+  const { user, isLoaded, isSignedIn } = useUser();
+  const { signOut } = useClerk();
+  const { sessionId } = useClerkAuth();
   const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 1. Listen to Firebase Auth changes
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        console.log("[Firebase] Session detected for:", user.email);
-        try {
-          // 2. Fetch profile from Firestore
-          let profile = await firebaseDB.getProfile(user.uid);
-
-          // AUTO-PROVISIONING logic for Admin
-          if (!profile && user.email === 'aakashacademics01@gmail.com') {
-            const adminProfile = {
-              id: user.uid,
-              email: user.email,
-              name: "Aakash Admin",
-              role: 'admin',
-              createdAt: serverTimestamp()
-            };
-            await setDoc(doc(db, 'profiles', user.uid), adminProfile);
-            profile = adminProfile;
-            toast.success("Welcome back, Chief!");
-          }
-
-          // Merge Firebase global user with Firestore profile info
-          setCurrentUser(profile || { 
-            id: user.uid, 
-            email: user.email, 
-            role: 'student', 
-            name: user.displayName || 'User' 
-          });
-        } catch (err) {
-          console.error("Auth sync error:", err);
-          setCurrentUser({ id: user.uid, email: user.email, role: 'student' });
-        }
+    if (isLoaded) {
+      if (isSignedIn && user) {
+        // Map Clerk user to your app's user shape
+        const mappedUser = {
+          id: user.id,
+          email: user.primaryEmailAddress?.emailAddress || '',
+          name: user.fullName || user.firstName || 'User',
+          role: user.unsafeMetadata?.role || (user.primaryEmailAddress?.emailAddress === 'aakashacademics01@gmail.com' ? 'admin' : 'student'),
+          imageUrl: user.imageUrl
+        };
+        setCurrentUser(mappedUser);
       } else {
         setCurrentUser(null);
       }
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  const login = async (email, password) => {
-    console.log("[Firebase] Attempting login for:", email);
-    try {
-      const result = await signInWithEmailAndPassword(auth, email.trim(), password.trim());
-      console.log("[Firebase] Success!");
-      
-      // Fetch profile immediately after login
-      const profile = await firebaseDB.getProfile(result.user.uid);
-      const userData = profile || { id: result.user.uid, role: 'student' };
-      setCurrentUser(userData);
-      return userData;
-    } catch (error) {
-      console.error("[Firebase] Error:", error.code);
-      let msg = "Invalid credentials. Please try again.";
-      if (error.code === 'auth/user-not-found') msg = "User not found. Please sign up.";
-      if (error.code === 'auth/wrong-password') msg = "Incorrect password.";
-      
-      toast.error(msg);
-      throw error;
     }
-  };
-
-  const signup = async (email, password, name) => {
-    try {
-      const result = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(result.user, { displayName: name });
-      
-      // Create Firestore Profile
-      const profileData = {
-        id: result.user.uid,
-        email: email,
-        name: name,
-        role: 'student',
-        createdAt: serverTimestamp()
-      };
-      
-      await setDoc(doc(db, 'profiles', result.user.uid), profileData);
-      
-      toast.success("Account created successfully!");
-      return result.user;
-    } catch (error) {
-      toast.error(error.message || "Signup failed");
-      throw error;
-    }
-  };
+  }, [isLoaded, isSignedIn, user]);
 
   const logout = async () => {
-    await signOut(auth);
-    setCurrentUser(null);
-    toast.success("Logged out successfully");
+    try {
+      await signOut();
+      toast.success("Logged out successfully");
+    } catch (err) {
+      toast.error("Logout failed");
+    }
   };
+
+  const { navigate } = useClerk(); // useClerk provides navigate for some reason in some versions, but better use react-router navigate
 
   const value = {
     currentUser,
-    login,
-    signup,
     logout,
-    loading
+    login: () => window.location.href = '/login',
+    signup: () => window.location.href = '/signup',
+    loading: !isLoaded,
+    isSignedIn
   };
 
-  if (loading) {
+  if (!isLoaded) {
     return (
       <div className="min-h-screen bg-[#030712] flex flex-col items-center justify-center font-exo">
         <div className="relative">
