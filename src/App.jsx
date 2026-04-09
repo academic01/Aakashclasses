@@ -44,7 +44,7 @@ function App() {
       
       <div className="relative z-10 flex flex-col min-h-screen">
         {!isDashboard && <Navbar />}
-        <main className={`flex-grow ${!isDashboard ? 'pt-[112px]' : ''}`}>
+        <main className="flex-grow pt-[var(--navbar-height,112px)]">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/courses" element={<CoursesPage />} />

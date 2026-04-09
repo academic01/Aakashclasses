@@ -78,6 +78,11 @@ const Navbar = () => {
     setShowAnnouncement(false);
   };
 
+  useEffect(() => {
+    const height = (showAnnouncement ? 40 : 0) + (scrolled ? 60 : 72);
+    document.documentElement.style.setProperty('--navbar-height', `${height}px`);
+  }, [showAnnouncement, scrolled]);
+
   return (
     <>
       <motion.nav

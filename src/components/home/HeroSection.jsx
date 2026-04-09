@@ -10,7 +10,7 @@ const HeroSection = () => {
       <style>{`
         .hero-section {
           width: 100%;
-          min-height: calc(100vh - 112px);
+          min-height: calc(100vh - var(--navbar-height, 112px));
           position: relative;
           overflow: hidden;
           background: linear-gradient(135deg, #0a1628 0%, #0D2240 60%, #1a3a6b 100%);
