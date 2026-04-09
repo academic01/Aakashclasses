@@ -9,10 +9,13 @@ const GoalSelectionPage = () => {
 
   // Top quick goals data matching screenshot
   const quickGoals = [
-    { id: 'iit-jee', name: 'IIT-JEE', icon: <Atom className="w-5 h-5 text-blue-600" />, bg: 'bg-[#DFF0FF]' },
-    { id: 'neet', name: 'NEET', icon: <Stethoscope className="w-5 h-5 text-green-700" />, bg: 'bg-[#D2F5DC]' },
     { id: 'upsc', name: 'UPSC', icon: <Landmark className="w-5 h-5 text-yellow-700" />, bg: 'bg-[#FFF3C2]' },
     { id: 'govt', name: 'Govt. Exams', icon: <ShieldAlert className="w-5 h-5 text-orange-600" />, bg: 'bg-[#FFE9D4]' },
+  ];
+
+  const upcomingExams = [
+    { id: 'iit-jee', name: 'IIT-JEE', icon: <Atom className="w-5 h-5 text-blue-600" />, bg: 'bg-[#E0F2FE]' },
+    { id: 'neet', name: 'NEET', icon: <Stethoscope className="w-5 h-5 text-green-700" />, bg: 'bg-[#DCFCE7]' },
   ];
 
   const allExams = [
@@ -71,7 +74,7 @@ const GoalSelectionPage = () => {
         {
           groupName: 'Engineering College Entrance',
           items: [
-            { name: 'IIT-JEE', icon: <Atom className="w-5 h-5 text-blue-500" /> },
+            { name: 'IIT-JEE (Coming Soon)', icon: <Atom className="w-5 h-5 text-blue-500" /> },
             { name: 'GATE', icon: <Atom className="w-5 h-5 text-blue-500" /> },
             { name: 'Polytechnic', icon: <Atom className="w-5 h-5 text-blue-500" />, hasArrow: true },
           ]
@@ -79,7 +82,7 @@ const GoalSelectionPage = () => {
         {
           groupName: 'Medical College Entrance',
           items: [
-            { name: 'NEET', icon: <Stethoscope className="w-5 h-5 text-green-600" /> },
+            { name: 'NEET (Coming Soon)', icon: <Stethoscope className="w-5 h-5 text-green-600" /> },
             { name: 'NEET PG', icon: <Stethoscope className="w-5 h-5 text-green-600" /> },
           ]
         },
@@ -139,21 +142,54 @@ const GoalSelectionPage = () => {
       <div className="w-full max-w-4xl px-4 mt-8">
         
         {/* Quick Goals Row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+        <div className="flex flex-wrap gap-4 mb-10">
           {quickGoals.map((goal, idx) => (
             <motion.div 
                whileHover={{ scale: 1.02 }}
                whileTap={{ scale: 0.98 }}
                key={idx} 
                onClick={() => activeModal !== goal.id && setActiveModal(goal.id)}
-               className={`flex items-center gap-3 px-4 py-4 rounded-xl cursor-pointer shadow-sm border border-transparent hover:border-black/5 transition-all ${goal.bg}`}
+               className={`flex items-center gap-3 px-6 py-4 rounded-2xl cursor-pointer shadow-sm border border-transparent hover:border-black/5 transition-all ${goal.bg}`}
             >
-              <div className="bg-white/50 p-1.5 rounded-full shadow-sm border border-black/5">
+              <div className="bg-white/50 p-2 rounded-full shadow-sm border border-black/5">
                 {goal.icon}
               </div>
-              <span className="font-bold text-[15px]">{goal.name}</span>
+              <span className="font-bold text-[16px] text-gray-800">{goal.name}</span>
             </motion.div>
           ))}
+        </div>
+
+        {/* Upcoming Section */}
+        <div className="mb-10">
+          <h2 className="text-[20px] font-bold text-gray-900 mb-6 px-1 flex items-center gap-2">
+            Upcoming <span className="text-xs bg-red-500 text-white px-2 py-0.5 rounded-full font-black animate-pulse">LIVE SOON</span>
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {upcomingExams.map((goal, idx) => (
+              <motion.div 
+                 whileHover={{ scale: 1.02 }}
+                 whileTap={{ scale: 0.98 }}
+                 key={idx} 
+                 onClick={() => activeModal !== goal.id && setActiveModal(goal.id)}
+                 className={`flex items-center justify-between px-6 py-5 rounded-[24px] cursor-pointer shadow-sm border border-brandNavy/5 transition-all ${goal.bg} relative overflow-hidden group`}
+              >
+                <div className="flex items-center gap-4 relative z-10">
+                  <div className="bg-white p-3 rounded-2xl shadow-sm border border-black/5 group-hover:rotate-12 transition-transform">
+                    {goal.icon}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-black text-[18px] text-gray-900 tracking-tight">{goal.name}</span>
+                    <span className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Launching Soon</span>
+                  </div>
+                </div>
+                <div className="bg-white/40 p-2 rounded-full relative z-10">
+                  <ChevronRight className="w-5 h-5 text-gray-600" />
+                </div>
+                {/* Decorative Pattern */}
+                <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-10 -mt-10 blur-2xl"></div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* All Exams Section */}
