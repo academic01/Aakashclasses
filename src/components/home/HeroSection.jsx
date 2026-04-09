@@ -83,52 +83,52 @@ const HeroSection = () => {
           </h1>
 
           {/* Element 3: Subheading */}
-          <p className="text-[rgba(255,255,255,0.68)] text-[15px] leading-[1.6] max-w-[440px] mb-[24px] animate-fade-up" style={{ animationDelay: '0.35s' }}>
+          <p className="text-[rgba(255,255,255,0.85)] text-[18px] leading-[1.6] max-w-[500px] mb-[24px] animate-fade-up font-medium" style={{ animationDelay: '0.35s' }}>
             Expert coaching for Class VI-XII, CUET 2026 & Government Jobs by India's most qualified faculty.
           </p>
 
           {/* Element 4: Faculty Strip */}
-          <div className="flex gap-[10px] mb-[24px] animate-fade-up" style={{ animationDelay: '0.45s' }}>
+          <div className="flex gap-[12px] mb-[28px] animate-fade-up" style={{ animationDelay: '0.45s' }}>
             {facultyData.map((f, i) => (
-              <div key={i} className="inline-flex items-center gap-[10px] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] border-l-[3px] border-l-[#F5A623] rounded-[0_10px_10px_0] p-[10px_14px]">
-                <div className="w-[36px] h-[36px] rounded-full bg-[rgba(245,166,35,0.12)] border-[1.5px] border-[#F5A623] text-[#F5A623] text-[15px] font-[900] flex items-center justify-center shrink-0">
+              <div key={i} className="inline-flex items-center gap-[12px] bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.1)] border-l-[3px] border-l-[#F5A623] rounded-[0_10px_10px_0] p-[12px_16px]">
+                <div className="w-[40px] h-[40px] rounded-full bg-[rgba(245,166,35,0.12)] border-[1.5px] border-[#F5A623] text-[#F5A623] text-[16px] font-[900] flex items-center justify-center shrink-0">
                   {f.initial}
                 </div>
                 <div className="flex flex-col text-left">
-                  <span className="text-white font-bold text-[13px] leading-tight">{f.name}</span>
-                  <span className="text-[rgba(255,255,255,0.5)] text-[10px] leading-tight mt-0.5">{f.detail}</span>
+                  <span className="text-white font-bold text-[15px] leading-tight">{f.name}</span>
+                  <span className="text-[rgba(255,255,255,0.6)] text-[12px] leading-tight mt-1">{f.detail}</span>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Element 5: Stats Row */}
-          <div className="flex items-center mb-[28px] animate-fade-up" style={{ animationDelay: '0.55s' }}>
-            <div className="pr-[24px] border-r border-[rgba(255,255,255,0.12)] mr-[24px]">
-              <div className="text-[26px] font-[900] text-[#F5A623] tracking-[-0.5px] leading-none">8,000+</div>
-              <div className="text-[11px] text-[rgba(255,255,255,0.5)] tracking-[0.5px] mt-[1px] uppercase font-bold">Happy Students</div>
+          <div className="flex items-center mb-[32px] animate-fade-up" style={{ animationDelay: '0.55s' }}>
+            <div className="pr-[28px] border-r border-[rgba(255,255,255,0.12)] mr-[28px]">
+              <div className="text-[32px] font-[900] text-[#F5A623] tracking-[-0.5px] leading-none">8,000+</div>
+              <div className="text-[13px] text-[rgba(255,255,255,0.5)] tracking-[0.5px] mt-[4px] uppercase font-bold">Happy Students</div>
             </div>
-            <div className="pr-[24px] border-r border-[rgba(255,255,255,0.12)] mr-[24px]">
-              <div className="text-[26px] font-[900] text-[#F5A623] tracking-[-0.5px] leading-none">39+</div>
-              <div className="text-[11px] text-[rgba(255,255,255,0.5)] tracking-[0.5px] mt-[1px] uppercase font-bold">Yrs Combined Exp</div>
+            <div className="pr-[28px] border-r border-[rgba(255,255,255,0.12)] mr-[28px]">
+              <div className="text-[32px] font-[900] text-[#F5A623] tracking-[-0.5px] leading-none">39+</div>
+              <div className="text-[13px] text-[rgba(255,255,255,0.5)] tracking-[0.5px] mt-[4px] uppercase font-bold">Yrs Combined Exp</div>
             </div>
             <div>
-              <div className="text-[26px] font-[900] text-[#F5A623] tracking-[-0.5px] leading-none">98%</div>
-              <div className="text-[11px] text-[rgba(255,255,255,0.5)] tracking-[0.5px] mt-[1px] uppercase font-bold">Success Rate</div>
+              <div className="text-[32px] font-[900] text-[#F5A623] tracking-[-0.5px] leading-none">98%</div>
+              <div className="text-[13px] text-[rgba(255,255,255,0.5)] tracking-[0.5px] mt-[4px] uppercase font-bold">Success Rate</div>
             </div>
           </div>
 
           {/* Element 6: CTA Buttons */}
-          <div className="flex gap-[14px] items-center animate-fade-up" style={{ animationDelay: '0.65s' }}>
+          <div className="flex gap-[16px] items-center animate-fade-up" style={{ animationDelay: '0.65s' }}>
             <button 
               onClick={() => navigate('/signup')} 
-              className="bg-[#F5A623] text-[#0D2240] font-[900] text-[15px] p-[11px_30px] rounded-full border-none shadow-[0_6px_24px_rgba(245,166,35,0.4)] cursor-pointer transition-all hover:-translate-y-[2px] hover:shadow-[0_10px_32px_rgba(245,166,35,0.55)]"
+              className="bg-[#F5A623] text-[#0D2240] font-[900] text-[16px] p-[13px_34px] rounded-full border-none shadow-[0_6px_24px_rgba(245,166,35,0.4)] cursor-pointer transition-all hover:-translate-y-[2px] hover:shadow-[0_10px_32px_rgba(245,166,35,0.55)]"
             >
               Get Started Free →
             </button>
             <button 
               onClick={() => navigate('/courses')} 
-              className="bg-transparent border-[1.5px] border-[rgba(255,255,255,0.3)] text-white font-[600] text-[15px] p-[11px_28px] rounded-full cursor-pointer transition-all hover:border-white hover:bg-[rgba(255,255,255,0.06)]"
+              className="bg-transparent border-[1.5px] border-[rgba(255,255,255,0.3)] text-white font-[600] text-[16px] p-[13px_32px] rounded-full cursor-pointer transition-all hover:border-white hover:bg-[rgba(255,255,255,0.06)]"
             >
               Explore Courses
             </button>
