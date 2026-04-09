@@ -7,33 +7,24 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  let clerkData = { isLoaded: true, isSignedIn: false, user: null };
-  let clerkMethods = { signOut: () => {} };
-
-  try {
-    // Attempt to use Clerk hooks - these will fail if ClerkProvider is missing
-    const { user, isLoaded, isSignedIn } = useUser();
-    const { signOut } = useClerk();
-    clerkData = { isLoaded, isSignedIn, user };
-    clerkMethods = { signOut };
-  } catch (e) {
-    console.warn("Clerk hooks failed (likely missing Provider). Running in guest mode.");
-  }
-
-  const { user, isLoaded, isSignedIn } = clerkData;
-  const { signOut } = clerkMethods;
+  // Call hooks at top level (Rules of Hooks)
+  const { user, isLoaded, isSignedIn } = useUser();
+  const { signOut } = useClerk();
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     if (isLoaded) {
       if (isSignedIn && user) {
+        // Precise mapping of Clerk data to your App's model
         const mappedUser = {
           id: user.id,
           email: user.primaryEmailAddress?.emailAddress || '',
           name: user.fullName || user.firstName || 'User',
-          role: user.unsafeMetadata?.role || (user.primaryEmailAddress?.emailAddress === 'aakashacademics01@gmail.com' ? 'admin' : 'student'),
+          // Explicit Admin Check
+          role: user.primaryEmailAddress?.emailAddress === 'aakashacademics01@gmail.com' ? 'admin' : (user.unsafeMetadata?.role || 'student'),
           imageUrl: user.imageUrl
         };
+        console.log("[Auth] Current User Mapped:", mappedUser);
         setCurrentUser(mappedUser);
       } else {
         setCurrentUser(null);
@@ -59,6 +50,7 @@ export const AuthProvider = ({ children }) => {
     isSignedIn
   };
 
+  // Only show loading screen while Clerk is doing its initial handshake
   if (!isLoaded) {
     return (
       <div className="min-h-screen bg-[#030712] flex flex-col items-center justify-center font-exo">
@@ -68,7 +60,7 @@ export const AuthProvider = ({ children }) => {
             <img src="/aakashlogo.png" alt="Aakash Logo" className="h-10 w-auto opacity-50 animate-pulse" />
           </div>
         </div>
-        <p className="mt-8 text-blue-400 font-orbitron font-bold tracking-[4px] uppercase text-xs animate-pulse">Syncing Portal Engine</p>
+        <p className="mt-8 text-blue-400 font-orbitron font-bold tracking-[4px] uppercase text-xs animate-pulse">Syncing Secure Engine</p>
       </div>
     );
   }

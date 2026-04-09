@@ -9,21 +9,13 @@ import { AppProvider } from './context/AppContext'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || import.meta.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
 
-// Conditional Wrapper to prevent the "White Screen of Death"
-const AppWithAuth = () => {
-  if (!PUBLISHABLE_KEY) {
-    return (
-      <AuthProvider>
-        <AppProvider>
-          <App />
-          <Toaster position="bottom-right" reverseOrder={false} />
-        </AppProvider>
-      </AuthProvider>
-    );
-  }
+if (!PUBLISHABLE_KEY) {
+  console.error("CRITICAL: Clerk Publishable Key is missing from environment variables.");
+}
 
-  return (
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY || ""} afterSignOutUrl="/">
       <AuthProvider>
         <AppProvider>
           <App />
@@ -31,11 +23,5 @@ const AppWithAuth = () => {
         </AppProvider>
       </AuthProvider>
     </ClerkProvider>
-  );
-};
-
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <AppWithAuth />
   </StrictMode>
 )
