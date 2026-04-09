@@ -69,9 +69,9 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   const facultyData = [
-    { initial: "V", name: "Vikas", line2: "M.A. • 9+ Yrs Exp" },
+    { initial: "K", name: "Kishan Sharma", line2: "M.Sc. • 15+ Yrs Exp" },
     { initial: "A", name: "Aakash", line2: "B.Tech • 15+ Yrs Exp" },
-    { initial: "K", name: "Kishan Sharma", line2: "M.Sc. • 15+ Yrs Exp" }
+    { initial: "V", name: "Vikas", line2: "M.A. • 9+ Yrs Exp" }
   ];
 
   return (
