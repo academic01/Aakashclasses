@@ -141,7 +141,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 1.03 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.9 }}
-            src="/Gemini_Generated_Image_x2rlx0x2rlx0x2rl.png" 
+            src="/faculty-team.png" 
             alt="Expert Faculty" 
             className="absolute inset-0 w-full h-full object-cover object-[center_top]"
           />
