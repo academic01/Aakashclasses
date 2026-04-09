@@ -165,13 +165,6 @@ const HeroSection = () => {
               </div>
             </div>
 
-            <div className="absolute top-[42%] left-[60px] z-[3] flex items-center gap-[10px] bg-[rgba(13,34,64,0.75)] backdrop-blur-[16px] border border-[rgba(255,255,255,0.15)] rounded-[14px] p-[12px_16px] shadow-[0_12px_32px_rgba(0,0,0,0.3)] animate-float" style={{ animationDelay: '1.2s' }}>
-              <span className="text-[22px] leading-none">⭐</span>
-              <div className="flex flex-col text-left">
-                <span className="text-white font-bold text-[13px] leading-tight">4.9 / 5.0 Rating</span>
-                <span className="text-[rgba(255,255,255,0.55)] text-[11px] leading-tight mt-0.5 whitespace-nowrap">By 8,000+ Students</span>
-              </div>
-            </div>
 
             <div className="absolute bottom-[10%] left-[30px] z-[3] flex items-center gap-[10px] bg-[rgba(13,34,64,0.75)] backdrop-blur-[16px] border border-[rgba(255,255,255,0.15)] rounded-[14px] p-[12px_16px] shadow-[0_12px_32px_rgba(0,0,0,0.3)] animate-float" style={{ animationDelay: '2.4s' }}>
               <span className="text-[22px] leading-none">🎓</span>
