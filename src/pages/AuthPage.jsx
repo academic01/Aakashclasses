@@ -1,13 +1,11 @@
 import React from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { SignIn, SignUp } from '@clerk/clerk-react';
 
 const AuthPage = ({ type = 'login' }) => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const isSignUp = type === 'signup' || searchParams.get('mode') === 'signup';
 
   return (
     <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center px-4 bg-[#11111199] backdrop-blur-sm overflow-y-auto pt-10 pb-10">
@@ -25,10 +23,9 @@ const AuthPage = ({ type = 'login' }) => {
         </button>
 
         <div className="shadow-2xl rounded-[32px] overflow-hidden">
-          {isSignUp ? (
+          {type === 'signup' ? (
             <SignUp 
-              routing="path" 
-              path="/signup" 
+              routing="virtual"
               signInUrl="/login" 
               forceRedirectUrl="/goal-selection"
               appearance={{
@@ -45,8 +42,7 @@ const AuthPage = ({ type = 'login' }) => {
             />
           ) : (
             <SignIn 
-              routing="path" 
-              path="/login" 
+              routing="virtual"
               signUpUrl="/signup" 
               forceRedirectUrl="/goal-selection"
               appearance={{

@@ -1,65 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Lock, User, LogIn, Eye, EyeOff, ShieldCheck } from 'lucide-react';
-import toast from 'react-hot-toast';
+import { LogIn, ShieldCheck, ArrowRight } from 'lucide-react';
 
 const AdminLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const { login, currentUser } = useAuth();
+  const { currentUser, isSignedIn } = useAuth();
   const navigate = useNavigate();
 
+  // Redirect to dashboard if already logged in as admin
   useEffect(() => {
-    if (currentUser?.role === 'admin') {
+    if (isSignedIn && currentUser?.role === 'admin') {
       navigate('/admin');
     }
-  }, [currentUser, navigate]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (isLoading) return;
-    setIsLoading(true);
-    
-    // Emergency local timeout to reset state if everything else fails
-    const emergencyTimeout = setTimeout(() => {
-      if (isLoading) {
-        setIsLoading(false);
-        toast.error("Process took too long. Forcing reset.");
-      }
-    }, 15500);
-
-    try {
-      const user = await login(email.trim(), password.trim());
-      clearTimeout(emergencyTimeout);
-      if (user.role !== 'admin') {
-        toast.error("Unauthorized. Only administrators can access this panel.");
-        return;
-      }
-      toast.success(`Welcome back, Administrator ${user.name}`);
-      navigate('/admin');
-    } catch (error) {
-      console.error("Login component caught error:", error);
-    } finally {
-      clearTimeout(emergencyTimeout);
-      setIsLoading(false);
-    }
-  };
-
-  // Pre-fill for convenience
-  useEffect(() => {
-    setEmail('aakashacademics01@gmail.com');
-    setPassword('Aakash@009');
-  }, []);
+  }, [isSignedIn, currentUser, navigate]);
 
   return (
     <div className="min-h-screen bg-[#030712] flex flex-col items-center justify-center p-4 relative overflow-hidden font-exo">
-      {/* Background aesthetics - Sleek Dark Gradients */}
+      {/* Background aesthetics */}
       <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-900/20 rounded-full blur-[120px]" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-900/10 rounded-full blur-[100px]" />
-
+      
       <div className="w-full max-w-md relative z-10">
         <div className="text-center mb-10">
             <div className="inline-flex p-4 rounded-3xl bg-blue-500/10 mb-6 border border-blue-500/20">
@@ -71,69 +30,31 @@ const AdminLogin = () => {
           <p className="text-gray-400 text-sm font-medium">Restricted Access Interface</p>
         </div>
 
-        <div className="bg-white/5 backdrop-blur-xl p-8 rounded-[32px] border border-white/10 shadow-2xl">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block text-sm font-bold text-gray-300 mb-2 uppercase tracking-tighter">Identity Identifier</label>
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors">
-                  <User size={18} className="text-gray-500 group-focus-within:text-blue-400" />
-                </div>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-11 pr-4 py-4 bg-white/5 border-2 border-white/10 rounded-2xl focus:outline-none focus:border-blue-500/50 focus:ring-0 text-white transition-all duration-300"
-                  placeholder="admin@aakash.com"
-                  required
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-bold text-gray-300 mb-2 uppercase tracking-tighter">Security Key</label>
-              <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Lock size={18} className="text-gray-500 group-focus-within:text-blue-400" />
-                </div>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-11 pr-12 py-4 bg-white/5 border-2 border-white/10 rounded-2xl focus:outline-none focus:border-blue-500/50 focus:ring-0 text-white transition-all duration-300"
-                  placeholder="••••••••"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-500 hover:text-blue-400 transition-colors"
-                >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-orbitron font-bold tracking-[2px] transition-all duration-300 shadow-lg shadow-blue-600/20 disabled:opacity-50 flex items-center justify-center gap-3 active:scale-[0.98]"
-            >
-              {isLoading ? (
-                <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              ) : (
-                <>
-                  <LogIn size={20} />
-                  <span>INITIALIZE LOGIN</span>
-                </>
-              )}
-            </button>
-          </form>
+        <div className="bg-white/5 backdrop-blur-xl p-10 rounded-[40px] border border-white/10 shadow-2xl text-center">
+          <p className="text-gray-300 mb-8 font-medium">Please sign in to your authorized administrator account to access backend controls.</p>
+          
+          <button
+            onClick={() => navigate('/login')}
+            className="w-full py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-orbitron font-bold tracking-[2px] transition-all duration-300 shadow-lg shadow-blue-600/20 flex items-center justify-center gap-4 active:scale-[0.98] group"
+          >
+            <LogIn size={22} className="group-hover:translate-x-1 transition-transform" />
+            <span>SECURE ADMIN LOGIN</span>
+            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform opacity-50" />
+          </button>
+          
+          <div className="mt-8 flex items-center gap-3 justify-center opacity-40">
+            <div className="h-px w-8 bg-white/20"></div>
+            <span className="text-[10px] font-bold text-white uppercase tracking-widest">Aakash Secure Cloud</span>
+            <div className="h-px w-8 bg-white/20"></div>
+          </div>
         </div>
         
-        <p className="mt-8 text-center text-gray-500 text-xs">
-          By logging in, you agree to our Internal Security Policy.<br/>Unauthorized access is strictly monitored.
-        </p>
+        <button 
+          onClick={() => navigate('/portal-login')}
+          className="mt-8 mx-auto flex items-center gap-2 text-gray-500 hover:text-white transition-colors text-sm font-bold uppercase tracking-widest"
+        >
+          Back to Portal Selection
+        </button>
       </div>
     </div>
   );
