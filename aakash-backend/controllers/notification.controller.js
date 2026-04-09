@@ -1,0 +1,1 @@
+const notificationController = { getAll: async (req, res) => { res.json({ message: 'notification routes connected' }); } };\nmodule.exports = notificationController;

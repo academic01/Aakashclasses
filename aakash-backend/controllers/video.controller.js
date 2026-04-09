@@ -1,0 +1,1 @@
+const videoController = { getAll: async (req, res) => { res.json({ message: 'video routes connected' }); } };\nmodule.exports = videoController;

@@ -1,0 +1,1 @@
+const express = require('express');\nconst router = express.Router();\nconst videoController = require('../controllers/video.controller');\nrouter.get('/', videoController.getAll);\nmodule.exports = router;

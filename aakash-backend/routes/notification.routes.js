@@ -1,0 +1,1 @@
+const express = require('express');\nconst router = express.Router();\nconst notificationController = require('../controllers/notification.controller');\nrouter.get('/', notificationController.getAll);\nmodule.exports = router;

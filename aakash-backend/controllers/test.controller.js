@@ -1,0 +1,1 @@
+const testController = { getAll: async (req, res) => { res.json({ message: 'test routes connected' }); } };\nmodule.exports = testController;

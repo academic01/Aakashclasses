@@ -1,0 +1,1 @@
+const userController = { getAll: async (req, res) => { res.json({ message: 'user routes connected' }); } };\nmodule.exports = userController;

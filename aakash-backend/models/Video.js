@@ -1,0 +1,1 @@
+const mongoose = require('mongoose');\nconst Schema = mongoose.Schema;\nconst VideoSchema = new Schema({ title: String });\nmodule.exports = mongoose.model('Video', VideoSchema);

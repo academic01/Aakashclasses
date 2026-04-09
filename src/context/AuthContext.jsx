@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useUser, useClerk, useAuth as useClerkAuth } from '@clerk/clerk-react';
 import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
@@ -7,58 +6,112 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  // Call hooks at top level (Rules of Hooks)
-  const { user, isLoaded, isSignedIn } = useUser();
-  const { signOut } = useClerk();
   const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   useEffect(() => {
-    if (isLoaded) {
-      if (isSignedIn && user) {
-        // Precise mapping of Clerk data to your App's model
-        const mappedUser = {
-          id: user.id,
-          email: user.primaryEmailAddress?.emailAddress || '',
-          name: user.fullName || user.firstName || 'User',
-          // Explicit Admin Check
-          role: user.primaryEmailAddress?.emailAddress === 'aakashacademics01@gmail.com' ? 'admin' : (user.unsafeMetadata?.role || 'student'),
-          imageUrl: user.imageUrl
-        };
-        console.log("[Auth] Current User Mapped:", mappedUser);
-        setCurrentUser(mappedUser);
-      } else {
-        setCurrentUser(null);
+    const verifyToken = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const res = await fetch('http://localhost:5000/api/auth/me', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          if (res.ok) {
+            const data = await res.json();
+            setCurrentUser(data);
+            setIsSignedIn(true);
+          } else {
+            localStorage.removeItem('token');
+          }
+        } catch (error) {
+          console.error("Auth verification failed", error);
+        }
       }
-    }
-  }, [isLoaded, isSignedIn, user]);
+      setLoading(false);
+    };
 
-  const logout = async () => {
+    verifyToken();
+  }, []);
+
+  const login = async (email, password) => {
     try {
-      await signOut();
-      toast.success("Logged out successfully");
+      const res = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem('token', data.token);
+        setCurrentUser({ id: data._id, name: data.name, email: data.email, role: data.role });
+        setIsSignedIn(true);
+        toast.success("Logged in successfully");
+        return true;
+      } else {
+        toast.error(data.message || "Login failed");
+        return false;
+      }
     } catch (err) {
-      toast.error("Logout failed");
+      toast.error("Network error");
+      return false;
     }
   };
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    setCurrentUser(null);
+    setIsSignedIn(false);
+    toast.success("Logged out successfully");
+    window.location.href = '/login';
+  };
+
+  const signup = async (name, email, password, phone) => {
+     try {
+      const res = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password, phone })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem('token', data.token);
+        setCurrentUser({ id: data._id, name: data.name, email: data.email, role: data.role });
+        setIsSignedIn(true);
+        toast.success("Registered successfully");
+        return true;
+      } else {
+        toast.error(data.message || "Registration failed");
+        return false;
+      }
+    } catch (err) {
+      toast.error("Network error");
+      return false;
+    }
+  }
 
   const value = {
     currentUser,
+    login,
     logout,
-    login: () => window.location.href = '/login',
-    signup: () => window.location.href = '/signup',
-    loading: !isLoaded,
-    isSignedIn
+    signup,
+    loading,
+    isSignedIn,
+    getToken: () => localStorage.getItem('token')
   };
 
-  // Only show loading screen while Clerk is doing its initial handshake
-  if (!isLoaded) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-[#030712] flex flex-col items-center justify-center font-exo">
         <div className="relative">
           <div className="w-24 h-24 border-b-4 border-blue-500 rounded-full animate-spin"></div>
-          <div className="absolute inset-x-0 inset-y-0 flex items-center justify-center">
-            <img src="/aakashlogo.png" alt="Aakash Logo" className="h-10 w-auto opacity-50 animate-pulse" />
-          </div>
         </div>
         <p className="mt-8 text-blue-400 font-orbitron font-bold tracking-[4px] uppercase text-xs animate-pulse">Syncing Secure Engine</p>
       </div>

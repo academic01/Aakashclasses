@@ -24,7 +24,12 @@ import PortalLogin from './pages/PortalLogin';
 import AdminLogin from './pages/admin/AdminLogin';
 import TeacherLogin from './pages/teacher/TeacherLogin';
 import StudentLogin from './pages/student/StudentLogin';
-import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminLayout from './admin/AdminLayout';
+import NewAdminDashboard from './admin/AdminDashboard';
+import AdminCourses from './admin/AdminCourses';
+import SiteSettings from './admin/SiteSettings';
+import AdminStudents from './admin/AdminStudents';
+import AdminTests from './admin/AdminTests';
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import StudentDashboard from './pages/student/StudentDashboard';
 
@@ -72,7 +77,13 @@ function App() {
             <Route path="/login-portal" element={<Navigate to="/portal-login" replace />} />
             
             <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<NewAdminDashboard />} />
+                <Route path="courses" element={<AdminCourses />} />
+                <Route path="settings" element={<SiteSettings />} />
+                <Route path="students" element={<AdminStudents />} />
+                <Route path="tests" element={<AdminTests />} />
+              </Route>
             </Route>
             
             <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>

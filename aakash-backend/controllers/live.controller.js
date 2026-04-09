@@ -1,0 +1,1 @@
+const liveController = { getAll: async (req, res) => { res.json({ message: 'live routes connected' }); } };\nmodule.exports = liveController;

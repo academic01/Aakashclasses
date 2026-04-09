@@ -1,0 +1,1 @@
+const express = require('express');\nconst router = express.Router();\nconst liveController = require('../controllers/live.controller');\nrouter.get('/', liveController.getAll);\nmodule.exports = router;

@@ -1,0 +1,1 @@
+const adminController = { getAll: async (req, res) => { res.json({ message: 'admin routes connected' }); } };\nmodule.exports = adminController;
