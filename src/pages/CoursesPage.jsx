@@ -156,7 +156,6 @@ const CoursesPage = () => {
               
               return (
                 <motion.div
-                  layout
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
@@ -197,7 +196,7 @@ const CoursesPage = () => {
                     
                     <div className="mt-auto flex gap-3">
                       {enrolled ? (
-                        <Link to={`/dashboard`} className="btn-secondary w-full text-center flex items-center justify-center gap-2 py-2 text-xs">
+                        <Link to={`/dashboard`} className="btn-secondary w-full text-center flex items-center justify-center gap-2 py-2 text-xs relative z-[20]">
                           <Play className="w-3 h-3 fill-brandNavy" /> ENROLLED — GO TO DASHBOARD
                         </Link>
                       ) : (
@@ -215,7 +214,7 @@ const CoursesPage = () => {
                               toast.error("Process failed. Please try again.");
                             }
                           }}
-                          className={`btn-primary w-full flex items-center justify-center gap-2 py-2 text-xs h-10 ${course.price > 0 ? 'bg-brandNavy' : 'bg-brandNavy'}`}
+                          className={`btn-primary w-full flex items-center justify-center gap-2 py-2 text-xs h-10 relative z-[20] ${course.price > 0 ? 'bg-brandNavy' : 'bg-brandNavy'}`}
                         >
                           {course.price === 0 ? <Play className="w-3 h-3 fill-white" /> : <ShoppingCart className="w-3 h-3" />}
                           {course.price === 0 ? 'START LEARNING FREE' : 'ENROLL NOW'}
