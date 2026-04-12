@@ -10,13 +10,13 @@ const GoalSelectionPage = () => {
   // Top quick goals data matching screenshot
   const quickGoals = [
     { id: 'upsc', name: 'UPSC', icon: <Landmark className="w-5 h-5 text-yellow-700" />, bg: 'bg-[#FFF3C2]' },
+    { id: 'cuet', name: 'CUET', icon: <BookOpen className="w-5 h-5 text-indigo-600" />, bg: 'bg-[#E0E7FF]' },
     { id: 'govt', name: 'Govt. Exams', icon: <ShieldAlert className="w-5 h-5 text-orange-600" />, bg: 'bg-[#FFE9D4]' },
   ];
 
   const upcomingExams = [
     { id: 'iit-jee', name: 'IIT-JEE', icon: <Atom className="w-5 h-5 text-blue-600" />, bg: 'bg-[#E0F2FE]' },
     { id: 'neet', name: 'NEET', icon: <Stethoscope className="w-5 h-5 text-green-700" />, bg: 'bg-[#DCFCE7]' },
-    { id: 'cuet', name: 'CUET', icon: <BookOpen className="w-5 h-5 text-indigo-600" />, bg: 'bg-[#E0E7FF]' },
   ];
 
   const allExams = [
