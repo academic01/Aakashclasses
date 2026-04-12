@@ -127,6 +127,71 @@ const GoalSelectionPage = () => {
         { name: 'CUET UG', icon: <BookOpen className="w-5 h-5 text-indigo-600" /> },
         { name: 'CUET PG', icon: <BookOpen className="w-5 h-5 text-indigo-600" /> },
       ]
+    },
+    'schools': {
+      title: 'Select your Class',
+      subtext: 'Schools, Boards & Olympiads',
+      items: [
+        { name: 'Class 6', icon: <BookOpen className="w-5 h-5 text-yellow-600" /> },
+        { name: 'Class 7', icon: <BookOpen className="w-5 h-5 text-yellow-600" /> },
+        { name: 'Class 8', icon: <BookOpen className="w-5 h-5 text-yellow-600" /> },
+        { name: 'Class 9', icon: <BookOpen className="w-5 h-5 text-yellow-600" /> },
+        { name: 'Class 10', icon: <BookOpen className="w-5 h-5 text-yellow-600" /> },
+        { name: 'Class 11', icon: <BookOpen className="w-5 h-5 text-yellow-600" /> },
+        { name: 'Class 12', icon: <BookOpen className="w-5 h-5 text-yellow-600" /> },
+        { name: 'Olympiads', icon: <Trophy className="w-5 h-5 text-yellow-600" /> },
+      ]
+    },
+    'govt-all': {
+      title: 'Select your Exam',
+      subtext: 'All Government Job Exams',
+      items: [
+        { name: 'SSC CGL/CHSL', icon: <Landmark className="w-5 h-5 text-red-400" /> },
+        { name: 'Banking - IBPS/SBI', icon: <Building className="w-5 h-5 text-red-400" /> },
+        { name: 'Railways RRB', icon: <Briefcase className="w-5 h-5 text-red-400" /> },
+        { name: 'Police Exams', icon: <ShieldAlert className="w-5 h-5 text-red-400" /> },
+        { name: 'Defense - NDA/CDS', icon: <ShieldAlert className="w-5 h-5 text-red-400" /> },
+        { name: 'State PSC', icon: <Landmark className="w-5 h-5 text-red-400" /> },
+      ]
+    },
+    'finance': {
+      title: 'Select your Course',
+      subtext: 'CA, CS & Finance',
+      items: [
+        { name: 'CA Foundation', icon: <Briefcase className="w-5 h-5 text-orange-600" /> },
+        { name: 'CA Intermediate', icon: <Briefcase className="w-5 h-5 text-orange-600" /> },
+        { name: 'CS - Company Secretary', icon: <Briefcase className="w-5 h-5 text-orange-600" /> },
+        { name: 'CMA', icon: <Briefcase className="w-5 h-5 text-orange-600" /> },
+      ]
+    },
+    'net': {
+      title: 'Select your Exam',
+      subtext: 'NET & Teaching',
+      items: [
+        { name: 'UGC NET', icon: <Glasses className="w-5 h-5 text-lime-600" /> },
+        { name: 'CSIR NET', icon: <Glasses className="w-5 h-5 text-lime-600" /> },
+        { name: 'CTET (Paper 1 & 2)', icon: <BookOpen className="w-5 h-5 text-lime-600" /> },
+        { name: 'TGT/PGT Exams', icon: <BookOpen className="w-5 h-5 text-lime-600" /> },
+      ]
+    },
+    'skills': {
+      title: 'Select a Skill',
+      subtext: 'Professional Skills',
+      items: [
+        { name: 'Digital Marketing', icon: <MonitorPlay className="w-5 h-5 text-purple-600" /> },
+        { name: 'Coding & DS', icon: <MonitorPlay className="w-5 h-5 text-purple-600" /> },
+        { name: 'Graphic Design', icon: <MonitorPlay className="w-5 h-5 text-purple-600" /> },
+        { name: 'Soft Skills', icon: <MonitorPlay className="w-5 h-5 text-purple-600" /> },
+      ]
+    },
+    'degree': {
+      title: 'Select Your Degree',
+      subtext: 'Online Degree Programs',
+      items: [
+        { name: 'Online BBA/MBA', icon: <Library className="w-5 h-5 text-yellow-700" /> },
+        { name: 'Online BCA/MCA', icon: <Library className="w-5 h-5 text-yellow-700" /> },
+        { name: 'Distance Learning', icon: <Library className="w-5 h-5 text-yellow-700" /> },
+      ]
     }
   };
 
@@ -228,7 +293,7 @@ const GoalSelectionPage = () => {
                whileHover={{ scale: 1.01, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' }}
                whileTap={{ scale: 0.99 }}
                key={idx} 
-               onClick={() => navigate('/dashboard')}
+               onClick={() => activeModal !== offer.id && setActiveModal(offer.id)}
                className="bg-brandBeige border border-brandNavy/5 rounded-[14px] p-4 flex items-center gap-5 cursor-pointer hover:border-[#5A4BDA] transition-all"
             >
               <div className={`w-[52px] h-[52px] rounded-[14px] ${offer.iconBg} flex items-center justify-center shrink-0`}>
