@@ -202,7 +202,12 @@ const CoursesPage = () => {
                         </Link>
                       ) : (
                         <button 
-                          onClick={() => enrollInCourse(course.id)}
+                          onClick={async () => {
+                            const result = await enrollInCourse(course.id);
+                            if (result && result.paymentRequired) {
+                              navigate(`/checkout?courseId=${course.id}&price=${result.price}&title=${encodeURIComponent(course.title)}`);
+                            }
+                          }}
                           className={`btn-primary w-full flex items-center justify-center gap-2 py-2 text-xs h-10 ${course.price > 0 ? 'bg-brandNavy' : 'bg-brandNavy'}`}
                         >
                           {course.price === 0 ? <Play className="w-3 h-3 fill-white" /> : <ShoppingCart className="w-3 h-3" />}

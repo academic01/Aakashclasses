@@ -13,8 +13,9 @@ const CheckoutPage = () => {
   const { processPayment } = useAppContext();
   const [loading, setLoading] = useState(false);
   
-  const planName = searchParams.get('plan') || 'Prime Batch';
-  const price = planName.includes('elite') ? 9999 : 4999;
+  const courseId = searchParams.get('courseId');
+  const courseTitle = searchParams.get('title') || searchParams.get('plan') || 'Selected Course';
+  const price = parseInt(searchParams.get('price')) || (courseTitle.includes('elite') ? 9999 : 4999);
 
   useEffect(() => {
     if (!user) {
@@ -34,19 +35,19 @@ const CheckoutPage = () => {
     }
 
     const options = {
-      key: 'YOUR_RAZORPAY_KEY', // Mock Key
+      key: 'rzp_test_mockkey', // Replace with your key
       amount: price * 100, // Amount in paise
       currency: "INR",
       name: "Aakash Academics",
-      description: `Purchase for ${planName.toUpperCase()}`,
-      image: "/logo.png",
+      description: `Enrollment for ${courseTitle}`,
+      image: "/aakashlogo.png",
       handler: function (response) {
-        toast.success('Payment Successful! Transaction ID: ' + response.razorpay_payment_id);
-        processPayment(planName, response);
+        toast.success('Payment Successful!');
+        processPayment(courseId || courseTitle, response);
         navigate('/dashboard?purchase=success');
       },
       prefill: {
-        name: user?.displayName || "",
+        name: user?.name || "",
         email: user?.email || "",
       },
       theme: {
@@ -89,8 +90,8 @@ const CheckoutPage = () => {
                             <Trophy className="w-5 h-5 text-brandNavy" />
                          </div>
                          <div>
-                            <div className="text-xs font-orbitron font-bold text-brandNavy uppercase tracking-widest">{planName}</div>
-                            <div className="text-[10px] text-textMuted uppercase font-bold">Billing Cycle: Yearly</div>
+                            <div className="text-xs font-orbitron font-bold text-brandNavy uppercase tracking-widest leading-tight">{courseTitle}</div>
+                            <div className="text-[10px] text-textMuted uppercase font-bold">Billing Cycle: Lifetime Access</div>
                          </div>
                       </div>
                       <span className="font-orbitron font-bold text-brandNavy">₹{price}</span>
@@ -125,18 +126,18 @@ const CheckoutPage = () => {
                 <ShieldCheck className="w-8 h-8" />
              </div>
              <h3 className="text-2xl font-orbitron font-bold text-brandNavy mb-4 uppercase">Secure Gateway</h3>
-             <p className="text-textSecondary font-exo text-sm mb-10 font-medium">Click the button below to initiate the secure payment via Razorpay. Your transaction is 256-bit encrypted.</p>
+             <p className="text-textSecondary font-exo text-sm mb-10 font-medium tracking-tight">Click the button below to initiate the secure payment via Razorpay. Your transaction is 256-bit encrypted.</p>
              
              <div className="w-full space-y-4 mb-2">
                 <button 
                   disabled={loading}
                   onClick={handlePayment}
-                  className="btn-primary w-full py-5 text-sm uppercase tracking-[0.2em] font-orbitron flex items-center justify-center gap-3 shadow-xl"
+                  className="btn-primary w-full py-5 text-xs uppercase tracking-[0.2em] font-orbitron flex items-center justify-center gap-3 shadow-xl"
                 >
                    {loading ? (
                      <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
                    ) : (
-                     <><CreditCard className="w-5 h-5" /> PAY NOW SECURELY</>
+                     <><CreditCard className="w-5 h-5" /> PAY ₹{price} SECURELY</>
                    )}
                 </button>
              </div>
