@@ -17,12 +17,14 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (isLoaded) {
       if (isClerkSignedIn && user) {
-        setCurrentUser({
+        const userData = {
           id: user.id,
           name: user.fullName || user.firstName,
+          displayName: user.fullName || user.firstName,
           email: user.primaryEmailAddress?.emailAddress,
           role: user.publicMetadata.role || 'student'
-        });
+        };
+        setCurrentUser(userData);
         setIsSignedIn(true);
       } else {
         setCurrentUser(null);
@@ -49,7 +51,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const value = {
-    currentUser,
+    user: currentUser,
+    currentUser, // Alias for compatibility
     login,
     logout,
     signup,
