@@ -201,18 +201,25 @@ const CoursesPage = () => {
                           <Play className="w-3 h-3 fill-brandNavy" /> ENROLLED — GO TO DASHBOARD
                         </Link>
                       ) : (
-                        <button 
+                        <motion.button 
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
                           onClick={async () => {
-                            const result = await enrollInCourse(course.id);
-                            if (result && result.paymentRequired) {
-                              navigate(`/checkout?courseId=${course.id}&price=${result.price}&title=${encodeURIComponent(course.title)}`);
+                            try {
+                              const result = await enrollInCourse(course.id);
+                              if (result && result.paymentRequired) {
+                                navigate(`/checkout?courseId=${course.id}&price=${result.price}&title=${encodeURIComponent(course.title)}`);
+                              }
+                            } catch (error) {
+                              console.error("Enrollment failed:", error);
+                              toast.error("Process failed. Please try again.");
                             }
                           }}
                           className={`btn-primary w-full flex items-center justify-center gap-2 py-2 text-xs h-10 ${course.price > 0 ? 'bg-brandNavy' : 'bg-brandNavy'}`}
                         >
                           {course.price === 0 ? <Play className="w-3 h-3 fill-white" /> : <ShoppingCart className="w-3 h-3" />}
                           {course.price === 0 ? 'START LEARNING FREE' : 'ENROLL NOW'}
-                        </button>
+                        </motion.button>
                       )}
                     </div>
                   </div>
