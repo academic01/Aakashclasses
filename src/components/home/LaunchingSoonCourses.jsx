@@ -232,14 +232,13 @@ const LaunchingSoonCourses = () => {
               </div>
 
               {cat.active ? (
-                <button 
-                  onClick={(e) => handleEnrollClick(e, cat)}
-                  disabled={loadingMap[cat.id]}
-                  className="btn-primary flex items-center justify-between w-full p-4 bg-lightBg2 text-[#0A0A0A] hover:bg-[#0D2240] hover:text-white rounded-2xl transition-all font-outfit font-black min-h-[44px] cursor-pointer disabled:opacity-50"
+                <Link 
+                  to={cat.link === '/checkout/cuet' ? '/courses/cuet' : `/checkout?title=${encodeURIComponent(cat.title)}&price=${cat.id === 13 ? 2999 : 4999}`}
+                  className="btn-primary flex items-center justify-between w-full p-4 bg-lightBg2 text-[#0A0A0A] hover:bg-[#0D2240] hover:text-white rounded-2xl transition-all font-outfit font-black min-h-[44px] cursor-pointer relative z-[30]"
                 >
-                  <span>{loadingMap[cat.id] ? 'Processing...' : 'Enroll Now'}</span>
+                  <span>Enroll Now</span>
                   <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-2" />
-                </button>
+                </Link>
               ) : (
                 <button 
                   onClick={() => handleNotifyClick(cat)}

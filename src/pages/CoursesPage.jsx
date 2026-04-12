@@ -196,29 +196,23 @@ const CoursesPage = () => {
                     
                     <div className="mt-auto flex gap-3">
                       {enrolled ? (
-                        <Link to={`/dashboard`} className="btn-secondary w-full text-center flex items-center justify-center gap-2 py-2 text-xs relative z-[20]">
+                        <Link to={`/dashboard`} className="btn-secondary w-full text-center flex items-center justify-center gap-2 py-2 text-xs relative z-[30]">
                           <Play className="w-3 h-3 fill-brandNavy" /> ENROLLED — GO TO DASHBOARD
                         </Link>
                       ) : (
-                        <motion.button 
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          onClick={async () => {
-                            try {
-                              const result = await enrollInCourse(course.id);
-                              if (result && result.paymentRequired) {
-                                navigate(`/checkout?courseId=${course.id}&price=${result.price}&title=${encodeURIComponent(course.title)}`);
-                              }
-                            } catch (error) {
-                              console.error("Enrollment failed:", error);
-                              toast.error("Process failed. Please try again.");
-                            }
+                        <Link 
+                          to={course.price === 0 
+                            ? `/dashboard?enroll=${course.id}` 
+                            : `/checkout?courseId=${course.id}&price=${course.price}&title=${encodeURIComponent(course.title)}`
+                          }
+                          onClick={() => {
+                            if (course.price === 0) enrollInCourse(course.id);
                           }}
-                          className={`btn-primary w-full flex items-center justify-center gap-2 py-2 text-xs h-10 relative z-[20] ${course.price > 0 ? 'bg-brandNavy' : 'bg-brandNavy'}`}
+                          className={`btn-primary w-full flex items-center justify-center gap-2 py-2 text-xs h-10 relative z-[30] ${course.price > 0 ? 'bg-brandNavy' : 'bg-brandNavy'}`}
                         >
                           {course.price === 0 ? <Play className="w-3 h-3 fill-white" /> : <ShoppingCart className="w-3 h-3" />}
                           {course.price === 0 ? 'START LEARNING FREE' : 'ENROLL NOW'}
-                        </motion.button>
+                        </Link>
                       )}
                     </div>
                   </div>
