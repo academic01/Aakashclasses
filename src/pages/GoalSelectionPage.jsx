@@ -16,6 +16,7 @@ const GoalSelectionPage = () => {
   const upcomingExams = [
     { id: 'iit-jee', name: 'IIT-JEE', icon: <Atom className="w-5 h-5 text-blue-600" />, bg: 'bg-[#E0F2FE]' },
     { id: 'neet', name: 'NEET', icon: <Stethoscope className="w-5 h-5 text-green-700" />, bg: 'bg-[#DCFCE7]' },
+    { id: 'cuet', name: 'CUET', icon: <BookOpen className="w-5 h-5 text-indigo-600" />, bg: 'bg-[#E0E7FF]' },
   ];
 
   const allExams = [
@@ -117,6 +118,14 @@ const GoalSelectionPage = () => {
             { name: 'CUET PG', icon: <BookOpen className="w-5 h-5 text-yellow-600" /> },
           ]
         }
+      ]
+    },
+    'cuet': {
+      title: 'Select your Category',
+      subtext: 'CUET',
+      items: [
+        { name: 'CUET UG', icon: <BookOpen className="w-5 h-5 text-indigo-600" /> },
+        { name: 'CUET PG', icon: <BookOpen className="w-5 h-5 text-indigo-600" /> },
       ]
     }
   };
@@ -281,7 +290,7 @@ const GoalSelectionPage = () => {
                             {group.items.map((item, idx) => (
                                <div 
                                  key={idx} 
-                                 onClick={() => navigate('/dashboard')}
+                                 onClick={() => item.name.toLowerCase().includes('cuet') ? navigate('/courses/cuet') : navigate('/dashboard')}
                                  className="flex items-center justify-between p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-[#5A4BDA] hover:bg-gray-50 transition-all font-semibold text-gray-800"
                                >
                                  <div className="flex items-center gap-3">
@@ -300,7 +309,7 @@ const GoalSelectionPage = () => {
                        {currentModal.items.map((item, idx) => (
                          <div 
                            key={idx} 
-                           onClick={() => navigate('/dashboard')}
+                           onClick={() => item.name.toLowerCase().includes('cuet') ? navigate('/courses/cuet') : navigate('/dashboard')}
                            className="flex items-center justify-between p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-[#5A4BDA] hover:bg-gray-50 transition-all"
                          >
                            <div className="flex items-center gap-3">

@@ -5,7 +5,8 @@ const AdminCourses = () => {
   const [courses, setCourses] = useState([
     { id: 1, title: 'NEET Complete Crash Course', category: 'neet', price: 4999, enrollments: 843, status: 'active', thumbnail: '' },
     { id: 2, title: 'JEE Main Target 2025', category: 'jee', price: 9999, enrollments: 1205, status: 'active', thumbnail: '' },
-    { id: 3, title: 'Class 12th Board Booster', category: 'school', price: 2499, enrollments: 432, status: 'coming_soon', thumbnail: '' }
+    { id: 3, title: 'Class 12th Board Booster', category: 'school', price: 2499, enrollments: 432, status: 'coming_soon', thumbnail: '' },
+    { id: 4, title: 'CUET 2026 Ultimate Batch', category: 'cuet', price: 2999, enrollments: 512, status: 'active', thumbnail: '' }
   ]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,6 +36,7 @@ const AdminCourses = () => {
             <option value="neet">NEET</option>
             <option value="jee">JEE</option>
             <option value="school">School Classes</option>
+            <option value="cuet">CUET</option>
           </select>
         </div>
       </div>
